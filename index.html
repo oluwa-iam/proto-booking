@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réservation UdeM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:#003D7C; --blue-h:#002D5C;
+      --teal:#0891B2; --teal-h:#0770A0;
+      --sidebar-bg:#0A1628; --sidebar-border:rgba(255,255,255,0.07);
+      --bg:#F7F7F6; --card:#FFFFFF; --bg2:#F2F2F0; --bg3:#E8E8E6;
+      --info-bg:#E0F2F9; --ok-bg:#EAF3DE; --warn-bg:#FAEEDA; --err-bg:#FCEBEB;
+      --t1:#111111; --t2:#555555; --t3:#999999;
+      --bd:#E2E2DF; --bd2:#C8C8C4;
+      --info:#0770A0; --ok:#27500A; --warn:#633806; --err:#791F1F;
+      --r-sm:6px; --r-md:8px; --r-lg:12px; --r-xl:16px;
+      --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md:0 4px 12px rgba(0,0,0,0.08),0 2px 4px rgba(0,0,0,0.04);
+    }
+    html,body{height:100%;font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:14px;color:var(--t1);background:var(--bg);-webkit-font-smoothing:antialiased;}
+    .num{font-variant-numeric:tabular-nums;}
+    .app{display:flex;height:100vh;overflow:hidden;}
+    .sidebar{width:224px;min-width:224px;background:var(--sidebar-bg);display:flex;flex-direction:column;overflow-y:auto;}
+    .main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+    .content{flex:1;padding:28px;overflow-y:auto;}
+    .page{display:none;} .page.active{display:block;}
+    .s-logo{padding:18px 16px 16px;border-bottom:1px solid var(--sidebar-border);}
+    .s-logo-t{color:#fff;font-size:13px;font-weight:600;line-height:1.3;letter-spacing:-0.01em;}
+    .s-logo-s{color:rgba(255,255,255,0.4);font-size:11px;margin-top:2px;}
+    .role-sw{margin:12px 12px 4px;background:rgba(255,255,255,0.06);border-radius:var(--r-md);padding:3px;display:flex;gap:3px;border:1px solid rgba(255,255,255,0.08);}
+    .role-btn{flex:1;padding:5px 4px;border:none;border-radius:6px;font-size:11px;cursor:pointer;background:transparent;color:rgba(255,255,255,0.45);font-family:'Inter',inherit;transition:all .15s;font-weight:500;}
+    .role-btn.on{background:var(--teal);color:#fff;font-weight:600;box-shadow:0 1px 4px rgba(8,145,178,0.4);}
+    .s-sec{padding:8px 0;}
+    .s-lbl{padding:8px 16px 4px;font-size:10px;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:.08em;font-weight:600;}
+    .s-item{display:flex;align-items:center;gap:9px;padding:8px 14px 8px 16px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;border-left:2px solid transparent;transition:all .15s;user-select:none;font-weight:400;margin:1px 0;}
+    .s-item:hover{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.9);}
+    .s-item.on{background:rgba(8,145,178,0.12);color:#fff;border-left-color:var(--teal);font-weight:500;}
+    .s-item i{font-size:16px;opacity:0.8;}
+    .s-item.on i{opacity:1;}
+    .s-user{margin-top:auto;padding:14px 16px;border-top:1px solid var(--sidebar-border);display:flex;align-items:center;gap:10px;}
+    .av{width:32px;height:32px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600;flex-shrink:0;box-shadow:0 0 0 2px rgba(8,145,178,0.3);}
+    .topbar{background:var(--card);padding:0 28px;height:52px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;border-bottom:1px solid var(--bd);box-shadow:var(--shadow-sm);}
+    .topbar-t{color:var(--t1);font-size:14px;font-weight:600;letter-spacing:-0.01em;}
+    .topbar-r{display:flex;align-items:center;gap:10px;color:var(--t2);font-size:12px;cursor:pointer;padding:6px 10px;border-radius:var(--r-md);transition:all .15s;border:1px solid transparent;}
+    .topbar-r:hover{color:var(--t1);background:var(--bg2);border-color:var(--bd);}
+    .ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px;gap:16px;}
+    .pt{font-size:21px;font-weight:700;letter-spacing:-0.02em;} .ps{font-size:13px;color:var(--t2);margin-top:4px;}
+    .divider{height:1px;background:var(--bd);margin:14px 0;}
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--r-md);font-size:13px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--t1);font-family:'Inter',inherit;font-weight:500;transition:all .15s;white-space:nowrap;letter-spacing:-0.01em;}
+    .btn:hover{background:var(--bg2);border-color:var(--bd2);}
+    .btn:active{transform:scale(.98);}
+    .btn.pri{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 1px 4px rgba(8,145,178,0.3);}
+    .btn.pri:hover{background:var(--teal-h);border-color:var(--teal-h);box-shadow:0 2px 8px rgba(8,145,178,0.35);}
+    .btn.dng{background:var(--err-bg);color:var(--err);border-color:#F09595;}
+    .btn.dng:hover{background:#F7C1C1;}
+    .btn.sm{padding:5px 10px;font-size:12px;}
+    .btn.ghost{border-color:transparent;background:transparent;}
+    .btn.ghost:hover{background:var(--bg2);border-color:var(--bd);}
+    .btn:disabled{opacity:.4;cursor:not-allowed;pointer-events:none;}
+    .badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;}
+    .b-ok{background:var(--ok-bg);color:var(--ok);}
+    .b-warn{background:var(--warn-bg);color:var(--warn);}
+    .b-info{background:var(--info-bg);color:var(--info);}
+    .b-neu{background:var(--bg2);color:var(--t2);border:1px solid var(--bd);}
+    .b-err{background:var(--err-bg);color:var(--err);}
+    .card{background:var(--card);border:1px solid var(--bd);border-radius:var(--r-xl);padding:20px 22px;margin-bottom:14px;box-shadow:var(--shadow-sm);}
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:22px;}
+    .oc{background:var(--card);border:1px solid var(--bd);border-radius:var(--r-xl);padding:18px 20px;cursor:pointer;transition:border-color .15s,box-shadow .15s;box-shadow:var(--shadow-sm);}
+    .oc:hover{border-color:var(--teal);box-shadow:var(--shadow-md);}
+    .oc-type{font-size:11px;color:var(--t3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em;font-weight:600;}
+    .oc-title{font-size:14px;font-weight:600;margin-bottom:6px;}
+    .oc-meta{font-size:12px;color:var(--t2);margin-bottom:12px;line-height:1.6;}
+    .oc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--bd);}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px;}
+    .stat{background:var(--card);border:1px solid var(--bd);border-radius:var(--r-xl);padding:16px 18px;box-shadow:var(--shadow-sm);transition:box-shadow .15s;}
+    .stat:hover{box-shadow:var(--shadow-md);}
+    .stat-l{font-size:11px;color:var(--t2);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:.04em;}
+    .stat-v{font-size:26px;font-weight:700;letter-spacing:-0.03em;font-variant-numeric:tabular-nums;}
+    .fg{margin-bottom:16px;}
+    .fl{display:block;font-size:11px;font-weight:600;color:var(--t2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.04em;}
+    .fi,.fs,textarea.fi{width:100%;padding:8px 10px;border:1px solid var(--bd);border-radius:var(--r-md);font-size:13px;background:var(--card);color:var(--t1);font-family:inherit;transition:border-color .15s;}
+    .fi:focus,.fs:focus,textarea.fi:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,61,124,.08);}
+    textarea.fi{resize:vertical;}
+    .fr{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .fi.err{border-color:#E24B4A;} .err-msg{font-size:11px;color:var(--err);margin-top:4px;}
+    .stepper{display:flex;margin-bottom:24px;border-bottom:1px solid var(--bd);}
+    .step{display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:12px;color:var(--t3);flex:1;border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500;}
+    .step.on{color:var(--blue);border-bottom-color:var(--blue);}
+    .step.done{color:var(--ok);border-bottom-color:var(--ok);}
+    .sn{width:22px;height:22px;border-radius:50%;background:var(--bg2);border:1px solid var(--bd);color:var(--t3);font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;}
+    .step.on .sn{background:var(--blue);color:#fff;border-color:var(--blue);}
+    .step.done .sn{background:var(--ok);color:#fff;border-color:var(--ok);font-size:13px;}
+    .tags{display:flex;flex-wrap:wrap;gap:5px;padding:6px 8px;border:1px solid var(--bd);border-radius:var(--r-md);min-height:38px;background:var(--card);}
+    .tag{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-sm);font-size:12px;color:var(--info);}
+    .tag button{background:none;border:none;cursor:pointer;color:#378ADD;font-size:15px;padding:0;line-height:1;}
+    .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-top:8px;}
+    .cal-h{text-align:center;font-size:10px;color:var(--t3);padding:4px;font-weight:600;text-transform:uppercase;}
+    .cal-d{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:var(--r-sm);font-size:12px;cursor:pointer;border:1px solid transparent;}
+    .cal-d:hover:not(.past):not(.empty){background:var(--bg2);border-color:var(--bd);}
+    .cal-d.today{border-color:var(--blue);color:var(--blue);font-weight:700;}
+    .cal-d.open{background:var(--info-bg);color:var(--info);font-weight:500;}
+    .cal-d.block{background:var(--warn-bg);color:var(--warn);}
+    .cal-d.past{color:var(--t3);cursor:default;} .cal-d.empty{cursor:default;}
+    .dot{width:4px;height:4px;border-radius:50%;background:var(--blue);margin-top:1px;}
+    .dot.w{background:var(--warn);}
+    .av-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bd);}
+    .av-row:last-child{border-bottom:none;}
+    .av-name{font-size:13px;font-weight:500;min-width:200px;}
+    .av-bar{flex:1;height:8px;background:var(--bg2);border-radius:4px;overflow:hidden;border:1px solid var(--bd);}
+    .av-fill{height:100%;border-radius:4px;}
+    .av-fill.res{background:var(--blue);} .av-fill.blk{background:#EF9F27;}
+    .search-bar{display:flex;gap:10px;margin-bottom:20px;}
+    .si-wrap{flex:2;position:relative;}
+    .si-wrap i{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--t3);font-size:16px;}
+    .si{width:100%;padding:8px 10px 8px 34px;border:1px solid var(--bd);border-radius:var(--r-md);font-size:13px;background:var(--card);color:var(--t1);font-family:inherit;}
+    .si:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,61,124,.08);}
+    .rc{background:var(--card);border:1px solid var(--bd);border-radius:var(--r-xl);padding:18px 20px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;cursor:pointer;transition:all .15s;box-shadow:var(--shadow-sm);}
+    .rc:hover{border-color:var(--teal);box-shadow:var(--shadow-md);}
+    .rc-icon{width:42px;height:42px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .rc-icon i{font-size:20px;color:var(--info);}
+    .rc-title{font-size:14px;font-weight:600;margin-bottom:3px;}
+    .rc-meta{font-size:12px;color:var(--t2);margin-bottom:9px;line-height:1.6;}
+    .slots{display:flex;gap:6px;flex-wrap:wrap;}
+    .chip{padding:4px 10px;background:var(--info-bg);color:var(--info);border-radius:var(--r-sm);font-size:12px;cursor:pointer;border:1px solid #B5D4F4;transition:all .15s;font-weight:500;}
+    .chip:hover,.chip.on{background:var(--teal);color:#fff;border-color:var(--teal);}
+    .notice{padding:10px 14px;border-radius:var(--r-md);font-size:12px;display:flex;gap:8px;align-items:flex-start;margin-bottom:14px;border:1px solid;}
+    .n-info{background:var(--info-bg);color:var(--info);border-color:#B5D4F4;}
+    .n-warn{background:var(--warn-bg);color:var(--warn);border-color:#FAC775;}
+    .n-ok{background:var(--ok-bg);color:var(--ok);border-color:#C0DD97;}
+    .n-err{background:var(--err-bg);color:var(--err);border-color:#F09595;}
+    .notice i{margin-top:1px;flex-shrink:0;font-size:15px;}
+    .dd{border:1px solid var(--bd);border-radius:var(--r-md);margin-top:4px;overflow:hidden;background:var(--card);box-shadow:0 4px 12px rgba(0,0,0,.08);}
+    .dd-item{padding:9px 12px;font-size:13px;cursor:pointer;border-bottom:1px solid var(--bd);transition:background .1s;}
+    .dd-item:last-child{border-bottom:none;} .dd-item:hover{background:var(--bg2);}
+    .dd-t{font-weight:500;} .dd-s{font-size:11px;color:var(--t3);margin-top:1px;}
+    .sum-t{width:100%;font-size:12px;border-collapse:collapse;}
+    .sum-t td{padding:5px 0;vertical-align:top;}
+    .sum-t td:first-child{color:var(--t2);width:45%;}
+    .sum-t td:last-child{font-weight:500;text-align:right;}
+    .ok-screen{text-align:center;padding:40px 20px;}
+    .ok-icon{width:60px;height:60px;border-radius:50%;background:var(--ok-bg);border:1px solid #C0DD97;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+    .ok-icon i{font-size:28px;color:var(--ok);}
+    .pi{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);}
+    .ri{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd);}
+    .ri:last-child{border-bottom:none;}
+    .ri-ic{width:38px;height:38px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .empty-st{text-align:center;padding:48px 20px;color:var(--t2);}
+    .empty-st i{font-size:40px;color:var(--t3);margin-bottom:14px;display:block;}
+    .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);}
+    .login-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--r-xl);padding:40px 36px;width:400px;box-shadow:var(--shadow-md);}
+    .mb-bg{background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;padding:24px;min-height:400px;}
+    .modal{background:var(--card);border-radius:var(--r-lg);padding:24px;width:100%;max-width:440px;border:1px solid var(--bd);}
+    .modal-t{font-size:16px;font-weight:600;margin-bottom:4px;}
+    .modal-s{font-size:13px;color:var(--t2);margin-bottom:18px;}
+    .pl-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--bd);}
+    .pl-item:last-child{border-bottom:none;}
+    .pl-date{font-size:12px;color:var(--t2);min-width:130px;}
+    .pl-time{font-size:13px;font-weight:500;min-width:160px;}
+    .det-grid{display:grid;grid-template-columns:1fr 280px;gap:16px;}
+    .ir{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--bd);font-size:13px;}
+    .ir:last-child{border-bottom:none;}
+    .ir-l{color:var(--t2);font-size:12px;min-width:140px;}
+    .rri{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--bd);}
+    .rri:last-child{border-bottom:none;}
+    .fc{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+    .fchip{padding:5px 12px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--t2);transition:all .15s;font-weight:500;}
+    .fchip.on{background:var(--blue);color:#fff;border-color:var(--blue);}
+    .fchip:hover:not(.on){background:var(--bg2);border-color:var(--bd2);}
+
+    .day-btn{padding:5px 10px;border-radius:var(--r-sm);font-size:12px;cursor:pointer;background:var(--card);border:1px solid var(--bd);color:var(--t3);user-select:none;transition:all .15s;}
+    .day-btn.on{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:600;}
+    .cal-d.available{background:var(--info-bg);color:var(--info);font-weight:500;cursor:pointer;}
+    .cal-d.available:hover{background:#B5D4F4;}
+    .cal-d.blocked-manual{background:var(--warn-bg);color:var(--warn);cursor:pointer;font-weight:500;}
+    .cal-d.blocked-manual:hover{background:#FAC775;}
+    .cal-d.unavailable{background:var(--bg3);color:var(--t3);cursor:default;}
+    .cal-d.past-day{color:var(--t3);cursor:default;opacity:.5;}
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="screen-login">
+<div class="login-wrap">
+  <div class="login-card">
+    <div style="text-align:center;margin-bottom:28px">
+      <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto;display:block">
+        <rect width="56" height="56" rx="14" fill="#0A1628"/>
+        <rect x="14" y="12" width="28" height="32" rx="5" stroke="#0891B2" stroke-width="2"/>
+        <line x1="14" y1="22" x2="42" y2="22" stroke="#0891B2" stroke-width="2"/>
+        <line x1="22" y1="12" x2="22" y2="18" stroke="#0891B2" stroke-width="2" stroke-linecap="round"/>
+        <line x1="34" y1="12" x2="34" y2="18" stroke="#0891B2" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="22" cy="30" r="2" fill="#0891B2"/>
+        <circle cx="28" cy="30" r="2" fill="white" fill-opacity="0.4"/>
+        <circle cx="34" cy="30" r="2" fill="#0891B2" fill-opacity="0.6"/>
+        <circle cx="22" cy="37" r="2" fill="#0891B2" fill-opacity="0.6"/>
+        <circle cx="28" cy="37" r="2" fill="#0891B2"/>
+        <circle cx="34" cy="37" r="2" fill="white" fill-opacity="0.3"/>
+      </svg>
+      <div style="font-size:18px;font-weight:700;color:var(--t1);margin-top:14px;letter-spacing:-0.02em">Réservation UdeM</div>
+      <div style="font-size:12px;color:var(--t2);margin-top:3px">Infrastructures et équipements</div>
+    </div>
+    <div class="fg"><label class="fl">Identifiant UdeM</label><input class="fi" type="text" value="mgagnon"></div>
+    <div class="fg"><label class="fl">Mot de passe</label><input class="fi" type="password" value="••••••••"></div>
+    <button class="btn pri" style="width:100%;justify-content:center;margin-top:6px;padding:10px 14px;font-size:14px" onclick="loginAs('responsable')">Se connecter</button>
+    <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--t2)">Authentification via le portail UdeM (SSO)</div>
+    <div class="divider"></div>
+    <div style="font-size:12px;color:var(--t2);text-align:center;margin-bottom:10px">Démonstration — choisir un profil</div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" style="flex:1;justify-content:center;font-size:12px" onclick="loginAs('responsable')"><i class="ti ti-shield"></i>Responsable</button>
+      <button class="btn" style="flex:1;justify-content:center;font-size:12px" onclick="loginAs('utilisateur')"><i class="ti ti-user"></i>Utilisateur</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- APP -->
+<div id="screen-app" style="display:none">
+<div class="app">
+  <div class="sidebar">
+    <div class="s-logo" style="display:flex;align-items:center;gap:11px">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="34" height="34" rx="9" fill="#0891B2" fill-opacity="0.18"/>
+        <rect x="9" y="8" width="16" height="18" rx="3" stroke="#0891B2" stroke-width="1.5"/>
+        <line x1="9" y1="13" x2="25" y2="13" stroke="#0891B2" stroke-width="1.5"/>
+        <line x1="13" y1="8" x2="13" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="21" y1="8" x2="21" y2="11" stroke="#0891B2" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="14" cy="18" r="1.2" fill="#0891B2"/>
+        <circle cx="17" cy="18" r="1.2" fill="white" fill-opacity="0.5"/>
+        <circle cx="20" cy="18" r="1.2" fill="#0891B2" fill-opacity="0.5"/>
+        <circle cx="14" cy="22" r="1.2" fill="#0891B2" fill-opacity="0.7"/>
+        <circle cx="17" cy="22" r="1.2" fill="#0891B2"/>
+        <circle cx="20" cy="22" r="1.2" fill="white" fill-opacity="0.3"/>
+      </svg>
+      <div><div class="s-logo-t">Réservation UdeM</div><div class="s-logo-s">Infrastructures et équipements</div></div>
+    </div>
+    <div class="role-sw">
+      <button class="role-btn on" onclick="switchRole('responsable')" id="btn-resp">Responsable</button>
+      <button class="role-btn" onclick="switchRole('utilisateur')" id="btn-user">Utilisateur</button>
+    </div>
+    <div class="s-sec" id="sb-resp">
+      <div class="s-lbl">Gestion</div>
+      <div class="s-item on" onclick="go('dashboard')" id="nav-dashboard"><i class="ti ti-layout-dashboard"></i>Tableau de bord</div>
+      <div class="s-item" onclick="go('offres')" id="nav-offres"><i class="ti ti-package"></i>Mes offres</div>
+      <div class="s-item" onclick="go('reservations-resp')" id="nav-reservations-resp"><i class="ti ti-list-check"></i>Réservations</div>
+    </div>
+    <div class="s-sec" id="sb-user" style="display:none">
+      <div class="s-lbl">Navigation</div>
+      <div class="s-item on" onclick="go('recherche')" id="nav-recherche"><i class="ti ti-search"></i>Rechercher</div>
+      <div class="s-item" onclick="go('mes-reservations')" id="nav-mes-reservations"><i class="ti ti-calendar-check"></i>Mes réservations</div>
+    </div>
+    <div class="s-user">
+      <div class="av" id="u-av">MG</div>
+      <div><div style="color:#fff;font-size:12px;font-weight:500" id="u-name">Marie Gagnon</div><div style="color:rgba(255,255,255,0.45);font-size:11px" id="u-role">Responsable</div></div>
+    </div>
+  </div>
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-t" id="topbar-t">Tableau de bord</div>
+      <div class="topbar-r" onclick="logout()"><i class="ti ti-external-link" style="color:var(--teal)"></i><span>Retour au RIÉ</span></div>
+    </div>
+    <div class="content">
+
+<!-- DASHBOARD -->
+<div class="page active" id="page-dashboard">
+  <div class="ph"><div><div class="pt">Bonjour, Marie</div><div class="ps">Laboratoire d'imagerie cellulaire — Pavillon Roger-Gaudry</div></div><button class="btn pri" onclick="go('nouvelle-offre')"><i class="ti ti-plus"></i>Nouvelle offre</button></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-l">Offres actives</div><div class="stat-v">4</div></div>
+    <div class="stat"><div class="stat-l">Réservations ce mois</div><div class="stat-v">23</div></div>
+    <div class="stat"><div class="stat-l">En attente</div><div class="stat-v" style="color:var(--warn)">3</div></div>
+    <div class="stat"><div class="stat-l">Taux d'occupation</div><div class="stat-v">67%</div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><div style="font-size:14px;font-weight:600">Disponibilité aujourd'hui</div><div style="font-size:12px;color:var(--t2)">Mardi 10 juin 2026</div></div>
+    <div class="av-row"><div class="av-name">Microscopie confocale Leica SP8</div><div class="av-bar"><div class="av-fill res" style="width:60%"></div></div><span class="badge b-info">3 / 5 créneaux</span></div>
+    <div class="av-row"><div class="av-name">Cytomètre BD LSRFortessa</div><div class="av-bar"><div class="av-fill res" style="width:100%"></div></div><span class="badge b-neu">Complet</span></div>
+    <div class="av-row"><div class="av-name">IVIS Spectrum CT</div><div class="av-bar"><div class="av-fill blk" style="width:40%"></div></div><span class="badge b-warn">Maintenance</span></div>
+    <div class="av-row"><div class="av-name">Microscopie électronique FEI Tecnai</div><div class="av-bar"><div class="av-fill res" style="width:20%"></div></div><span class="badge b-ok">Disponible</span></div>
+  </div>
+  <div class="card" style="margin-bottom:0">
+    <div style="font-size:14px;font-weight:600;margin-bottom:4px">Réservations en attente de confirmation</div>
+    <div style="font-size:12px;color:var(--t2);margin-bottom:12px">Hors fenêtre active — approbation requise</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div class="pi"><div><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Lun 15 juil. · 8h–10h</div></div><div style="display:flex;gap:6px"><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
+      <div class="pi"><div><div style="font-size:13px;font-weight:500">Sophie Tremblay</div><div style="font-size:11px;color:var(--t2)">Cytomètre BD LSR · Ven 18 juil. · 13h–15h</div></div><div style="display:flex;gap:6px"><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
+      <div class="pi"><div><div style="font-size:13px;font-weight:500">Léa Fontaine</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Mar 22 juil. · 10h–12h</div></div><div style="display:flex;gap:6px"><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MES OFFRES -->
+<div class="page" id="page-offres">
+  <div class="ph"><div><div class="pt">Mes offres de service</div><div class="ps">4 offres configurées</div></div><button class="btn pri" onclick="go('nouvelle-offre')"><i class="ti ti-plus"></i>Nouvelle offre</button></div>
+  <div class="card-grid">
+    <div class="oc" onclick="go('detail-offre')"><div class="oc-type">Microscopie</div><div class="oc-title">Microscopie confocale Leica SP8</div><div class="oc-meta">Roger-Gaudry, G-1015<br>Avec opérateur · Formation Leica SP8 requise</div><div class="oc-foot"><span class="badge b-ok">Active</span><span style="font-size:11px;color:var(--t3)">5 créneaux / sem.</span></div></div>
+    <div class="oc" onclick="go('detail-offre')"><div class="oc-type">Cytométrie</div><div class="oc-title">Cytomètre BD LSRFortessa</div><div class="oc-meta">Roger-Gaudry, G-1020<br>Autonomie · Formation BD LSR requise</div><div class="oc-foot"><span class="badge b-ok">Active</span><span style="font-size:11px;color:var(--t3)">8 créneaux / sem.</span></div></div>
+    <div class="oc" onclick="go('detail-offre')"><div class="oc-type">Imagerie in vivo</div><div class="oc-title">IVIS Spectrum CT + Station</div><div class="oc-meta">Roger-Gaudry, G-1018<br>2 équipements liés · Avec opérateur</div><div class="oc-foot"><span class="badge b-warn">Maintenance</span><span style="font-size:11px;color:var(--t3)">Reprise 17 juin</span></div></div>
+    <div class="oc"><div class="oc-type">Microscopie</div><div class="oc-title">Microscopie électronique FEI Tecnai</div><div class="oc-meta">Roger-Gaudry, G-1022<br>Autonomie · Formation FEI requise</div><div class="oc-foot"><span class="badge b-neu">Brouillon</span><span style="font-size:11px;color:var(--t3)">Non publiée</span></div></div>
+  </div>
+</div>
+
+<!-- DETAIL OFFRE -->
+<div class="page" id="page-detail-offre">
+  <div class="ph">
+    <div><button class="btn ghost sm" onclick="go('offres')" style="margin-bottom:8px;padding-left:0"><i class="ti ti-arrow-left"></i> Mes offres</button><div class="pt">Microscopie confocale Leica SP8</div><div class="ps">Labo. imagerie cellulaire — Roger-Gaudry, G-1015</div></div>
+    <div style="display:flex;gap:8px"><button class="btn" onclick="go('modifier-offre')"><i class="ti ti-edit"></i>Modifier</button><button class="btn dng" onclick="go('modal-suppr')"><i class="ti ti-trash"></i>Désactiver</button></div>
+  </div>
+  <div class="det-grid">
+    <div>
+      <div class="card" style="margin-bottom:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><div style="font-size:14px;font-weight:600">Informations générales</div><span class="badge b-ok">Active</span></div>
+        <div class="ir"><span class="ir-l">Type de service</span><span>Avec opérateur</span></div>
+        <div class="ir"><span class="ir-l">Infrastructure</span><span>Labo. imagerie cellulaire</span></div>
+        <div class="ir"><span class="ir-l">Opérateur</span><span>Jean-François Côté</span></div>
+        <div class="ir"><span class="ir-l">Durée min / max</span><span>1h – 4h</span></div>
+        <div class="ir"><span class="ir-l">Fenêtre de réservation</span><span>1 mois à l'avance</span></div>
+        <div class="ir"><span class="ir-l">Délai d'annulation</span><span>24 heures minimum</span></div>
+      </div>
+      <div class="card" style="margin-bottom:14px">
+        <div style="font-size:14px;font-weight:600;margin-bottom:12px">Équipements inclus</div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0">
+          <div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-microscope" style="color:var(--info);font-size:18px"></i></div>
+          <div><div style="font-size:13px;font-weight:500">Leica SP8 — Microscopie confocale</div><div style="font-size:11px;color:var(--t2)">#EQ-2041 · Roger-Gaudry G-1015 · Actif</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:14px;font-weight:600;margin-bottom:12px">Conditions d'accès</div>
+        <div class="ir"><span class="ir-l">Formation requise</span><span>Formation Leica SP8 — Niveau 1</span></div>
+        <div class="ir" style="border:none"><span class="ir-l">Groupes autorisés</span><div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end"><span class="badge b-info">Chercheurs UdeM</span><span class="badge b-info">Étudiants gradués</span><span class="badge b-info">Partenaires RQCHP</span></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Ce mois-ci</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Réservations</span><span style="font-weight:600">12</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Heures utilisées</span><span style="font-weight:600">24h</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">En attente</span><span style="font-weight:600;color:var(--warn)">2</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Taux d'occupation</span><span style="font-weight:600">60%</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Prochains créneaux ouverts</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Mar 11 juin · 9h–11h</div><div style="color:var(--t2)">1 place disponible</div></div>
+          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Mer 12 juin · 14h–16h</div><div style="color:var(--t2)">Disponible</div></div>
+          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Jeu 13 juin · 8h–12h</div><div style="color:var(--t2)">Disponible</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODIFIER OFFRE -->
+<div class="page" id="page-modifier-offre">
+  <div class="ph"><div><button class="btn ghost sm" onclick="go('detail-offre')" style="margin-bottom:8px;padding-left:0"><i class="ti ti-arrow-left"></i> Détail de l'offre</button><div class="pt">Modifier l'offre</div><div class="ps">Microscopie confocale Leica SP8</div></div><button class="btn ghost" onclick="go('detail-offre')"><i class="ti ti-x"></i>Annuler</button></div>
+  <div class="card" style="max-width:620px">
+    <div class="notice n-info"><i class="ti ti-info-circle"></i><span>Les modifications s'appliquent aux créneaux non encore réservés. Les réservations existantes ne sont pas affectées.</span></div>
+    <div class="fg"><label class="fl">Titre de l'offre</label><input class="fi" type="text" value="Microscopie confocale Leica SP8 — avec opérateur"></div>
+    <div class="fg"><label class="fl">Description</label><textarea class="fi" rows="3">Séances de microscopie confocale supervisées par un opérateur qualifié.</textarea></div>
+    <div class="fr"><div class="fg"><label class="fl">Type de service</label><select class="fs"><option selected>Avec opérateur</option><option>Autonomie</option></select></div><div class="fg"><label class="fl">Opérateur</label><select class="fs"><option selected>Jean-François Côté</option><option>Amira Mansouri</option></select></div></div>
+    <div class="fr"><div class="fg"><label class="fl">Fenêtre de réservation</label><select class="fs"><option>2 semaines</option><option selected>1 mois</option><option>2 mois</option></select></div><div class="fg"><label class="fl">Délai d'annulation</label><select class="fs"><option>12h</option><option selected>24h</option><option>48h</option></select></div></div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('detail-offre')">Annuler</button><button class="btn pri" onclick="go('detail-offre')"><i class="ti ti-check"></i>Enregistrer</button></div>
+  </div>
+</div>
+
+<!-- RESERVATIONS RESPONSABLE -->
+<div class="page" id="page-reservations-resp">
+  <div class="ph"><div><div class="pt">Réservations</div><div class="ps">Toutes les réservations de vos offres</div></div></div>
+  <div class="fc"><div class="fchip on">Toutes</div><div class="fchip">Confirmées</div><div class="fchip">En attente</div><div class="fchip">Annulées</div></div>
+  <div class="card" style="margin-bottom:0">
+    <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--info);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Mar 11 juin · 9h–11h</div></div><span class="badge b-ok">Confirmée</span><button class="btn sm" onclick="go('modal-annul-resp')" style="margin-left:8px">Annuler</button></div>
+    <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-filter" style="color:var(--info);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Amira Ben Salah</div><div style="font-size:11px;color:var(--t2)">Cytomètre BD LSR · Mer 12 juin · 10h–12h</div></div><span class="badge b-ok">Confirmée</span><button class="btn sm" onclick="go('modal-annul-resp')" style="margin-left:8px">Annuler</button></div>
+    <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--warn-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--warn);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Lun 15 juil. · 8h–10h · Hors fenêtre active</div></div><span class="badge b-warn">En attente</span><div style="display:flex;gap:5px;margin-left:8px"><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
+    <div class="rri" style="border:none"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--t3);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--t2)">Léa Fontaine</div><div style="font-size:11px;color:var(--t3)">Leica SP8 · Mar 3 juin · 9h–11h</div></div><span class="badge b-neu">Annulée</span></div>
+  </div>
+</div>
+
+<!-- NOUVELLE OFFRE 1 -->
+<div class="page" id="page-nouvelle-offre">
+  <div class="ph"><div><div class="pt">Nouvelle offre de service</div><div class="ps">Configurez les équipements et les conditions d'accès</div></div><button class="btn ghost" onclick="go('offres')"><i class="ti ti-x"></i>Annuler</button></div>
+  <div class="stepper"><div class="step on"><div class="sn">1</div>Informations générales</div><div class="step"><div class="sn">2</div>Équipements</div><div class="step"><div class="sn">3</div>Conditions d'accès</div><div class="step"><div class="sn">4</div>Plages horaires</div></div>
+  <div class="card" style="max-width:620px">
+    <div class="fg"><label class="fl">Titre de l'offre <span style="color:var(--err)">*</span></label><input class="fi" id="f-titre" type="text" value="Microscopie confocale Leica SP8 — avec opérateur"></div>
+    <div class="fg"><label class="fl">Description</label><textarea class="fi" rows="3">Séances de microscopie confocale supervisées par un opérateur qualifié. Idéal pour les chercheurs débutants ou les acquisitions complexes.</textarea></div>
+    <div class="fr"><div class="fg"><label class="fl">Infrastructure <span style="color:var(--err)">*</span></label><select class="fs"><option value="">-- Sélectionner --</option><option selected>Labo. imagerie cellulaire — Roger-Gaudry</option><option>Plateforme cytométrie — Ste-Justine</option></select></div><div class="fg"><label class="fl">Type de service</label><select class="fs"><option>Avec opérateur</option><option>Autonomie (formation requise)</option><option>Formation initiale</option></select></div></div>
+    <div class="fr"><div class="fg"><label class="fl">Durée minimale</label><select class="fs"><option>30 min</option><option selected>1 heure</option><option>2 heures</option></select></div><div class="fg"><label class="fl">Durée maximale</label><select class="fs"><option>2 heures</option><option selected>4 heures</option><option>Journée</option></select></div></div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('offres')">Annuler</button><button class="btn pri" onclick="validateStep1()">Continuer <i class="ti ti-arrow-right"></i></button></div>
+  </div>
+</div>
+
+<!-- NOUVELLE OFFRE 2 -->
+<div class="page" id="page-nouvelle-offre-2">
+  <div class="ph"><div><div class="pt">Nouvelle offre de service</div><div class="ps">Sélectionnez les équipements inclus</div></div><button class="btn ghost" onclick="go('offres')"><i class="ti ti-x"></i>Annuler</button></div>
+  <div class="stepper"><div class="step done"><div class="sn">✓</div>Informations générales</div><div class="step on"><div class="sn">2</div>Équipements</div><div class="step"><div class="sn">3</div>Conditions d'accès</div><div class="step"><div class="sn">4</div>Plages horaires</div></div>
+  <div class="card" style="max-width:620px">
+    <div class="fg"><label class="fl">Équipements sélectionnés</label><div class="tags" id="equip-tags"><div class="tag"><i class="ti ti-microscope" style="font-size:13px"></i>Leica SP8 — #EQ-2041<button onclick="this.parentElement.remove()">×</button></div></div></div>
+    <div class="fg"><label class="fl">Ajouter un équipement depuis le RIÉ</label><input class="fi" type="text" id="equip-search" placeholder="Rechercher par nom, numéro de série..." oninput="toggleDD(this.value)" autocomplete="off"><div id="equip-dd" style="display:none" class="dd"><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Leica SP8 — Microscopie confocale</div><div class="dd-s">Roger-Gaudry G-1015 · #EQ-2041 · Actif</div></div><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Zeiss LSM 880 — Microscopie confocale</div><div class="dd-s">Pavillon Marcelle-Coutu · #EQ-1887 · Actif</div></div><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Nikon A1R — Microscopie confocale HD</div><div class="dd-s">3200 Jean-Brillant · #EQ-2203 · Actif</div></div></div></div>
+    <div class="notice n-info"><i class="ti ti-info-circle"></i><span>Si deux équipements sont liés, la réservation de l'un bloquera automatiquement l'autre sur le même créneau.</span></div>
+    <div class="fg"><label class="fl">Opérateur assigné (optionnel)</label><select class="fs"><option value="">Aucun — accès en autonomie</option><option selected>Jean-François Côté (technicien principal)</option><option>Amira Mansouri (technicienne)</option></select></div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn pri" onclick="go('nouvelle-offre-3')">Continuer <i class="ti ti-arrow-right"></i></button></div>
+  </div>
+</div>
+
+<!-- NOUVELLE OFFRE 3 -->
+<div class="page" id="page-nouvelle-offre-3">
+  <div class="ph"><div><div class="pt">Nouvelle offre de service</div><div class="ps">Conditions d'accès et fenêtre de réservation</div></div><button class="btn ghost" onclick="go('offres')"><i class="ti ti-x"></i>Annuler</button></div>
+  <div class="stepper"><div class="step done"><div class="sn">✓</div>Informations générales</div><div class="step done"><div class="sn">✓</div>Équipements</div><div class="step on"><div class="sn">3</div>Conditions d'accès</div><div class="step"><div class="sn">4</div>Plages horaires</div></div>
+  <div class="card" style="max-width:620px">
+    <div class="fg"><label class="fl">Formation requise</label><select class="fs"><option>Aucune</option><option selected>Formation Leica SP8 — Niveau 1</option><option>Formation Leica SP8 — Niveau 2</option></select></div>
+    <div class="fg"><label class="fl">Groupes d'accès autorisés</label><div class="tags"><div class="tag">Chercheurs UdeM<button>×</button></div><div class="tag">Étudiants gradués<button>×</button></div><div class="tag">Partenaires RQCHP<button>×</button></div></div></div>
+    <div class="divider"></div>
+    <div style="font-size:13px;font-weight:600;margin-bottom:12px">Fenêtre de réservation</div>
+    <div class="fr"><div class="fg"><label class="fl">Visibilité à l'avance</label><select class="fs"><option>2 semaines</option><option selected>1 mois</option><option>2 mois</option><option>Personnalisé</option></select></div><div class="fg"><label class="fl">Délai d'annulation minimum</label><select class="fs"><option>12h</option><option selected>24h</option><option>48h</option><option>72h</option></select></div></div>
+    <div class="notice n-info"><i class="ti ti-info-circle"></i><span>Les réservations au-delà de la fenêtre d'1 mois seront marquées <strong>«&nbsp;en attente de confirmation&nbsp;»</strong> et devront être approuvées manuellement.</span></div>
+
+    <div class="divider"></div>
+    <div style="font-size:13px;font-weight:600;margin-bottom:4px">Tarification</div>
+    <div style="font-size:12px;color:var(--t2);margin-bottom:14px">Définissez le tarif de base et, optionnellement, des tarifs réduits sur certaines plages horaires.</div>
+    <div class="fr">
+      <div class="fg">
+        <label class="fl">Type de tarification</label>
+        <select class="fs" id="tarif-type" onchange="toggleTarifFields()">
+          <option value="horaire" selected>À l'heure</option>
+          <option value="session">Par session</option>
+          <option value="demi">Demi-journée / Journée</option>
+          <option value="gratuit">Gratuit</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="fl">Tarif de base</label>
+        <div style="position:relative">
+          <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:13px;pointer-events:none">$</span>
+          <input class="fi" type="number" id="tarif-base" value="75" min="0" step="0.01" style="padding-left:24px">
+        </div>
+      </div>
+      <div class="fg">
+        <label class="fl">Unité</label>
+        <select class="fs" id="tarif-unit">
+          <option selected>/ heure</option>
+          <option>/ session</option>
+          <option>/ demi-journée</option>
+          <option>/ journée</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Tarifs par fenêtre horaire -->
+    <div id="tarifs-fenetres-wrap">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div>
+          <div style="font-size:12px;font-weight:600;color:var(--t1)">Tarifs par fenêtre horaire <span class="badge b-neu" style="font-size:10px;vertical-align:middle">Optionnel</span></div>
+          <div style="font-size:11px;color:var(--t2);margin-top:2px">Appliquer un tarif différent selon l'heure de réservation</div>
+        </div>
+        <button class="btn sm" onclick="addTarifFenetre()"><i class="ti ti-plus"></i>Ajouter une fenêtre</button>
+      </div>
+      <div id="tarifs-fenetres-list">
+        <!-- Fenêtre tarifaire existante (exemple pré-rempli) -->
+        <div class="tarif-fenetre-row" style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;padding:12px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);margin-bottom:8px">
+          <div class="fg" style="margin-bottom:0">
+            <label class="fl">Heure de début</label>
+            <input class="fi" type="time" value="16:00">
+          </div>
+          <div class="fg" style="margin-bottom:0">
+            <label class="fl">Heure de fin</label>
+            <input class="fi" type="time" value="19:00">
+          </div>
+          <div class="fg" style="margin-bottom:0">
+            <label class="fl">Tarif réduit</label>
+            <div style="position:relative">
+              <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:13px;pointer-events:none">$</span>
+              <input class="fi" type="number" value="50" min="0" step="0.01" style="padding-left:24px">
+            </div>
+          </div>
+          <button class="btn sm ghost" onclick="this.closest('.tarif-fenetre-row').remove()" style="margin-bottom:0;padding:8px"><i class="ti ti-trash" style="color:var(--err)"></i></button>
+        </div>
+      </div>
+      <div id="tarifs-empty-msg" style="display:none;font-size:12px;color:var(--t3);padding:10px 0">Aucune fenêtre tarifaire ajoutée. Le tarif de base s'appliquera à tous les créneaux.</div>
+    </div>
+
+    <!-- Aperçu tarifaire -->
+    <div id="tarif-preview" style="margin-top:4px">
+      <div style="font-size:12px;font-weight:600;color:var(--t2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em">Aperçu</div>
+      <div style="display:flex;flex-direction:column;gap:4px" id="tarif-preview-rows">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px">
+          <span style="color:var(--t2)">Tarif standard <span style="color:var(--t3)">(8h00 – 16h00 · 19h00 – 17h00)</span></span>
+          <span style="font-weight:700;color:var(--t1)">75,00 $ / heure</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-sm);font-size:12px">
+          <span style="color:var(--info)">Tarif réduit <span style="color:var(--t2)">(16h00 – 19h00)</span></span>
+          <span style="font-weight:700;color:var(--info)">50,00 $ / heure</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre-2')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn pri" onclick="go('nouvelle-offre-4')">Continuer <i class="ti ti-arrow-right"></i></button></div>
+  </div>
+</div>
+
+<!-- NOUVELLE OFFRE 4 -->
+<div class="page" id="page-nouvelle-offre-4">
+  <div class="ph">
+    <div><div class="pt">Nouvelle offre de service</div><div class="ps">Définissez les plages horaires disponibles</div></div>
+    <button class="btn ghost" onclick="go('offres')"><i class="ti ti-x"></i>Annuler</button>
+  </div>
+  <div class="stepper">
+    <div class="step done"><div class="sn">✓</div>Informations générales</div>
+    <div class="step done"><div class="sn">✓</div>Équipements</div>
+    <div class="step done"><div class="sn">✓</div>Conditions d'accès</div>
+    <div class="step on"><div class="sn">4</div>Plages horaires</div>
+  </div>
+
+  <!-- Zone 1 : règle récurrente -->
+  <div class="card" style="max-width:720px;margin-bottom:14px">
+    <div style="font-size:14px;font-weight:600;margin-bottom:4px">Règle de disponibilité de base</div>
+    <div style="font-size:12px;color:var(--t2);margin-bottom:14px">Définissez les jours et heures habituels de disponibilité. Le calendrier sera généré automatiquement.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+      <div class="fg" style="margin-bottom:0">
+        <label class="fl">Jours disponibles</label>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:2px" id="day-btns">
+          <div class="day-btn on" data-day="Lu" onclick="toggleDay(this)">Lu</div>
+          <div class="day-btn on" data-day="Ma" onclick="toggleDay(this)">Ma</div>
+          <div class="day-btn on" data-day="Me" onclick="toggleDay(this)">Me</div>
+          <div class="day-btn on" data-day="Je" onclick="toggleDay(this)">Je</div>
+          <div class="day-btn on" data-day="Ve" onclick="toggleDay(this)">Ve</div>
+          <div class="day-btn" data-day="Sa" onclick="toggleDay(this)">Sa</div>
+          <div class="day-btn" data-day="Di" onclick="toggleDay(this)">Di</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="fg" style="margin-bottom:0"><label class="fl">Heure de début</label><input class="fi" type="time" value="08:00" id="rule-start"></div>
+        <div class="fg" style="margin-bottom:0"><label class="fl">Heure de fin</label><input class="fi" type="time" value="17:00" id="rule-end"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="fg" style="margin-bottom:0"><label class="fl">Date de début</label><input class="fi" type="date" value="2026-06-01" id="rule-from"></div>
+        <div class="fg" style="margin-bottom:0"><label class="fl">Date de fin</label><input class="fi" type="date" value="2026-12-31" id="rule-to"></div>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <button class="btn pri" onclick="generateCalendar()"><i class="ti ti-refresh"></i>Générer les créneaux</button>
+      <span id="gen-msg" style="font-size:12px;color:var(--ok);margin-left:12px;display:none"><i class="ti ti-circle-check" style="vertical-align:-2px"></i> Créneaux générés</span>
+    </div>
+  </div>
+
+  <!-- Zone 2 : calendrier interactif -->
+  <div style="max-width:720px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <div style="font-size:14px;font-weight:600">Ajustements — cliquez sur un jour pour le bloquer ou le débloquer</div>
+      <div style="display:flex;gap:10px;font-size:11px;color:var(--t2)">
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:var(--info-bg);border:1px solid #B5D4F4;display:inline-block"></span>Disponible</span>
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:var(--warn-bg);border:1px solid #FAC775;display:inline-block"></span>Bloqué</span>
+        <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:2px;background:var(--bg3);border:1px solid var(--bd);display:inline-block"></span>Non disponible</span>
+      </div>
+    </div>
+
+    <!-- Navigation mois -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+      <button class="btn sm ghost" onclick="prevMonth()" style="padding:4px 8px"><i class="ti ti-chevron-left"></i></button>
+      <div style="font-size:14px;font-weight:600;min-width:120px;text-align:center" id="cal-month-label">Juin 2026</div>
+      <button class="btn sm ghost" onclick="nextMonth()" style="padding:4px 8px"><i class="ti ti-chevron-right"></i></button>
+      <div style="font-size:12px;color:var(--t2);margin-left:8px" id="cal-summary">0 jours disponibles</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--bd);border-radius:var(--r-lg);padding:16px">
+      <div class="cal" id="cal-interactive">
+        <div class="cal-h">Lu</div><div class="cal-h">Ma</div><div class="cal-h">Me</div><div class="cal-h">Je</div><div class="cal-h">Ve</div><div class="cal-h">Sa</div><div class="cal-h">Di</div>
+        <div class="cal-d empty" colspan="7" style="grid-column:span 7;font-size:12px;color:var(--t3);text-align:center;padding:16px 0;aspect-ratio:unset">Définissez une règle et cliquez sur "Générer les créneaux"</div>
+      </div>
+    </div>
+
+    <!-- Panel blocage (apparaît au clic sur un jour disponible) -->
+    <div id="block-panel" style="display:none;margin-top:12px">
+      <div class="card" style="margin-bottom:0;border-color:#FAC775;background:var(--warn-bg)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:600;color:var(--warn);margin-bottom:8px" id="block-panel-title">Bloquer le mercredi 18 juin</div>
+            <div class="fg" style="margin-bottom:0">
+              <label class="fl" style="color:var(--warn)">Raison du blocage</label>
+              <select class="fs" id="block-reason">
+                <option value="">-- Sélectionner --</option>
+                <option selected>Maintenance préventive</option>
+                <option>Maintenance d'urgence</option>
+                <option>Congé / fermeture exceptionnelle</option>
+                <option>Réservation hors système</option>
+                <option>Autre</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:20px">
+            <button class="btn sm" onclick="confirmBlock()"><i class="ti ti-ban"></i>Confirmer le blocage</button>
+            <button class="btn sm ghost" onclick="cancelBlock()"><i class="ti ti-x"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Résumé des blocages -->
+    <div id="blocks-summary" style="display:none;margin-top:12px">
+      <div style="font-size:13px;font-weight:600;margin-bottom:8px;color:var(--t1)">Jours bloqués</div>
+      <div id="blocks-list" style="display:flex;flex-direction:column;gap:6px"></div>
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;margin-top:20px;max-width:720px">
+    <button class="btn" onclick="go('nouvelle-offre-3')"><i class="ti ti-arrow-left"></i> Retour</button>
+    <button class="btn pri" onclick="go('offre-creee')"><i class="ti ti-check"></i>Publier l'offre</button>
+  </div>
+</div>
+
+
+<!-- OFFRE CRÉÉE -->
+<div class="page" id="page-offre-creee">
+  <div class="ok-screen"><div class="ok-icon"><i class="ti ti-check" style="font-size:28px"></i></div><div style="font-size:20px;font-weight:700;margin-bottom:8px">Offre publiée avec succès</div><div style="font-size:13px;color:var(--t2);margin-bottom:24px;max-width:360px;margin-left:auto;margin-right:auto;line-height:1.6">La microscopie confocale Leica SP8 est maintenant visible et réservable par les utilisateurs autorisés.</div><div style="display:flex;gap:10px;justify-content:center"><button class="btn" onclick="go('offres')">Voir mes offres</button><button class="btn pri" onclick="go('nouvelle-offre')"><i class="ti ti-plus"></i>Nouvelle offre</button></div></div>
+</div>
+
+<!-- RECHERCHE UTILISATEUR -->
+<div class="page" id="page-recherche">
+  <div class="ph"><div><div class="pt">Rechercher un équipement</div><div class="ps">Trouvez un créneau disponible sur les plateformes de l'UdeM</div></div></div>
+  <div class="search-bar"><div class="si-wrap"><i class="ti ti-search"></i><input class="si" type="text" id="s-query" value="microscopie confocale"></div><input class="fi" type="date" value="2026-06-10" style="flex:1"><input class="fi" type="date" value="2026-06-30" style="flex:1"><button class="btn pri" onclick="doSearch()">Rechercher</button></div>
+  <div class="fc"><div class="fchip on">Tous types</div><div class="fchip">Microscopie</div><div class="fchip">Cytométrie</div><div class="fchip">Imagerie in vivo</div><div class="fchip">Avec opérateur</div></div>
+  <div id="search-results">
+    <div style="font-size:12px;color:var(--t2);margin-bottom:14px">3 offres disponibles pour «&nbsp;microscopie confocale&nbsp;»</div>
+    <div class="rc" onclick="go('offre-detail-user')">
+      <div class="rc-icon"><i class="ti ti-microscope"></i></div>
+      <div style="flex:1"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="rc-title">Microscopie confocale Leica SP8</div><span class="badge b-info">Avec opérateur</span></div><div class="rc-meta">Labo. imagerie cellulaire · Pavillon Roger-Gaudry, G-1015<br>Opérateur : Jean-François Côté · Formation Leica SP8 requise</div><div style="font-size:11px;font-weight:600;margin-bottom:6px;color:var(--t2);text-transform:uppercase;letter-spacing:.04em">Créneaux disponibles</div><div class="slots"><div class="chip">Lun 10 · 8h–10h</div><div class="chip">Lun 10 · 10h–12h</div><div class="chip on">Mar 11 · 9h–11h</div><div class="chip">Mer 12 · 14h–16h</div><div class="chip">Jeu 13 · 8h–12h</div></div></div>
+      <button class="btn pri sm" onclick="event.stopPropagation();go('offre-detail-user')">Voir l'offre</button>
+    </div>
+    <div class="rc"><div class="rc-icon"><i class="ti ti-microscope"></i></div><div style="flex:1"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="rc-title">Zeiss LSM 880 — Confocal HD</div><span class="badge b-ok">Autonomie</span></div><div class="rc-meta">Plateforme imagerie · Pavillon Marcelle-Coutu, M-4210<br>Formation Zeiss LSM requise · 6 créneaux disponibles</div><div class="slots"><div class="chip">Mar 11 · 8h–10h</div><div class="chip">Mer 12 · 10h–12h</div><div class="chip">Ven 14 · 13h–17h</div></div></div><button class="btn sm">Voir</button></div>
+    <div class="rc" style="cursor:default"><div class="rc-icon" style="background:var(--warn-bg)"><i class="ti ti-microscope" style="color:var(--warn)"></i></div><div style="flex:1"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="rc-title">Nikon A1R — Imagerie HD</div><span class="badge b-warn">Maintenance</span></div><div class="rc-meta">Plateforme 3200 Jean-Brillant · Reprise des réservations le 17 juin 2026</div></div><button class="btn sm" disabled>Indisponible</button></div>
+  </div>
+  <div id="search-empty" style="display:none"><div class="empty-st"><i class="ti ti-search-off"></i><div style="font-size:15px;font-weight:600;margin-bottom:6px">Aucun résultat trouvé</div><div style="font-size:13px;max-width:300px;margin:0 auto;line-height:1.6">Aucun équipement disponible ne correspond à votre recherche sur cette période. Essayez d'élargir les dates ou de modifier les termes.</div></div></div>
+</div>
+
+
+<!-- DETAIL OFFRE UTILISATEUR -->
+<div class="page" id="page-offre-detail-user">
+  <div class="ph">
+    <div>
+      <button class="btn ghost sm" onclick="go('recherche')" style="margin-bottom:8px;padding-left:0"><i class="ti ti-arrow-left"></i> Résultats de recherche</button>
+      <div class="pt">Microscopie confocale Leica SP8</div>
+      <div class="ps">Labo. imagerie cellulaire — Pavillon Roger-Gaudry, G-1015</div>
+    </div>
+    <button class="btn pri" onclick="go('select-creneau')"><i class="ti ti-calendar-plus"></i>Réserver</button>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 280px;gap:16px;max-width:780px">
+    <div>
+      <div class="card" style="margin-bottom:14px">
+        <div style="font-size:14px;font-weight:600;margin-bottom:12px">Description</div>
+        <div style="font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:14px">Séances de microscopie confocale supervisées par un opérateur qualifié. Idéal pour les chercheurs débutants ou les acquisitions complexes nécessitant une expertise technique avancée.</div>
+        <div class="ir"><span class="ir-l">Type de service</span><span class="badge b-info">Avec opérateur</span></div>
+        <div class="ir"><span class="ir-l">Opérateur</span><span>Jean-François Côté</span></div>
+        <div class="ir"><span class="ir-l">Durée min / max</span><span>1h – 4h</span></div>
+        <div class="ir"><span class="ir-l">Délai d'annulation</span><span>24 heures minimum</span></div>
+        <div class="ir"><span class="ir-l">Fenêtre de réservation</span><span>1 mois à l'avance</span></div>
+        <div class="ir"><span class="ir-l">Tarif</span><span style="font-weight:600">75,00 $ / heure</span></div>
+        <div class="ir" style="border:none"><span class="ir-l">Tarif réduit</span><span style="color:var(--info)">50,00 $ / heure (16h–19h)</span></div>
+      </div>
+      <div class="card">
+        <div style="font-size:14px;font-weight:600;margin-bottom:12px">Équipements inclus</div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd)">
+          <div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-microscope" style="color:var(--info);font-size:18px"></i></div>
+          <div><div style="font-size:13px;font-weight:500">Leica SP8 — Microscopie confocale</div><div style="font-size:11px;color:var(--t2)">#EQ-2041 · Roger-Gaudry G-1015</div></div>
+        </div>
+        <div style="padding-top:12px;font-size:12px;color:var(--t2)"><i class="ti ti-info-circle" style="vertical-align:-2px"></i> Si vous réservez cette offre, le Zeiss LSM 880 sera automatiquement indisponible sur le même créneau.</div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Conditions d'accès</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px">
+            <i class="ti ti-circle-check" style="color:var(--ok);font-size:16px;flex-shrink:0;margin-top:1px"></i>
+            <div><div style="font-weight:500;color:var(--ok)">Formation validée</div><div style="color:var(--t2)">Formation Leica SP8 — Niveau 1<br>Complétée le 3 mars 2025</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px">
+            <i class="ti ti-circle-check" style="color:var(--ok);font-size:16px;flex-shrink:0;margin-top:1px"></i>
+            <div><div style="font-weight:500;color:var(--ok)">Groupe autorisé</div><div style="color:var(--t2)">Chercheurs UdeM</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:12px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Prochaines disponibilités</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="padding:7px 10px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500;color:var(--info)">Lun 10 juin</div><div style="color:var(--t2)">8h–10h · 10h–12h</div></div>
+          <div style="padding:7px 10px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500;color:var(--info)">Mar 11 juin</div><div style="color:var(--t2)">9h–11h</div></div>
+          <div style="padding:7px 10px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500;color:var(--info)">Mer 12 juin</div><div style="color:var(--t2)">14h–16h</div></div>
+        </div>
+      </div>
+      <button class="btn pri" style="width:100%;justify-content:center" onclick="go('select-creneau')"><i class="ti ti-calendar-plus"></i>Réserver cet équipement</button>
+    </div>
+  </div>
+</div>
+
+<!-- SELECTION CRENEAU (calendrier + horaires) -->
+<div class="page" id="page-select-creneau">
+  <div class="ph">
+    <div>
+      <button class="btn ghost sm" onclick="go('offre-detail-user')" style="margin-bottom:8px;padding-left:0"><i class="ti ti-arrow-left"></i> Détail de l'offre</button>
+      <div class="pt">Choisir un créneau</div>
+      <div class="ps">Microscopie confocale Leica SP8 — avec opérateur</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px">
+    <!-- Calendrier -->
+    <div>
+      <div class="card" style="margin-bottom:0">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <button class="btn sm ghost" onclick="userPrevMonth()" style="padding:4px 8px"><i class="ti ti-chevron-left"></i></button>
+          <div style="font-size:14px;font-weight:600" id="user-cal-label">Juin 2026</div>
+          <button class="btn sm ghost" onclick="userNextMonth()" style="padding:4px 8px"><i class="ti ti-chevron-right"></i></button>
+        </div>
+        <div class="cal" id="user-cal">
+          <div class="cal-h">Lu</div><div class="cal-h">Ma</div><div class="cal-h">Me</div><div class="cal-h">Je</div><div class="cal-h">Ve</div><div class="cal-h">Sa</div><div class="cal-h">Di</div>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:12px;font-size:11px;color:var(--t2)">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:50%;background:var(--info-bg);border:1px solid #B5D4F4;display:inline-block"></span>Disponible</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:50%;background:var(--blue);display:inline-block"></span>Sélectionné</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:10px;height:10px;border-radius:50%;background:var(--bg3);border:1px solid var(--bd);display:inline-block"></span>Indisponible</span>
+        </div>
+      </div>
+    </div>
+    <!-- Horaires du jour sélectionné -->
+    <div>
+      <div class="card" style="margin-bottom:0" id="slots-panel">
+        <div style="font-size:13px;font-weight:600;margin-bottom:4px" id="slots-day-title">Sélectionnez un jour</div>
+        <div style="font-size:12px;color:var(--t2);margin-bottom:14px" id="slots-day-sub">Cliquez sur une date disponible dans le calendrier</div>
+        <div id="slots-list">
+          <div style="text-align:center;padding:24px 0;color:var(--t3)">
+            <i class="ti ti-calendar" style="font-size:32px;display:block;margin-bottom:8px"></i>
+            <div style="font-size:12px">Aucun jour sélectionné</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Récap créneau sélectionné -->
+  <div id="creneau-selected-bar" style="display:none;max-width:760px;margin-top:14px">
+    <div class="card" style="margin-bottom:0;border-color:var(--teal);background:#F0F9FC">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <i class="ti ti-calendar-check" style="font-size:22px;color:var(--teal)"></i>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--info)" id="selected-creneau-label">Mar 11 juin · 9h00–11h00</div>
+            <div style="font-size:12px;color:var(--t2)">Leica SP8 · Opérateur : Jean-François Côté · Roger-Gaudry G-1015</div>
+          </div>
+        </div>
+        <button class="btn pri" onclick="go('detail-reservation')">Continuer <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL RESERVATION -->
+<div class="page" id="page-detail-reservation">
+  <div class="ph">
+    <div>
+      <button class="btn ghost sm" onclick="go('select-creneau')" style="margin-bottom:8px;padding-left:0"><i class="ti ti-arrow-left"></i> Choix du créneau</button>
+      <div class="pt">Confirmer la réservation</div>
+      <div class="ps">Microscopie confocale Leica SP8 — avec opérateur</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 300px;gap:16px;max-width:780px">
+    <div>
+      <div class="card" style="margin-bottom:14px;border-color:#B5D4F4;background:var(--info-bg)">
+        <div style="display:flex;align-items:center;gap:10px">
+          <i class="ti ti-calendar-check" style="font-size:20px;color:var(--info)"></i>
+          <div><div style="font-size:13px;font-weight:600;color:var(--info)">Mardi 11 juin 2026 · 9h00 – 11h00</div><div style="font-size:12px;color:var(--t2)">Opérateur : Jean-François Côté · Roger-Gaudry G-1015</div></div>
+          <button class="btn sm ghost" onclick="go('select-creneau')" style="margin-left:auto;font-size:12px;color:var(--info)"><i class="ti ti-edit"></i>Modifier</button>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:12px">Informations complémentaires</div>
+        <div class="fg"><label class="fl">Projet de recherche</label><select class="fs"><option>Analyse morphologique des cellules NK — IRSC 2024-2027</option><option>Étude comparative des marqueurs CD4/CD8</option></select></div>
+        <div class="fg"><label class="fl">Description de l'utilisation prévue <span style="color:var(--err)">*</span></label><textarea class="fi" rows="3" id="resa-desc">Acquisition d'images z-stack de coupes histologiques pour analyse de la distribution des cellules NK dans les ganglions lymphatiques.</textarea></div>
+        <div class="fg"><label class="fl">Nombre d'échantillons prévus</label><input class="fi" type="number" value="12" style="width:120px"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:12px">Récapitulatif</div>
+        <table class="sum-t">
+          <tr><td>Équipement</td><td>Leica SP8 — Confocal</td></tr>
+          <tr><td>Date</td><td>Mar 11 juin 2026</td></tr>
+          <tr><td>Heure</td><td>9h00 – 11h00</td></tr>
+          <tr><td>Durée</td><td>2 heures</td></tr>
+          <tr><td>Opérateur</td><td>J.-F. Côté</td></tr>
+          <tr><td>Local</td><td>Roger-Gaudry G-1015</td></tr>
+        </table>
+        <div class="divider" style="margin:10px 0"></div>
+        <table class="sum-t"><tr><td>Annulation avant</td><td>Lun 10 juin · 9h</td></tr></table>
+      </div>
+      <div class="card n-ok" style="margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+          <i class="ti ti-circle-check" style="color:var(--ok);font-size:16px"></i>
+          <span style="font-size:12px;font-weight:600;color:var(--ok)">Formation validée</span>
+        </div>
+        <div style="font-size:11px;color:#3B6D11;line-height:1.5">Formation Leica SP8 — Niveau 1<br>Complétée le 3 mars 2025</div>
+      </div>
+      <button class="btn pri" style="width:100%;justify-content:center" onclick="validateResa()">
+        <i class="ti ti-check"></i>Confirmer la réservation
+      </button>
+      <div id="resa-err" style="display:none" class="notice n-err" style="margin-top:8px"><i class="ti ti-alert-circle"></i><span>Veuillez décrire l'utilisation prévue.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- RESERVATION CONFIRMÉE -->
+<div class="page" id="page-reservation-confirmee">
+  <div class="ok-screen">
+    <div class="ok-icon"><i class="ti ti-calendar-check" style="font-size:28px"></i></div>
+    <div style="font-size:20px;font-weight:700;margin-bottom:8px">Réservation confirmée</div>
+    <div style="font-size:13px;color:var(--t2);margin-bottom:22px;line-height:1.6">Un courriel de confirmation vous a été envoyé.</div>
+    <div class="card" style="max-width:320px;margin:0 auto 24px;text-align:left">
+      <table class="sum-t">
+        <tr><td>Équipement</td><td>Leica SP8 — Confocal</td></tr>
+        <tr><td>Date</td><td>Mar 11 juin 2026</td></tr>
+        <tr><td>Heure</td><td>9h00 – 11h00</td></tr>
+        <tr><td>Local</td><td>Roger-Gaudry G-1015</td></tr>
+        <tr><td>Opérateur</td><td>Jean-François Côté</td></tr>
+        <tr><td>Total facturé</td><td style="font-weight:700;color:var(--blue)">150,00 $</td></tr>
+      </table>
+      <div class="divider" style="margin:10px 0"></div>
+      <table class="sum-t"><tr><td>Numéro</td><td style="color:var(--blue);font-weight:700">#RES-2026-0847</td></tr></table>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button class="btn" onclick="go('mes-reservations')">Mes réservations</button>
+      <button class="btn pri" onclick="go('recherche')">Nouvelle recherche</button>
+    </div>
+  </div>
+</div>
+
+<!-- MES RESERVATIONS -->
+<div class="page" id="page-mes-reservations">
+  <div class="ph">
+    <div><div class="pt">Mes réservations</div><div class="ps">Karim Belkacem — 3 réservations actives</div></div>
+  </div>
+  <div class="card">
+    <div class="ri">
+      <div style="display:flex;align-items:center;gap:12px;flex:1">
+        <div class="ri-ic" style="background:var(--info-bg)"><i class="ti ti-microscope" style="color:var(--info);font-size:18px"></i></div>
+        <div>
+          <div style="font-size:13px;font-weight:600">Microscopie confocale Leica SP8</div>
+          <div style="font-size:11px;color:var(--t2)">Mar 11 juin 2026 · 9h00–11h00 · Roger-Gaudry G-1015</div>
+          <div style="font-size:11px;color:var(--t2)">#RES-2026-0847</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="badge b-ok">Confirmée</span>
+        <button class="btn sm" onclick="go('modal-annul-user')">Annuler</button>
+      </div>
+    </div>
+    <div class="ri">
+      <div style="display:flex;align-items:center;gap:12px;flex:1">
+        <div class="ri-ic" style="background:var(--info-bg)"><i class="ti ti-filter" style="color:var(--info);font-size:18px"></i></div>
+        <div>
+          <div style="font-size:13px;font-weight:600">Cytomètre BD LSRFortessa</div>
+          <div style="font-size:11px;color:var(--t2)">Jeu 25 juin 2026 · 13h00–15h00 · Roger-Gaudry G-1020</div>
+          <div style="font-size:11px;color:var(--t2)">#RES-2026-0821</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="badge b-ok">Confirmée</span>
+        <button class="btn sm" onclick="go('modal-annul-user')">Annuler</button>
+      </div>
+    </div>
+    <div class="ri" style="border:none">
+      <div style="display:flex;align-items:center;gap:12px;flex:1">
+        <div class="ri-ic" style="background:var(--warn-bg)"><i class="ti ti-microscope" style="color:var(--warn);font-size:18px"></i></div>
+        <div>
+          <div style="font-size:13px;font-weight:600">Microscopie confocale Leica SP8</div>
+          <div style="font-size:11px;color:var(--t2)">Lun 15 juillet 2026 · 8h00–10h00 · Hors fenêtre active</div>
+          <div style="font-size:11px;color:var(--t2)">#RES-2026-0803</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="badge b-warn">En attente</span>
+        <button class="btn sm" onclick="go('modal-annul-user')">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ANNULATION UTILISATEUR -->
+<div class="page" id="page-modal-annul-user">
+  <div class="mb-bg">
+    <div class="modal">
+      <div class="modal-t">Annuler la réservation</div>
+      <div class="modal-s">Microscopie confocale Leica SP8 · Mar 11 juin 2026 · 9h00–11h00</div>
+      <div class="card" style="margin-bottom:14px;background:var(--bg2)">
+        <table class="sum-t">
+          <tr><td>Équipement</td><td>Leica SP8 — Confocal</td></tr>
+          <tr><td>Date</td><td>Mar 11 juin 2026</td></tr>
+          <tr><td>Heure</td><td>9h00 – 11h00</td></tr>
+          <tr><td>Numéro</td><td style="color:var(--blue);font-weight:700">#RES-2026-0847</td></tr>
+        </table>
+      </div>
+      <div class="notice n-warn"><i class="ti ti-alert-triangle"></i><span>Vous annulez dans les délais autorisés. Annulation possible jusqu'au <strong>lundi 10 juin à 9h00</strong>.</span></div>
+      <div class="fg">
+        <label class="fl">Raison de l'annulation <span style="color:var(--err)">*</span></label>
+        <select class="fs" id="user-cancel-reason" style="margin-bottom:8px">
+          <option value="">-- Sélectionner une raison --</option>
+          <option selected>Changement de planning</option>
+          <option>Expérience reportée</option>
+          <option>Problème technique de mon côté</option>
+          <option>Autre</option>
+        </select>
+        <textarea class="fi" rows="2" placeholder="Précisions supplémentaires (optionnel)..."></textarea>
+      </div>
+      <div id="cancel-reason-err" style="display:none" class="notice n-err"><i class="ti ti-alert-circle"></i><span>Veuillez sélectionner une raison.</span></div>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px">
+        <button class="btn" onclick="go('mes-reservations')">Conserver la réservation</button>
+        <button class="btn dng" onclick="validateCancelUser()"><i class="ti ti-trash"></i>Confirmer l'annulation</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ANNULATION CONFIRMÉE UTILISATEUR -->
+<div class="page" id="page-annulation-confirmee">
+  <div class="ok-screen">
+    <div style="width:60px;height:60px;border-radius:50%;background:var(--err-bg);border:1px solid #F09595;display:flex;align-items:center;justify-content:center;margin:0 auto 18px">
+      <i class="ti ti-calendar-x" style="font-size:28px;color:var(--err)"></i>
+    </div>
+    <div style="font-size:20px;font-weight:700;margin-bottom:8px">Réservation annulée</div>
+    <div style="font-size:13px;color:var(--t2);margin-bottom:22px;line-height:1.6">Un courriel de confirmation d'annulation vous a été envoyé.</div>
+    <div class="card" style="max-width:320px;margin:0 auto 24px;text-align:left">
+      <table class="sum-t">
+        <tr><td>Équipement</td><td>Leica SP8 — Confocal</td></tr>
+        <tr><td>Date annulée</td><td>Mar 11 juin 2026</td></tr>
+        <tr><td>Numéro</td><td style="color:var(--t2)">#RES-2026-0847</td></tr>
+        <tr><td>Raison</td><td>Changement de planning</td></tr>
+      </table>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button class="btn" onclick="go('mes-reservations')">Mes réservations</button>
+      <button class="btn pri" onclick="go('recherche')">Nouvelle recherche</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL REFUS -->
+<div class="page" id="page-modal-refus"><div class="mb-bg"><div class="modal"><div class="modal-t">Refuser la réservation</div><div class="modal-s">Karim Belkacem · Leica SP8 · Lun 15 juil. · 8h–10h</div><div class="notice n-warn"><i class="ti ti-alert-triangle"></i><span>L'utilisateur sera notifié par courriel avec la raison fournie.</span></div><div class="fg"><label class="fl">Raison du refus <span style="color:var(--err)">*</span></label><select class="fs" style="margin-bottom:8px"><option value="">-- Sélectionner une raison --</option><option selected>Créneau réservé pour maintenance</option><option>Équipement hors service</option><option>Capacité dépassée</option><option>Autre raison</option></select><textarea class="fi" rows="3">Maintenance préventive planifiée par le fabricant Leica sur cette période.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('dashboard')">Annuler</button><button class="btn dng" onclick="go('dashboard')"><i class="ti ti-x"></i>Confirmer le refus</button></div></div></div></div>
+
+<!-- MODAL ANNULATION RESP -->
+<div class="page" id="page-modal-annul-resp"><div class="mb-bg"><div class="modal"><div class="modal-t">Annuler la réservation</div><div class="modal-s">Karim Belkacem · Leica SP8 · Mar 11 juin · 9h–11h</div><div class="notice n-warn"><i class="ti ti-alert-triangle"></i><span>L'utilisateur sera notifié par courriel. Cette action est irréversible.</span></div><div class="fg"><label class="fl">Raison de l'annulation <span style="color:var(--err)">*</span></label><select class="fs" style="margin-bottom:8px"><option value="">-- Sélectionner --</option><option selected>Bris d'équipement</option><option>Maintenance d'urgence</option><option>Équipement hors service</option><option>Autre raison</option></select><textarea class="fi" rows="3">Bris mécanique sur l'objectif principal. Réparation en cours, délai estimé 3–5 jours ouvrables.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('reservations-resp')">Annuler</button><button class="btn dng" onclick="go('reservations-resp')"><i class="ti ti-trash"></i>Annuler la réservation</button></div></div></div></div>
+
+<!-- MODAL BLOCAGE -->
+<div class="page" id="page-modal-bloc"><div class="mb-bg"><div class="modal"><div class="modal-t">Bloquer une période</div><div class="modal-s">Les créneaux existants seront annulés et les utilisateurs notifiés.</div><div class="fg"><label class="fl">Offre concernée</label><select class="fs"><option selected>Microscopie confocale Leica SP8</option><option>Cytomètre BD LSRFortessa</option><option>Toutes mes offres</option></select></div><div class="fr"><div class="fg"><label class="fl">Date de début</label><input class="fi" type="date" value="2026-06-18"></div><div class="fg"><label class="fl">Date de fin</label><input class="fi" type="date" value="2026-06-18"></div></div><div class="fg"><label class="fl">Raison <span style="color:var(--err)">*</span></label><select class="fs" style="margin-bottom:8px"><option selected>Maintenance préventive</option><option>Maintenance d'urgence</option><option>Congé / fermeture</option><option>Autre</option></select><textarea class="fi" rows="2">Maintenance préventive annuelle planifiée par Leica Microsystems.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('plages')">Annuler</button><button class="btn pri" onclick="go('plages')"><i class="ti ti-check"></i>Confirmer le blocage</button></div></div></div></div>
+
+<!-- MODAL DÉSACTIVER -->
+<div class="page" id="page-modal-suppr"><div class="mb-bg"><div class="modal"><div class="modal-t">Désactiver l'offre</div><div class="modal-s">Microscopie confocale Leica SP8</div><div class="notice n-err"><i class="ti ti-alert-circle"></i><span>Cette offre sera masquée du catalogue. Les réservations confirmées existantes ne sont pas automatiquement annulées.</span></div><div class="fg"><label class="fl">Raison (optionnel)</label><textarea class="fi" rows="2" placeholder="Ex : Équipement retiré du service..."></textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('detail-offre')">Annuler</button><button class="btn dng" onclick="go('offres')"><i class="ti ti-eye-off"></i>Désactiver l'offre</button></div></div></div></div>
+
+    </div></div></div></div>
+
+<script>
+const routes={
+  dashboard:{title:'Tableau de bord',page:'page-dashboard',sb:'sb-resp',nav:'nav-dashboard'},
+  offres:{title:'Mes offres de service',page:'page-offres',sb:'sb-resp',nav:'nav-offres'},
+  'detail-offre':{title:"Détail de l'offre",page:'page-detail-offre',sb:'sb-resp',nav:'nav-offres'},
+  'modifier-offre':{title:"Modifier l'offre",page:'page-modifier-offre',sb:'sb-resp',nav:'nav-offres'},
+  'reservations-resp':{title:'Réservations',page:'page-reservations-resp',sb:'sb-resp',nav:'nav-reservations-resp'},
+  'nouvelle-offre':{title:'Nouvelle offre — Étape 1 / 4',page:'page-nouvelle-offre',sb:'sb-resp',nav:'nav-offres'},
+  'nouvelle-offre-2':{title:'Nouvelle offre — Étape 2 / 4',page:'page-nouvelle-offre-2',sb:'sb-resp',nav:'nav-offres'},
+  'nouvelle-offre-3':{title:'Nouvelle offre — Étape 3 / 4',page:'page-nouvelle-offre-3',sb:'sb-resp',nav:'nav-offres'},
+  'nouvelle-offre-4':{title:'Nouvelle offre — Étape 4 / 4',page:'page-nouvelle-offre-4',sb:'sb-resp',nav:'nav-offres'},
+  'offre-creee':{title:'Offre publiée',page:'page-offre-creee',sb:'sb-resp',nav:'nav-offres'},
+  'modal-refus':{title:'Refuser une réservation',page:'page-modal-refus',sb:'sb-resp',nav:'nav-dashboard'},
+  'modal-annul-resp':{title:'Annuler une réservation',page:'page-modal-annul-resp',sb:'sb-resp',nav:'nav-reservations-resp'},
+  'modal-bloc':{title:'Bloquer une période',page:'page-modal-bloc',sb:'sb-resp',nav:'nav-reservations-resp'},
+  'modal-suppr':{title:"Désactiver l'offre",page:'page-modal-suppr',sb:'sb-resp',nav:'nav-offres'},
+  recherche:{title:'Rechercher un équipement',page:'page-recherche',sb:'sb-user',nav:'nav-recherche'},
+  'offre-detail-user':{title:"Détail de l'offre",page:'page-offre-detail-user',sb:'sb-user',nav:'nav-recherche'},
+  'select-creneau':{title:'Choisir un créneau',page:'page-select-creneau',sb:'sb-user',nav:'nav-recherche'},
+  'detail-reservation':{title:'Confirmer la réservation',page:'page-detail-reservation',sb:'sb-user',nav:'nav-recherche'},
+  'reservation-confirmee':{title:'Réservation confirmée',page:'page-reservation-confirmee',sb:'sb-user',nav:'nav-recherche'},
+  'mes-reservations':{title:'Mes réservations',page:'page-mes-reservations',sb:'sb-user',nav:'nav-mes-reservations'},
+  'modal-annul-user':{title:'Annuler la réservation',page:'page-modal-annul-user',sb:'sb-user',nav:'nav-mes-reservations'},
+  'annulation-confirmee':{title:'Réservation annulée',page:'page-annulation-confirmee',sb:'sb-user',nav:'nav-mes-reservations'},
+};
+function go(n){const r=routes[n];if(!r)return;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(r.page).classList.add('active');document.getElementById('topbar-t').textContent=r.title;document.querySelectorAll('.s-item').forEach(el=>el.classList.remove('on'));const nav=document.getElementById(r.nav);if(nav)nav.classList.add('on');}
+function switchRole(role){document.getElementById('btn-resp').classList.toggle('on',role==='responsable');document.getElementById('btn-user').classList.toggle('on',role==='utilisateur');document.getElementById('sb-resp').style.display=role==='responsable'?'block':'none';document.getElementById('sb-user').style.display=role==='utilisateur'?'block':'none';if(role==='responsable'){document.getElementById('u-av').textContent='MG';document.getElementById('u-name').textContent='Marie Gagnon';document.getElementById('u-role').textContent='Responsable';go('dashboard');}else{document.getElementById('u-av').textContent='KB';document.getElementById('u-name').textContent='Karim Belkacem';document.getElementById('u-role').textContent='Chercheur — Biochimie';go('recherche');}}
+function loginAs(role){document.getElementById('screen-login').style.display='none';document.getElementById('screen-app').style.display='block';document.getElementById('btn-resp').classList.toggle('on',role==='responsable');document.getElementById('btn-user').classList.toggle('on',role==='utilisateur');document.getElementById('sb-resp').style.display=role==='responsable'?'block':'none';document.getElementById('sb-user').style.display=role==='utilisateur'?'block':'none';if(role==='responsable'){document.getElementById('u-av').textContent='MG';document.getElementById('u-name').textContent='Marie Gagnon';document.getElementById('u-role').textContent='Responsable';go('dashboard');}else{document.getElementById('u-av').textContent='KB';document.getElementById('u-name').textContent='Karim Belkacem';document.getElementById('u-role').textContent='Chercheur — Biochimie';go('recherche');}}
+function logout(){document.getElementById('screen-app').style.display='none';document.getElementById('screen-login').style.display='block';}
+function toggleDD(val){document.getElementById('equip-dd').style.display=val.length>1?'block':'none';}
+function selectEquip(){document.getElementById('equip-dd').style.display='none';document.getElementById('equip-search').value='';}
+function doSearch(){const q=document.getElementById('s-query').value.trim().toLowerCase();const empty=q&&!['microscopie','confocal','leica','zeiss','nikon','cytomètre','cytometre','imagerie','microscope'].some(k=>q.includes(k));document.getElementById('search-results').style.display=empty?'none':'block';document.getElementById('search-empty').style.display=empty?'block':'none';}
+function validateStep1(){const t=document.getElementById('f-titre');const existing=t.parentElement.querySelector('.err-msg');if(existing)existing.remove();if(!t.value.trim()){t.classList.add('err');const m=document.createElement('div');m.className='err-msg';m.textContent='Le titre est requis.';t.insertAdjacentElement('afterend',m);return;}t.classList.remove('err');go('nouvelle-offre-2');}
+
+// ── Interactive calendar (step 4) ──
+let calYear = 2026, calMonth = 5; // 0-indexed, June=5
+const activeDays = new Set(['Lu','Ma','Me','Je','Ve']);
+const blockedDates = new Map(); // "YYYY-MM-DD" -> reason
+const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const DAYS_FR = ['Lu','Ma','Me','Je','Ve','Sa','Di'];
+let pendingBlockDate = null;
+
+function toggleDay(el){
+  el.classList.toggle('on');
+  if(el.classList.contains('on')) activeDays.add(el.dataset.day);
+  else activeDays.delete(el.dataset.day);
+}
+
+function generateCalendar(){
+  renderCalendar();
+  const msg = document.getElementById('gen-msg');
+  msg.style.display = 'inline';
+  setTimeout(()=>{ msg.style.display='none'; }, 2500);
+}
+
+function renderCalendar(){
+  const cal = document.getElementById('cal-interactive');
+  const label = document.getElementById('cal-month-label');
+  label.textContent = MONTHS_FR[calMonth] + ' ' + calYear;
+
+  // Count available days for summary
+  let availCount = 0;
+
+  // Build grid
+  const firstDay = new Date(calYear, calMonth, 1);
+  const lastDay  = new Date(calYear, calMonth+1, 0);
+  const startDow = (firstDay.getDay()+6)%7; // Mon=0
+  const today = new Date(2026,5,9); // prototype "today"
+
+  let html = '<div class="cal-h">Lu</div><div class="cal-h">Ma</div><div class="cal-h">Me</div><div class="cal-h">Je</div><div class="cal-h">Ve</div><div class="cal-h">Sa</div><div class="cal-h">Di</div>';
+
+  // Empty cells before first day
+  for(let i=0;i<startDow;i++) html += '<div class="cal-d empty"></div>';
+
+  for(let d=1;d<=lastDay.getDate();d++){
+    const date = new Date(calYear, calMonth, d);
+    const dow  = (date.getDay()+6)%7; // Mon=0
+    const dayName = DAYS_FR[dow];
+    const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isPast  = date < today;
+
+    if(isPast){
+      html += `<div class="cal-d past-day">${d}</div>`;
+    } else if(blockedDates.has(dateStr)){
+      html += `<div class="cal-d blocked-manual" onclick="unblockDate('${dateStr}')" title="Bloqué: ${blockedDates.get(dateStr)}\nCliquer pour débloquer">${d}<div class="dot w"></div></div>`;
+    } else if(activeDays.has(dayName)){
+      availCount++;
+      html += `<div class="cal-d available" onclick="startBlock('${dateStr}', ${d})">${d}<div class="dot"></div></div>`;
+    } else {
+      html += `<div class="cal-d unavailable">${d}</div>`;
+    }
+  }
+
+  cal.innerHTML = html;
+  document.getElementById('cal-summary').textContent = availCount + ' jour' + (availCount>1?'s':'') + ' disponible' + (availCount>1?'s':'');
+  renderBlocksSummary();
+}
+
+function prevMonth(){
+  calMonth--;
+  if(calMonth<0){calMonth=11;calYear--;}
+  renderCalendar();
+  cancelBlock();
+}
+
+function nextMonth(){
+  calMonth++;
+  if(calMonth>11){calMonth=0;calYear++;}
+  renderCalendar();
+  cancelBlock();
+}
+
+function startBlock(dateStr, day){
+  pendingBlockDate = dateStr;
+  const panel = document.getElementById('block-panel');
+  const title = document.getElementById('block-panel-title');
+  const parts = dateStr.split('-');
+  title.textContent = `Bloquer le ${day} ${MONTHS_FR[parseInt(parts[1])-1].toLowerCase()} ${parts[0]}`;
+  panel.style.display = 'block';
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function confirmBlock(){
+  if(!pendingBlockDate) return;
+  const reason = document.getElementById('block-reason').value || 'Non précisé';
+  blockedDates.set(pendingBlockDate, reason);
+  pendingBlockDate = null;
+  document.getElementById('block-panel').style.display = 'none';
+  renderCalendar();
+}
+
+function cancelBlock(){
+  pendingBlockDate = null;
+  document.getElementById('block-panel').style.display = 'none';
+}
+
+function unblockDate(dateStr){
+  blockedDates.delete(dateStr);
+  renderCalendar();
+  cancelBlock();
+}
+
+function renderBlocksSummary(){
+  const summary = document.getElementById('blocks-summary');
+  const list    = document.getElementById('blocks-list');
+  if(blockedDates.size === 0){ summary.style.display='none'; return; }
+  summary.style.display = 'block';
+  const sorted = [...blockedDates.entries()].sort((a,b)=>a[0].localeCompare(b[0]));
+  list.innerHTML = sorted.map(([date,reason])=>{
+    const [y,m,d] = date.split('-');
+    const label = `${parseInt(d)} ${MONTHS_FR[parseInt(m)-1]} ${y}`;
+    return `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--warn-bg);border:1px solid #FAC775;border-radius:var(--r-sm);font-size:12px">
+      <span><strong>${label}</strong> — ${reason}</span>
+      <button class="btn sm ghost" onclick="unblockDate('${date}')" style="padding:2px 6px;font-size:11px"><i class="ti ti-x"></i></button>
+    </div>`;
+  }).join('');
+}
+
+
+// ── User calendar (créneau selection) ──
+let uYear=2026, uMonth=5, uSelectedDate=null;
+const MONTHS_FR2=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const DAYS_FR2=['Lu','Ma','Me','Je','Ve','Sa','Di'];
+
+const availableSlots = {
+  '2026-06-10': ['8h00 – 10h00','10h00 – 12h00'],
+  '2026-06-11': ['9h00 – 11h00'],
+  '2026-06-12': ['14h00 – 16h00'],
+  '2026-06-13': ['8h00 – 12h00'],
+  '2026-06-16': ['8h00 – 10h00','13h00 – 15h00'],
+  '2026-06-17': ['9h00 – 11h00','11h00 – 13h00'],
+  '2026-06-19': ['8h00 – 10h00'],
+  '2026-06-22': ['10h00 – 12h00','14h00 – 16h00'],
+  '2026-06-23': ['9h00 – 11h00'],
+  '2026-06-24': ['8h00 – 12h00'],
+  '2026-06-25': ['13h00 – 15h00'],
+  '2026-06-26': ['8h00 – 10h00','10h00 – 12h00'],
+};
+
+function renderUserCalendar(){
+  const cal = document.getElementById('user-cal');
+  if(!cal) return;
+  document.getElementById('user-cal-label').textContent = MONTHS_FR2[uMonth]+' '+uYear;
+  const firstDay = new Date(uYear, uMonth, 1);
+  const lastDay  = new Date(uYear, uMonth+1, 0);
+  const startDow = (firstDay.getDay()+6)%7;
+  const today    = new Date(2026,5,9);
+  let html = '<div class="cal-h">Lu</div><div class="cal-h">Ma</div><div class="cal-h">Me</div><div class="cal-h">Je</div><div class="cal-h">Ve</div><div class="cal-h">Sa</div><div class="cal-h">Di</div>';
+  for(let i=0;i<startDow;i++) html+='<div class="cal-d empty"></div>';
+  for(let d=1;d<=lastDay.getDate();d++){
+    const date=new Date(uYear,uMonth,d);
+    const ds=`${uYear}-${String(uMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isPast=date<today;
+    const hasSlots=!!availableSlots[ds];
+    const isSelected=ds===uSelectedDate;
+    if(isPast){
+      html+=`<div class="cal-d past-day">${d}</div>`;
+    } else if(isSelected){
+      html+=`<div class="cal-d" style="background:var(--blue);color:#fff;font-weight:700;cursor:pointer;border-radius:var(--r-sm)" onclick="selectUserDay('${ds}',${d})">${d}</div>`;
+    } else if(hasSlots){
+      html+=`<div class="cal-d available" onclick="selectUserDay('${ds}',${d})">${d}<div class="dot"></div></div>`;
+    } else {
+      html+=`<div class="cal-d unavailable">${d}</div>`;
+    }
+  }
+  cal.innerHTML=html;
+}
+
+function selectUserDay(ds, d){
+  uSelectedDate=ds;
+  renderUserCalendar();
+  const slots=availableSlots[ds]||[];
+  const parts=ds.split('-');
+  const monthName=MONTHS_FR2[parseInt(parts[1])-1];
+  document.getElementById('slots-day-title').textContent=`Créneaux disponibles — ${d} ${monthName} ${parts[0]}`;
+  document.getElementById('slots-day-sub').textContent=`${slots.length} créneau${slots.length>1?'x':''} disponible${slots.length>1?'s':''}`;
+  let html='';
+  slots.forEach((s,i)=>{
+    html+=`<div onclick="selectSlot(this,'${d} ${monthName}','${s}')" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--bd);border-radius:var(--r-md);margin-bottom:8px;cursor:pointer;transition:all .15s;background:var(--card)" onmouseover="this.style.borderColor='var(--blue)';this.style.background='var(--info-bg)'" onmouseout="if(!this.classList.contains('slot-selected')){this.style.borderColor='var(--bd)';this.style.background='var(--card)'}">
+      <div>
+        <div style="font-size:13px;font-weight:600">${s}</div>
+        <div style="font-size:11px;color:var(--t2)">2 heures · Opérateur : J.-F. Côté</div>
+      </div>
+      <i class="ti ti-circle" style="font-size:18px;color:var(--bd)"></i>
+    </div>`;
+  });
+  document.getElementById('slots-list').innerHTML=html;
+}
+
+function selectSlot(el, day, time){
+  document.querySelectorAll('#slots-list > div').forEach(d=>{
+    d.classList.remove('slot-selected');
+    d.style.borderColor='var(--bd)';
+    d.style.background='var(--card)';
+    d.querySelector('i').className='ti ti-circle';
+    d.querySelector('i').style.color='var(--bd)';
+  });
+  el.classList.add('slot-selected');
+  el.style.borderColor='var(--blue)';
+  el.style.background='var(--info-bg)';
+  el.querySelector('i').className='ti ti-circle-check';
+  el.querySelector('i').style.color='var(--blue)';
+  const label=`${day} · ${time}`;
+  document.getElementById('selected-creneau-label').textContent=label;
+  document.getElementById('creneau-selected-bar').style.display='block';
+}
+
+function userPrevMonth(){uMonth--;if(uMonth<0){uMonth=11;uYear--;}uSelectedDate=null;renderUserCalendar();resetSlotsPanel();}
+function userNextMonth(){uMonth++;if(uMonth>11){uMonth=0;uYear++;}uSelectedDate=null;renderUserCalendar();resetSlotsPanel();}
+function resetSlotsPanel(){
+  document.getElementById('slots-day-title').textContent='Sélectionnez un jour';
+  document.getElementById('slots-day-sub').textContent='Cliquez sur une date disponible dans le calendrier';
+  document.getElementById('slots-list').innerHTML='<div style="text-align:center;padding:24px 0;color:var(--t3)"><i class="ti ti-calendar" style="font-size:32px;display:block;margin-bottom:8px"></i><div style="font-size:12px">Aucun jour sélectionné</div></div>';
+  document.getElementById('creneau-selected-bar').style.display='none';
+}
+
+// Init user calendar when page becomes visible
+const origGo = go;
+go = function(n){
+  origGo(n);
+  if(n==='select-creneau') renderUserCalendar();
+};
+
+function validateResa(){
+  const desc=document.getElementById('resa-desc');
+  const errEl=document.getElementById('resa-err');
+  if(!desc||!desc.value.trim()){
+    if(errEl){errEl.style.display='flex';errEl.style.marginTop='8px';}
+    return;
+  }
+  if(errEl) errEl.style.display='none';
+  go('reservation-confirmee');
+}
+
+function validateCancelUser(){
+  const reason=document.getElementById('user-cancel-reason');
+  const errEl=document.getElementById('cancel-reason-err');
+  if(!reason||!reason.value){
+    if(errEl) errEl.style.display='flex';
+    return;
+  }
+  if(errEl) errEl.style.display='none';
+  go('annulation-confirmee');
+}
+
+
+// ── Tarification (step 3) ──
+function toggleTarifFields(){
+  const type = document.getElementById('tarif-type');
+  if(!type) return;
+  const unit = document.getElementById('tarif-unit');
+  const wrap = document.getElementById('tarifs-fenetres-wrap');
+  const map = {horaire:'/ heure', session:'/ session', demi:'/ journée', gratuit:'/ heure'};
+  if(unit) unit.value = map[type.value] || '/ heure';
+  if(wrap) wrap.style.display = type.value==='gratuit' ? 'none' : 'block';
+}
+
+function addTarifFenetre(){
+  const list = document.getElementById('tarifs-fenetres-list');
+  const empty = document.getElementById('tarifs-empty-msg');
+  if(!list) return;
+  if(empty) empty.style.display='none';
+  const row = document.createElement('div');
+  row.className='tarif-fenetre-row';
+  row.style.cssText='display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;padding:12px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);margin-bottom:8px';
+  row.innerHTML=`
+    <div class="fg" style="margin-bottom:0"><label class="fl">Heure de début</label><input class="fi" type="time" value="08:00"></div>
+    <div class="fg" style="margin-bottom:0"><label class="fl">Heure de fin</label><input class="fi" type="time" value="12:00"></div>
+    <div class="fg" style="margin-bottom:0"><label class="fl">Tarif réduit</label>
+      <div style="position:relative"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:13px;pointer-events:none">$</span>
+      <input class="fi" type="number" value="50" min="0" step="0.01" style="padding-left:24px"></div>
+    </div>
+    <button class="btn sm ghost" onclick="removeTarifFenetre(this)" style="margin-bottom:0;padding:8px"><i class="ti ti-trash" style="color:var(--err)"></i></button>`;
+  list.appendChild(row);
+}
+
+function removeTarifFenetre(btn){
+  btn.closest('.tarif-fenetre-row').remove();
+  const list=document.getElementById('tarifs-fenetres-list');
+  const empty=document.getElementById('tarifs-empty-msg');
+  if(list&&empty) empty.style.display=list.children.length===0?'block':'none';
+}
+
+</script>
+</body>
+</html>
