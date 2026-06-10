@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Réservation UdeM</title>
+  <title>Service de réservation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -203,7 +203,7 @@
         <circle cx="28" cy="37" r="2" fill="#0891B2"/>
         <circle cx="34" cy="37" r="2" fill="white" fill-opacity="0.3"/>
       </svg>
-      <div style="font-size:18px;font-weight:700;color:var(--t1);margin-top:14px;letter-spacing:-0.02em">Réservation UdeM</div>
+      <div style="font-size:18px;font-weight:700;color:var(--t1);margin-top:14px;letter-spacing:-0.02em">Service de réservation</div>
       <div style="font-size:12px;color:var(--t2);margin-top:3px">Infrastructures et équipements</div>
     </div>
     <div class="fg"><label class="fl">Identifiant UdeM</label><input class="fi" type="text" value="mgagnon"></div>
@@ -238,7 +238,7 @@
         <circle cx="17" cy="22" r="1.2" fill="#0891B2"/>
         <circle cx="20" cy="22" r="1.2" fill="white" fill-opacity="0.3"/>
       </svg>
-      <div><div class="s-logo-t">Réservation UdeM</div><div class="s-logo-s">Infrastructures et équipements</div></div>
+      <div><div class="s-logo-t">Service de réservation</div><div class="s-logo-s">Infrastructures et équipements</div></div>
     </div>
     <div class="role-sw">
       <button class="role-btn on" onclick="switchRole('responsable')" id="btn-resp">Responsable</button>
@@ -412,7 +412,7 @@
 <div class="page" id="page-nouvelle-offre-3">
   <div class="ph"><div><div class="pt">Nouvelle offre de service</div><div class="ps">Conditions d'accès et fenêtre de réservation</div></div><button class="btn ghost" onclick="go('offres')"><i class="ti ti-x"></i>Annuler</button></div>
   <div class="stepper"><div class="step done"><div class="sn">✓</div>Informations générales</div><div class="step done"><div class="sn">✓</div>Équipements</div><div class="step on"><div class="sn">3</div>Conditions d'accès</div><div class="step"><div class="sn">4</div>Plages horaires</div></div>
-  <div class="card" style="max-width:620px">
+  <div class="card" style="max-width:780px">
     <div class="fg"><label class="fl">Formation requise</label><select class="fs"><option>Aucune</option><option selected>Formation Leica SP8 — Niveau 1</option><option>Formation Leica SP8 — Niveau 2</option></select></div>
     <div class="fg"><label class="fl">Groupes d'accès autorisés</label><div class="tags"><div class="tag">Chercheurs UdeM<button>×</button></div><div class="tag">Étudiants gradués<button>×</button></div><div class="tag">Partenaires RQCHP<button>×</button></div></div></div>
     <div class="divider"></div>
@@ -421,10 +421,12 @@
     <div class="notice n-info"><i class="ti ti-info-circle"></i><span>Les réservations au-delà de la fenêtre d'1 mois seront marquées <strong>«&nbsp;en attente de confirmation&nbsp;»</strong> et devront être approuvées manuellement.</span></div>
 
     <div class="divider"></div>
-    <div style="font-size:13px;font-weight:600;margin-bottom:4px">Tarification</div>
-    <div style="font-size:12px;color:var(--t2);margin-bottom:14px">Définissez le tarif de base et, optionnellement, des tarifs réduits sur certaines plages horaires.</div>
-    <div class="fr">
-      <div class="fg">
+    <div style="font-size:13px;font-weight:600;margin-bottom:2px">Tarification</div>
+    <div style="font-size:12px;color:var(--t2);margin-bottom:16px">Définissez un tarif de base, puis des réductions optionnelles selon les plages horaires ou les groupes d'usagers.</div>
+
+    <!-- Tarif de base -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:18px">
+      <div class="fg" style="margin-bottom:0">
         <label class="fl">Type de tarification</label>
         <select class="fs" id="tarif-type" onchange="toggleTarifFields()">
           <option value="horaire" selected>À l'heure</option>
@@ -433,14 +435,14 @@
           <option value="gratuit">Gratuit</option>
         </select>
       </div>
-      <div class="fg">
+      <div class="fg" style="margin-bottom:0">
         <label class="fl">Tarif de base</label>
         <div style="position:relative">
           <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:13px;pointer-events:none">$</span>
-          <input class="fi" type="number" id="tarif-base" value="75" min="0" step="0.01" style="padding-left:24px">
+          <input class="fi num" type="number" id="tarif-base" value="75" min="0" step="0.01" style="padding-left:24px" oninput="refreshPreview()">
         </div>
       </div>
-      <div class="fg">
+      <div class="fg" style="margin-bottom:0">
         <label class="fl">Unité</label>
         <select class="fs" id="tarif-unit">
           <option selected>/ heure</option>
@@ -451,50 +453,90 @@
       </div>
     </div>
 
-    <!-- Tarifs par fenêtre horaire -->
-    <div id="tarifs-fenetres-wrap">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-        <div>
-          <div style="font-size:12px;font-weight:600;color:var(--t1)">Tarifs par fenêtre horaire <span class="badge b-neu" style="font-size:10px;vertical-align:middle">Optionnel</span></div>
-          <div style="font-size:11px;color:var(--t2);margin-top:2px">Appliquer un tarif différent selon l'heure de réservation</div>
-        </div>
-        <button class="btn sm" onclick="addTarifFenetre()"><i class="ti ti-plus"></i>Ajouter une fenêtre</button>
-      </div>
-      <div id="tarifs-fenetres-list">
-        <!-- Fenêtre tarifaire existante (exemple pré-rempli) -->
-        <div class="tarif-fenetre-row" style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;padding:12px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);margin-bottom:8px">
-          <div class="fg" style="margin-bottom:0">
-            <label class="fl">Heure de début</label>
-            <input class="fi" type="time" value="16:00">
+    <!-- Réductions -->
+    <div id="reductions-wrap">
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px">
+
+        <!-- Réductions horaires -->
+        <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-lg);padding:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--t1)"><i class="ti ti-clock" style="vertical-align:-2px;color:var(--teal)"></i> Réductions horaires</div>
+              <div style="font-size:11px;color:var(--t3);margin-top:2px">Moins cher sur certaines plages</div>
+            </div>
+            <button class="btn sm" onclick="addReductionHoraire()" style="font-size:11px;padding:4px 8px"><i class="ti ti-plus"></i>Ajouter</button>
           </div>
-          <div class="fg" style="margin-bottom:0">
-            <label class="fl">Heure de fin</label>
-            <input class="fi" type="time" value="19:00">
-          </div>
-          <div class="fg" style="margin-bottom:0">
-            <label class="fl">Tarif réduit</label>
-            <div style="position:relative">
-              <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:13px;pointer-events:none">$</span>
-              <input class="fi" type="number" value="50" min="0" step="0.01" style="padding-left:24px">
+          <div id="reductions-horaires-list">
+            <div class="reduc-row" style="display:grid;grid-template-columns:1fr 1fr 80px auto;gap:8px;align-items:end;margin-bottom:8px">
+              <div class="fg" style="margin-bottom:0"><label class="fl" style="font-size:10px">De</label><input class="fi" type="time" value="18:00" oninput="refreshPreview()"></div>
+              <div class="fg" style="margin-bottom:0"><label class="fl" style="font-size:10px">À</label><input class="fi" type="time" value="21:00" oninput="refreshPreview()"></div>
+              <div class="fg" style="margin-bottom:0">
+                <label class="fl" style="font-size:10px">Réduction</label>
+                <div style="position:relative">
+                  <input class="fi" type="number" value="20" min="1" max="99" style="padding-right:22px" oninput="refreshPreview()">
+                  <span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:12px;pointer-events:none">%</span>
+                </div>
+              </div>
+              <button class="btn sm ghost" onclick="removeReduc(this)" style="padding:8px;margin-bottom:0"><i class="ti ti-x" style="color:var(--err)"></i></button>
             </div>
           </div>
-          <button class="btn sm ghost" onclick="this.closest('.tarif-fenetre-row').remove()" style="margin-bottom:0;padding:8px"><i class="ti ti-trash" style="color:var(--err)"></i></button>
+          <div id="reductions-horaires-empty" style="display:none;font-size:11px;color:var(--t3);padding:4px 0">Tarif de base appliqué à toutes les heures.</div>
+        </div>
+
+        <!-- Réductions groupes -->
+        <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-lg);padding:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--t1)"><i class="ti ti-users" style="vertical-align:-2px;color:var(--teal)"></i> Réductions par groupe</div>
+              <div style="font-size:11px;color:var(--t3);margin-top:2px">Moins cher pour certains usagers</div>
+            </div>
+            <button class="btn sm" onclick="addReductionGroupe()" style="font-size:11px;padding:4px 8px"><i class="ti ti-plus"></i>Ajouter</button>
+          </div>
+          <div id="reductions-groupes-list">
+            <div class="reduc-row" style="display:grid;grid-template-columns:1fr 80px auto;gap:8px;align-items:end;margin-bottom:8px">
+              <div class="fg" style="margin-bottom:0">
+                <label class="fl" style="font-size:10px">Groupe</label>
+                <select class="fs" oninput="refreshPreview()">
+                  <option>Même département</option>
+                  <option>Étudiants gradués</option>
+                  <option>Chercheurs UdeM</option>
+                  <option>Partenaires externes</option>
+                </select>
+              </div>
+              <div class="fg" style="margin-bottom:0">
+                <label class="fl" style="font-size:10px">Réduction</label>
+                <div style="position:relative">
+                  <input class="fi" type="number" value="30" min="1" max="99" style="padding-right:22px" oninput="refreshPreview()">
+                  <span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:12px;pointer-events:none">%</span>
+                </div>
+              </div>
+              <button class="btn sm ghost" onclick="removeReduc(this)" style="padding:8px;margin-bottom:0"><i class="ti ti-x" style="color:var(--err)"></i></button>
+            </div>
+          </div>
+          <div id="reductions-groupes-empty" style="display:none;font-size:11px;color:var(--t3);padding:4px 0">Tarif de base appliqué à tous les groupes.</div>
         </div>
       </div>
-      <div id="tarifs-empty-msg" style="display:none;font-size:12px;color:var(--t3);padding:10px 0">Aucune fenêtre tarifaire ajoutée. Le tarif de base s'appliquera à tous les créneaux.</div>
-    </div>
 
-    <!-- Aperçu tarifaire -->
-    <div id="tarif-preview" style="margin-top:4px">
-      <div style="font-size:12px;font-weight:600;color:var(--t2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em">Aperçu</div>
-      <div style="display:flex;flex-direction:column;gap:4px" id="tarif-preview-rows">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px">
-          <span style="color:var(--t2)">Tarif standard <span style="color:var(--t3)">(8h00 – 16h00 · 19h00 – 17h00)</span></span>
-          <span style="font-weight:700;color:var(--t1)">75,00 $ / heure</span>
-        </div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-sm);font-size:12px">
-          <span style="color:var(--info)">Tarif réduit <span style="color:var(--t2)">(16h00 – 19h00)</span></span>
-          <span style="font-weight:700;color:var(--info)">50,00 $ / heure</span>
+      <!-- Aperçu dynamique -->
+      <div style="background:var(--card);border:1px solid var(--bd);border-radius:var(--r-lg);padding:14px" id="tarif-preview">
+        <div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Aperçu tarifaire</div>
+        <div id="tarif-preview-rows">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);margin-bottom:6px;font-size:12px">
+            <span>Tarif standard <span style="color:var(--t3)">(toutes plages, tous groupes)</span></span>
+            <span class="num" style="font-weight:700">75,00 $ / heure</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:#F0F9FC;border:1px solid var(--teal);border-radius:var(--r-md);margin-bottom:6px;font-size:12px">
+            <span style="color:var(--teal)"><i class="ti ti-clock" style="vertical-align:-2px"></i> 18h00–21h00 <span style="color:var(--t2)">· −20%</span></span>
+            <span class="num" style="font-weight:700;color:var(--teal)">60,00 $ / heure</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:#F0F9FC;border:1px solid var(--teal);border-radius:var(--r-md);margin-bottom:6px;font-size:12px">
+            <span style="color:var(--teal)"><i class="ti ti-users" style="vertical-align:-2px"></i> Même département <span style="color:var(--t2)">· −30%</span></span>
+            <span class="num" style="font-weight:700;color:var(--teal)">52,50 $ / heure</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:#EAF6FA;border:1px solid #7DCCE8;border-radius:var(--r-md);font-size:12px">
+            <span style="color:#0770A0"><i class="ti ti-sparkles" style="vertical-align:-2px"></i> Même département · 18h–21h <span style="color:var(--t2)">· −20% −30%</span></span>
+            <span class="num" style="font-weight:700;color:#0770A0">42,00 $ / heure</span>
+          </div>
         </div>
       </div>
     </div>
@@ -1250,36 +1292,141 @@ function toggleTarifFields(){
   const type = document.getElementById('tarif-type');
   if(!type) return;
   const unit = document.getElementById('tarif-unit');
-  const wrap = document.getElementById('tarifs-fenetres-wrap');
+  const wrap = document.getElementById('reductions-wrap');
   const map = {horaire:'/ heure', session:'/ session', demi:'/ journée', gratuit:'/ heure'};
   if(unit) unit.value = map[type.value] || '/ heure';
   if(wrap) wrap.style.display = type.value==='gratuit' ? 'none' : 'block';
+  refreshPreview();
 }
 
-function addTarifFenetre(){
-  const list = document.getElementById('tarifs-fenetres-list');
-  const empty = document.getElementById('tarifs-empty-msg');
+function addReductionHoraire(){
+  const list = document.getElementById('reductions-horaires-list');
+  const empty = document.getElementById('reductions-horaires-empty');
   if(!list) return;
   if(empty) empty.style.display='none';
   const row = document.createElement('div');
-  row.className='tarif-fenetre-row';
-  row.style.cssText='display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;padding:12px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);margin-bottom:8px';
+  row.className='reduc-row';
+  row.style.cssText='display:grid;grid-template-columns:1fr 1fr 80px auto;gap:8px;align-items:end;margin-bottom:8px';
   row.innerHTML=`
-    <div class="fg" style="margin-bottom:0"><label class="fl">Heure de début</label><input class="fi" type="time" value="08:00"></div>
-    <div class="fg" style="margin-bottom:0"><label class="fl">Heure de fin</label><input class="fi" type="time" value="12:00"></div>
-    <div class="fg" style="margin-bottom:0"><label class="fl">Tarif réduit</label>
-      <div style="position:relative"><span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:13px;pointer-events:none">$</span>
-      <input class="fi" type="number" value="50" min="0" step="0.01" style="padding-left:24px"></div>
+    <div class="fg" style="margin-bottom:0"><label class="fl" style="font-size:10px">De</label><input class="fi" type="time" value="08:00" oninput="refreshPreview()"></div>
+    <div class="fg" style="margin-bottom:0"><label class="fl" style="font-size:10px">À</label><input class="fi" type="time" value="12:00" oninput="refreshPreview()"></div>
+    <div class="fg" style="margin-bottom:0"><label class="fl" style="font-size:10px">Réduction</label>
+      <div style="position:relative">
+        <input class="fi" type="number" value="10" min="1" max="99" style="padding-right:22px" oninput="refreshPreview()">
+        <span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:12px;pointer-events:none">%</span>
+      </div>
     </div>
-    <button class="btn sm ghost" onclick="removeTarifFenetre(this)" style="margin-bottom:0;padding:8px"><i class="ti ti-trash" style="color:var(--err)"></i></button>`;
+    <button class="btn sm ghost" onclick="removeReduc(this)" style="padding:8px;margin-bottom:0"><i class="ti ti-x" style="color:var(--err)"></i></button>`;
   list.appendChild(row);
+  refreshPreview();
 }
 
-function removeTarifFenetre(btn){
-  btn.closest('.tarif-fenetre-row').remove();
-  const list=document.getElementById('tarifs-fenetres-list');
-  const empty=document.getElementById('tarifs-empty-msg');
-  if(list&&empty) empty.style.display=list.children.length===0?'block':'none';
+function addReductionGroupe(){
+  const list = document.getElementById('reductions-groupes-list');
+  const empty = document.getElementById('reductions-groupes-empty');
+  if(!list) return;
+  if(empty) empty.style.display='none';
+  const row = document.createElement('div');
+  row.className='reduc-row';
+  row.style.cssText='display:grid;grid-template-columns:1fr 80px auto;gap:8px;align-items:end;margin-bottom:8px';
+  row.innerHTML=`
+    <div class="fg" style="margin-bottom:0"><label class="fl" style="font-size:10px">Groupe</label>
+      <select class="fs" oninput="refreshPreview()">
+        <option>Même département</option>
+        <option>Étudiants gradués</option>
+        <option>Chercheurs UdeM</option>
+        <option>Partenaires externes</option>
+      </select>
+    </div>
+    <div class="fg" style="margin-bottom:0"><label class="fl" style="font-size:10px">Réduction</label>
+      <div style="position:relative">
+        <input class="fi" type="number" value="15" min="1" max="99" style="padding-right:22px" oninput="refreshPreview()">
+        <span style="position:absolute;right:8px;top:50%;transform:translateY(-50%);color:var(--t2);font-size:12px;pointer-events:none">%</span>
+      </div>
+    </div>
+    <button class="btn sm ghost" onclick="removeReduc(this)" style="padding:8px;margin-bottom:0"><i class="ti ti-x" style="color:var(--err)"></i></button>`;
+  list.appendChild(row);
+  refreshPreview();
+}
+
+function removeReduc(btn){
+  const row = btn.closest('.reduc-row');
+  const list = row.parentElement;
+  row.remove();
+  const emptyH = document.getElementById('reductions-horaires-empty');
+  const emptyG = document.getElementById('reductions-groupes-empty');
+  const listH  = document.getElementById('reductions-horaires-list');
+  const listG  = document.getElementById('reductions-groupes-list');
+  if(listH && emptyH) emptyH.style.display = listH.children.length===0 ? 'block':'none';
+  if(listG && emptyG) emptyG.style.display = listG.children.length===0 ? 'block':'none';
+  refreshPreview();
+}
+
+function refreshPreview(){
+  const baseEl = document.getElementById('tarif-base');
+  const unitEl = document.getElementById('tarif-unit');
+  if(!baseEl) return;
+  const base = parseFloat(baseEl.value) || 0;
+  const unit = unitEl ? unitEl.value : '/ heure';
+  const fmt = v => v.toLocaleString('fr-CA', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' $ ' + unit;
+
+  // Collect horaire reductions
+  const hRows = document.querySelectorAll('#reductions-horaires-list .reduc-row');
+  const horaires = [];
+  hRows.forEach(r => {
+    const inputs = r.querySelectorAll('input');
+    const selects = r.querySelectorAll('select');
+    if(inputs.length>=3){
+      horaires.push({ from: inputs[0].value, to: inputs[1].value, pct: parseFloat(inputs[2].value)||0 });
+    }
+  });
+
+  // Collect groupe reductions
+  const gRows = document.querySelectorAll('#reductions-groupes-list .reduc-row');
+  const groupes = [];
+  gRows.forEach(r => {
+    const sel = r.querySelector('select');
+    const inp = r.querySelector('input[type="number"]');
+    if(sel && inp) groupes.push({ name: sel.value, pct: parseFloat(inp.value)||0 });
+  });
+
+  let html = `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);margin-bottom:6px;font-size:12px">
+    <span>Tarif standard <span style="color:var(--t3)">(tous groupes, toutes plages)</span></span>
+    <span class="num" style="font-weight:700">${fmt(base)}</span>
+  </div>`;
+
+  horaires.forEach(h => {
+    if(h.pct<=0) return;
+    const reduced = base * (1 - h.pct/100);
+    html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:#F0F9FC;border:1px solid var(--teal);border-radius:var(--r-md);margin-bottom:6px;font-size:12px">
+      <span style="color:var(--teal)"><i class="ti ti-clock" style="vertical-align:-2px"></i> ${h.from}–${h.to} <span style="color:var(--t2)">· −${h.pct}%</span></span>
+      <span class="num" style="font-weight:700;color:var(--teal)">${fmt(reduced)}</span>
+    </div>`;
+  });
+
+  groupes.forEach(g => {
+    if(g.pct<=0) return;
+    const reduced = base * (1 - g.pct/100);
+    html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:#F0F9FC;border:1px solid var(--teal);border-radius:var(--r-md);margin-bottom:6px;font-size:12px">
+      <span style="color:var(--teal)"><i class="ti ti-users" style="vertical-align:-2px"></i> ${g.name} <span style="color:var(--t2)">· −${g.pct}%</span></span>
+      <span class="num" style="font-weight:700;color:var(--teal)">${fmt(reduced)}</span>
+    </div>`;
+  });
+
+  // Combined reductions (horaire + groupe)
+  horaires.forEach(h => {
+    groupes.forEach(g => {
+      if(h.pct<=0 || g.pct<=0) return;
+      const reduced = base * (1 - h.pct/100) * (1 - g.pct/100);
+      html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:#EAF6FA;border:1px solid #7DCCE8;border-radius:var(--r-md);margin-bottom:6px;font-size:12px">
+        <span style="color:#0770A0"><i class="ti ti-sparkles" style="vertical-align:-2px"></i> ${g.name} · ${h.from}–${h.to} <span style="color:var(--t2)">· −${h.pct}% −${g.pct}%</span></span>
+        <span class="num" style="font-weight:700;color:#0770A0">${fmt(reduced)}</span>
+      </div>`;
+    });
+  });
+
+  const preview = document.getElementById('tarif-preview-rows');
+  if(preview) preview.innerHTML = html;
 }
 
 </script>
