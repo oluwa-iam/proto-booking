@@ -531,7 +531,7 @@
     <div class="fg"><label class="fl">Description</label><textarea class="fi" rows="3">Séances de microscopie confocale supervisées par un opérateur qualifié. Idéal pour les chercheurs débutants ou les acquisitions complexes.</textarea></div>
     <div class="fr"><div class="fg"><label class="fl">Infrastructure <span style="color:var(--err)">*</span></label><select class="fs"><option value="">-- Sélectionner --</option><option selected>Labo. imagerie cellulaire — Roger-Gaudry</option><option>Plateforme cytométrie — Ste-Justine</option></select></div><div class="fg"><label class="fl">Type de service</label><select class="fs"><option>Avec opérateur</option><option>Autonomie (formation requise)</option><option>Formation initiale</option></select></div></div>
     <div class="fr"><div class="fg"><label class="fl">Durée minimale</label><select class="fs"><option>30 min</option><option selected>1 heure</option><option>2 heures</option></select></div><div class="fg"><label class="fl">Durée maximale</label><select class="fs"><option>2 heures</option><option selected>4 heures</option><option>Journée</option></select></div></div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('offres')">Annuler</button><button class="btn ghost" onclick="saveDraft()" style="color:var(--t2)"><i class="ti ti-device-floppy"></i>Brouillon</button><button class="btn pri" onclick="validateStep1()">Continuer <i class="ti ti-arrow-right"></i></button></div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('offres')">Annuler</button><button class="btn" onclick="saveDraft()"><i class="ti ti-device-floppy" style="color:var(--teal)"></i>Sauvegarder le brouillon</button><button class="btn pri" onclick="validateStep1()">Continuer <i class="ti ti-arrow-right"></i></button></div>
   </div>
 </div>
 
@@ -544,7 +544,7 @@
     <div class="fg"><label class="fl">Ajouter un équipement depuis le RIÉ</label><input class="fi" type="text" id="equip-search" placeholder="Rechercher par nom, numéro de série..." oninput="toggleDD(this.value)" autocomplete="off"><div id="equip-dd" style="display:none" class="dd"><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Leica SP8 — Microscopie confocale</div><div class="dd-s">Roger-Gaudry G-1015 · #EQ-2041 · Actif</div></div><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Zeiss LSM 880 — Microscopie confocale</div><div class="dd-s">Pavillon Marcelle-Coutu · #EQ-1887 · Actif</div></div><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Nikon A1R — Microscopie confocale HD</div><div class="dd-s">3200 Jean-Brillant · #EQ-2203 · Actif</div></div></div></div>
     <div class="notice n-info"><i class="ti ti-info-circle"></i><span>Si deux équipements sont liés, la réservation de l'un bloquera automatiquement l'autre sur le même créneau.</span></div>
     <div class="fg"><label class="fl">Opérateur assigné (optionnel)</label><select class="fs"><option value="">Aucun — accès en autonomie</option><option selected>Jean-François Côté (technicien principal)</option><option>Amira Mansouri (technicienne)</option></select></div>
-    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn ghost" onclick="saveDraft()" style="color:var(--t2)"><i class="ti ti-device-floppy"></i>Brouillon</button><button class="btn pri" onclick="go('nouvelle-offre-3')">Continuer <i class="ti ti-arrow-right"></i></button></div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn" onclick="saveDraft()"><i class="ti ti-device-floppy" style="color:var(--teal)"></i>Sauvegarder le brouillon</button><button class="btn pri" onclick="go('nouvelle-offre-3')">Continuer <i class="ti ti-arrow-right"></i></button></div>
   </div>
 </div>
 
@@ -689,7 +689,7 @@
       </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre-2')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn ghost" onclick="saveDraft()" style="color:var(--t2)"><i class="ti ti-device-floppy"></i>Brouillon</button><button class="btn pri" onclick="go('nouvelle-offre-4')">Continuer <i class="ti ti-arrow-right"></i></button></div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre-2')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn" onclick="saveDraft()"><i class="ti ti-device-floppy" style="color:var(--teal)"></i>Sauvegarder le brouillon</button><button class="btn pri" onclick="go('nouvelle-offre-4')">Continuer <i class="ti ti-arrow-right"></i></button></div>
   </div>
 </div>
 
@@ -1895,10 +1895,16 @@ function saveDraft(){
   if(!toast) return;
   toast.style.display = 'flex';
   toast.style.opacity = '1';
-  setTimeout(()=>{
+  toast.style.transition = '';
+  clearTimeout(window._draftTimer);
+  window._draftTimer = setTimeout(()=>{
     toast.style.transition = 'opacity .4s';
     toast.style.opacity = '0';
-    setTimeout(()=>{ toast.style.display='none'; toast.style.opacity='1'; toast.style.transition=''; }, 420);
+    setTimeout(()=>{
+      toast.style.display = 'none';
+      toast.style.opacity = '1';
+      toast.style.transition = '';
+    }, 420);
   }, 2800);
 }
 
