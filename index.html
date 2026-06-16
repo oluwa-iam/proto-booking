@@ -221,6 +221,129 @@
 </div>
 
 <!-- APP -->
+<!-- ONBOARDING -->
+<div id="screen-onboarding" style="display:none">
+<div class="login-wrap">
+  <div class="login-card" style="max-width:460px;width:460px">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="width:48px;height:48px;background:var(--teal);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto">
+        <i class="ti ti-user-circle" style="font-size:24px;color:#fff"></i>
+      </div>
+      <div style="font-size:17px;font-weight:700;color:var(--t1);margin-top:12px;letter-spacing:-0.02em">Bienvenue, Karim</div>
+      <div style="font-size:12px;color:var(--t2);margin-top:3px">Complétez votre profil pour continuer</div>
+    </div>
+
+    <!-- Étape 1 : rôle -->
+    <div id="ob-step-1">
+      <div style="font-size:13px;font-weight:600;margin-bottom:12px;color:var(--t1)">Quel est votre statut ?</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+        <div id="ob-card-etudiant" onclick="selectRole('etudiant')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--bd);border-radius:var(--r-lg);cursor:pointer;transition:all .15s;background:var(--card)">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <i class="ti ti-school" style="font-size:20px;color:var(--info)"></i>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600">Étudiant(e)</div>
+            <div style="font-size:11px;color:var(--t2);margin-top:2px">Mes réservations sont imputées à un compte professeur</div>
+          </div>
+          <i class="ti ti-circle" id="ob-icon-etudiant" style="margin-left:auto;font-size:18px;color:var(--bd)"></i>
+        </div>
+        <div id="ob-card-prof" onclick="selectRole('professeur')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--bd);border-radius:var(--r-lg);cursor:pointer;transition:all .15s;background:var(--card)">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--ok-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <i class="ti ti-briefcase" style="font-size:20px;color:var(--ok)"></i>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600">Professeur(e) / Chercheur(se)</div>
+            <div style="font-size:11px;color:var(--t2);margin-top:2px">Je gère un compte et j'autorise des étudiants à réserver</div>
+          </div>
+          <i class="ti ti-circle" id="ob-icon-prof" style="margin-left:auto;font-size:18px;color:var(--bd)"></i>
+        </div>
+        <div id="ob-card-autre" onclick="selectRole('autre')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--bd);border-radius:var(--r-lg);cursor:pointer;transition:all .15s;background:var(--card)">
+          <div style="width:40px;height:40px;border-radius:10px;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <i class="ti ti-user" style="font-size:20px;color:var(--t2)"></i>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600">Autre (technicien, partenaire…)</div>
+            <div style="font-size:11px;color:var(--t2);margin-top:2px">Je réserve pour mon propre compte</div>
+          </div>
+          <i class="ti ti-circle" id="ob-icon-autre" style="margin-left:auto;font-size:18px;color:var(--bd)"></i>
+        </div>
+      </div>
+      <button class="btn pri" id="ob-btn-next" style="width:100%;justify-content:center;opacity:.4;pointer-events:none" onclick="obNext()">Continuer <i class="ti ti-arrow-right"></i></button>
+    </div>
+
+    <!-- Étape 2a : étudiant → choisir professeur -->
+    <div id="ob-step-2a" style="display:none">
+      <button class="btn ghost sm" onclick="obBack()" style="margin-bottom:16px;padding-left:0"><i class="ti ti-arrow-left"></i> Retour</button>
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px">Sélectionnez votre professeur responsable</div>
+      <div style="font-size:12px;color:var(--t2);margin-bottom:14px">Vos réservations seront imputées à son compte. Il devra approuver votre demande.</div>
+      <div class="fg">
+        <label class="fl">Rechercher un professeur</label>
+        <input class="fi" type="text" id="ob-prof-search" placeholder="Nom, département…" oninput="filterProfs(this.value)">
+      </div>
+      <div id="ob-prof-list" style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+        <div class="ob-prof-item" onclick="selectProf(this,'Dr. Marie-Claire Boivin','Biochimie')" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:var(--r-md);cursor:pointer;background:var(--card);transition:all .15s">
+          <div style="width:34px;height:34px;border-radius:50%;background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:600;color:var(--info)">MB</div>
+          <div><div style="font-size:13px;font-weight:500">Dr. Marie-Claire Boivin</div><div style="font-size:11px;color:var(--t2)">Département de biochimie</div></div>
+          <i class="ti ti-circle" style="margin-left:auto;font-size:18px;color:var(--bd)"></i>
+        </div>
+        <div class="ob-prof-item" onclick="selectProf(this,'Pr. Éric Lacombe','Physique')" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:var(--r-md);cursor:pointer;background:var(--card);transition:all .15s">
+          <div style="width:34px;height:34px;border-radius:50%;background:var(--ok-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:600;color:var(--ok)">EL</div>
+          <div><div style="font-size:13px;font-weight:500">Pr. Éric Lacombe</div><div style="font-size:11px;color:var(--t2)">Département de physique</div></div>
+          <i class="ti ti-circle" style="margin-left:auto;font-size:18px;color:var(--bd)"></i>
+        </div>
+        <div class="ob-prof-item" onclick="selectProf(this,'Pr. Fatima Zahra Idrissi','Chimie')" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--bd);border-radius:var(--r-md);cursor:pointer;background:var(--card);transition:all .15s">
+          <div style="width:34px;height:34px;border-radius:50%;background:var(--warn-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:600;color:var(--warn)">FI</div>
+          <div><div style="font-size:13px;font-weight:500">Pr. Fatima Zahra Idrissi</div><div style="font-size:11px;color:var(--t2)">Département de chimie</div></div>
+          <i class="ti ti-circle" style="margin-left:auto;font-size:18px;color:var(--bd)"></i>
+        </div>
+      </div>
+      <div id="ob-prof-selected-notice" style="display:none" class="notice n-info" style="margin-bottom:12px"><i class="ti ti-info-circle"></i><span id="ob-prof-selected-text">Une demande sera envoyée au professeur sélectionné pour approbation.</span></div>
+      <button class="btn pri" id="ob-btn-submit-etudiant" style="width:100%;justify-content:center;opacity:.4;pointer-events:none" onclick="obSubmitEtudiant()">Envoyer la demande <i class="ti ti-send"></i></button>
+    </div>
+
+    <!-- Étape 2b : professeur → paramètres compte -->
+    <div id="ob-step-2b" style="display:none">
+      <button class="btn ghost sm" onclick="obBack()" style="margin-bottom:16px;padding-left:0"><i class="ti ti-arrow-left"></i> Retour</button>
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px">Paramètres de votre compte professeur</div>
+      <div style="font-size:12px;color:var(--t2);margin-bottom:16px">Vous pourrez gérer vos étudiants autorisés depuis votre profil.</div>
+      <div class="fg"><label class="fl">Département</label>
+        <select class="fs"><option selected>Département de biochimie</option><option>Département de physique</option><option>Département de chimie</option><option>Département de biologie</option></select>
+      </div>
+      <div class="fg"><label class="fl">Numéro de compte de facturation</label>
+        <input class="fi" type="text" placeholder="Ex : FRQ-2024-0042" value="IRSC-2024-1187">
+      </div>
+      <div class="fg" style="margin-bottom:20px">
+        <label class="fl">Approbation des étudiants</label>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="radio" name="appro" checked style="accent-color:var(--teal)">
+            Approbation manuelle (je valide chaque demande)
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="radio" name="appro" style="accent-color:var(--teal)">
+            Approbation automatique (tout étudiant de mon département)
+          </label>
+        </div>
+      </div>
+      <button class="btn pri" style="width:100%;justify-content:center" onclick="obSubmitProf()">Accéder à la plateforme <i class="ti ti-arrow-right"></i></button>
+    </div>
+
+    <!-- Étape 3 : demande envoyée (étudiant) -->
+    <div id="ob-step-3" style="display:none">
+      <div style="text-align:center;padding:20px 0">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--ok-bg);border:1px solid #C0DD97;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">
+          <i class="ti ti-send" style="font-size:24px;color:var(--ok)"></i>
+        </div>
+        <div style="font-size:16px;font-weight:700;margin-bottom:8px">Demande envoyée</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.7;margin-bottom:20px" id="ob-confirm-text">Une demande a été envoyée à <strong>Dr. Marie-Claire Boivin</strong>. Vous recevrez un courriel dès qu'elle sera approuvée.</div>
+        <div class="notice n-info" style="text-align:left"><i class="ti ti-info-circle"></i><span>En attendant l'approbation, vous pouvez consulter le catalogue d'équipements. La réservation sera activée une fois votre demande acceptée.</span></div>
+        <button class="btn pri" style="width:100%;justify-content:center;margin-top:16px" onclick="goApp('utilisateur')">Explorer le catalogue <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
 <div id="screen-app" style="display:none">
 <div class="app">
   <div class="sidebar">
@@ -249,6 +372,7 @@
       <div class="s-item on" onclick="go('dashboard')" id="nav-dashboard"><i class="ti ti-layout-dashboard"></i>Tableau de bord</div>
       <div class="s-item" onclick="go('offres')" id="nav-offres"><i class="ti ti-package"></i>Mes offres</div>
       <div class="s-item" onclick="go('reservations-resp')" id="nav-reservations-resp"><i class="ti ti-list-check"></i>Réservations</div>
+      <div class="s-item" onclick="go('mes-etudiants')" id="nav-mes-etudiants"><i class="ti ti-users"></i>Mes étudiants</div>
     </div>
     <div class="s-sec" id="sb-user" style="display:none">
       <div class="s-lbl">Navigation</div>
@@ -274,7 +398,7 @@
     <div class="stat"><div class="stat-l">Offres actives</div><div class="stat-v">4</div></div>
     <div class="stat"><div class="stat-l">Réservations ce mois</div><div class="stat-v">23</div></div>
     <div class="stat"><div class="stat-l">En attente</div><div class="stat-v" style="color:var(--warn)">3</div></div>
-    <div class="stat"><div class="stat-l">Taux d'occupation</div><div class="stat-v">67%</div></div>
+    <div class="stat"><div class="stat-l">Taux de réservation</div><div class="stat-v">67%</div></div>
   </div>
   <div class="card">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><div style="font-size:14px;font-weight:600">Disponibilité aujourd'hui</div><div style="font-size:12px;color:var(--t2)">Mardi 10 juin 2026</div></div>
@@ -342,7 +466,7 @@
           <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Réservations</span><span style="font-weight:600">12</span></div>
           <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Heures utilisées</span><span style="font-weight:600">24h</span></div>
           <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">En attente</span><span style="font-weight:600;color:var(--warn)">2</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Taux d'occupation</span><span style="font-weight:600">60%</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Taux de réservation</span><span style="font-weight:600">60%</span></div>
         </div>
       </div>
       <div class="card">
@@ -373,7 +497,23 @@
 <!-- RESERVATIONS RESPONSABLE -->
 <div class="page" id="page-reservations-resp">
   <div class="ph"><div><div class="pt">Réservations</div><div class="ps">Toutes les réservations de vos offres</div></div></div>
-  <div class="fc"><div class="fchip on">Toutes</div><div class="fchip">Confirmées</div><div class="fchip">En attente</div><div class="fchip">Annulées</div></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+    <div class="fc" style="margin-bottom:0">
+      <div class="fchip on">Toutes</div>
+      <div class="fchip">Confirmées</div>
+      <div class="fchip">En attente</div>
+      <div class="fchip">Annulées</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="font-size:12px;color:var(--t2);white-space:nowrap">Trier par infrastructure</span>
+      <select class="fs" id="tri-infra" onchange="trierParInfra(this.value)" style="width:auto;padding:5px 10px;font-size:12px">
+        <option value="">Toutes les infrastructures</option>
+        <option value="leica">Labo. Imagerie — Roger-Gaudry</option>
+        <option value="cyto">Plateforme cytométrie — Ste-Justine</option>
+        <option value="ivis">Imagerie in vivo — Roger-Gaudry</option>
+      </select>
+    </div>
+  </div>
   <div class="card" style="margin-bottom:0">
     <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--info);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Mar 11 juin · 9h–11h</div></div><span class="badge b-ok">Confirmée</span><button class="btn sm" onclick="go('modal-annul-resp')" style="margin-left:8px">Annuler</button></div>
     <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-filter" style="color:var(--info);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Amira Ben Salah</div><div style="font-size:11px;color:var(--t2)">Cytomètre BD LSR · Mer 12 juin · 10h–12h</div></div><span class="badge b-ok">Confirmée</span><button class="btn sm" onclick="go('modal-annul-resp')" style="margin-left:8px">Annuler</button></div>
@@ -453,8 +593,16 @@
       </div>
     </div>
 
+    <!-- Tarification avancée -->
+    <div style="margin-bottom:14px">
+      <button type="button" class="btn sm" id="btn-tarif-avance" onclick="toggleTarifAvance()" style="gap:6px">
+        <i class="ti ti-settings" style="color:var(--teal)"></i>Tarification avancée
+        <i class="ti ti-chevron-down" id="icon-tarif-avance" style="font-size:12px;color:var(--t3);transition:transform .2s"></i>
+      </button>
+      <span style="font-size:11px;color:var(--t3);margin-left:10px">Réductions par plage horaire ou par groupe d'usagers</span>
+    </div>
     <!-- Réductions -->
-    <div id="reductions-wrap">
+    <div id="reductions-wrap" style="display:none">
       <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px">
 
         <!-- Réductions horaires -->
@@ -987,6 +1135,84 @@
 </div>
 
 
+<!-- MES ETUDIANTS (professeur) -->
+<div class="page" id="page-mes-etudiants">
+  <div class="ph">
+    <div><div class="pt">Mes étudiants autorisés</div><div class="ps">Les étudiants autorisés peuvent réserver en votre nom sans validation de votre part à chaque réservation</div></div>
+  </div>
+
+  <!-- Demandes en attente -->
+  <div class="card" style="margin-bottom:14px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div><div style="font-size:14px;font-weight:600">Demandes d'autorisation en attente <span class="badge b-warn" style="margin-left:6px">2</span></div><div style="font-size:12px;color:var(--t2);margin-top:2px">Ces étudiants demandent à être autorisés à réserver en votre nom</div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--warn-bg);border:1px solid #FAC775;border-radius:var(--r-md)">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:600;color:var(--warn)">KB</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:500">Karim Belkacem</div>
+          <div style="font-size:11px;color:var(--t2)">Doctorat · Biochimie · Demande reçue le 9 juin 2026</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="btn sm pri" onclick="approuverEtudiant(this)"><i class="ti ti-check"></i>Approuver</button>
+          <button class="btn sm" onclick="revoquerEtudiant(this)">Refuser</button>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--warn-bg);border:1px solid #FAC775;border-radius:var(--r-md)">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:600;color:var(--warn)">LF</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:500">Léa Fontaine</div>
+          <div style="font-size:11px;color:var(--t2)">Maîtrise · Biochimie · Demande reçue le 8 juin 2026</div>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="btn sm pri" onclick="approuverEtudiant(this)"><i class="ti ti-check"></i>Approuver</button>
+          <button class="btn sm" onclick="revoquerEtudiant(this)">Refuser</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Étudiants approuvés -->
+  <div class="card" style="margin-bottom:0">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div style="font-size:14px;font-weight:600">Étudiants autorisés <span class="badge b-ok" style="margin-left:6px">3</span></div>
+    </div>
+    <div id="etudiants-approuves-list" style="display:flex;flex-direction:column">
+      <div class="rri">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--ok-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:600;color:var(--ok)">AT</div>
+        <div style="flex:1;margin-left:12px">
+          <div style="font-size:13px;font-weight:500">Amira Tremblay</div>
+          <div style="font-size:11px;color:var(--t2)">Doctorat · Biochimie · Autorisée depuis le 3 mai 2026</div>
+          <div style="font-size:11px;color:var(--t2);margin-top:2px">4 réservations · Dernier accès : 2 juin 2026</div>
+        </div>
+        <span class="badge b-ok">Active</span>
+        <button class="btn sm dng" onclick="revoquerEtudiantApprouve(this)" style="margin-left:8px"><i class="ti ti-user-x"></i>Révoquer</button>
+      </div>
+      <div class="rri">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--ok-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:600;color:var(--ok)">SP</div>
+        <div style="flex:1;margin-left:12px">
+          <div style="font-size:13px;font-weight:500">Samuel Perreault</div>
+          <div style="font-size:11px;color:var(--t2)">Maîtrise · Biochimie · Autorisé depuis le 15 avr. 2026</div>
+          <div style="font-size:11px;color:var(--t2);margin-top:2px">7 réservations · Dernier accès : 5 juin 2026</div>
+        </div>
+        <span class="badge b-ok">Active</span>
+        <button class="btn sm dng" onclick="revoquerEtudiantApprouve(this)" style="margin-left:8px"><i class="ti ti-user-x"></i>Révoquer</button>
+      </div>
+      <div class="rri" style="border:none">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--ok-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:600;color:var(--ok)">NB</div>
+        <div style="flex:1;margin-left:12px">
+          <div style="font-size:13px;font-weight:500">Nadia Bergeron</div>
+          <div style="font-size:11px;color:var(--t2)">Doctorat · Biochimie · Autorisée depuis le 2 mars 2026</div>
+          <div style="font-size:11px;color:var(--t2);margin-top:2px">12 réservations · Dernier accès : 7 juin 2026</div>
+        </div>
+        <span class="badge b-ok">Active</span>
+        <button class="btn sm dng" onclick="revoquerEtudiantApprouve(this)" style="margin-left:8px"><i class="ti ti-user-x"></i>Révoquer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- MODAL REFUS -->
 <div class="page" id="page-modal-refus"><div class="mb-bg"><div class="modal"><div class="modal-t">Refuser la réservation</div><div class="modal-s">Karim Belkacem · Leica SP8 · Lun 15 juil. · 8h–10h</div><div class="notice n-warn"><i class="ti ti-alert-triangle"></i><span>L'utilisateur sera notifié par courriel avec la raison fournie.</span></div><div class="fg"><label class="fl">Raison du refus <span style="color:var(--err)">*</span></label><select class="fs" style="margin-bottom:8px"><option value="">-- Sélectionner une raison --</option><option selected>Créneau réservé pour maintenance</option><option>Équipement hors service</option><option>Capacité dépassée</option><option>Autre raison</option></select><textarea class="fi" rows="3">Maintenance préventive planifiée par le fabricant Leica sur cette période.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('dashboard')">Annuler</button><button class="btn dng" onclick="go('dashboard')"><i class="ti ti-x"></i>Confirmer le refus</button></div></div></div></div>
 
@@ -1015,6 +1241,7 @@ const routes={
   'offre-creee':{title:'Offre publiée',page:'page-offre-creee',sb:'sb-resp',nav:'nav-offres'},
   'modal-refus':{title:'Refuser une réservation',page:'page-modal-refus',sb:'sb-resp',nav:'nav-dashboard'},
   'modal-annul-resp':{title:'Annuler une réservation',page:'page-modal-annul-resp',sb:'sb-resp',nav:'nav-reservations-resp'},
+  'mes-etudiants':{title:'Mes étudiants autorisés',page:'page-mes-etudiants',sb:'sb-resp',nav:'nav-mes-etudiants'},
   'modal-bloc':{title:'Bloquer une période',page:'page-modal-bloc',sb:'sb-resp',nav:'nav-reservations-resp'},
   'modal-suppr':{title:"Désactiver l'offre",page:'page-modal-suppr',sb:'sb-resp',nav:'nav-offres'},
   recherche:{title:'Rechercher un équipement',page:'page-recherche',sb:'sb-user',nav:'nav-recherche'},
@@ -1028,7 +1255,33 @@ const routes={
 };
 function go(n){const r=routes[n];if(!r)return;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(r.page).classList.add('active');document.getElementById('topbar-t').textContent=r.title;document.querySelectorAll('.s-item').forEach(el=>el.classList.remove('on'));const nav=document.getElementById(r.nav);if(nav)nav.classList.add('on');}
 function switchRole(role){document.getElementById('btn-resp').classList.toggle('on',role==='responsable');document.getElementById('btn-user').classList.toggle('on',role==='utilisateur');document.getElementById('sb-resp').style.display=role==='responsable'?'block':'none';document.getElementById('sb-user').style.display=role==='utilisateur'?'block':'none';if(role==='responsable'){document.getElementById('u-av').textContent='MG';document.getElementById('u-name').textContent='Marie Gagnon';document.getElementById('u-role').textContent='Responsable';go('dashboard');}else{document.getElementById('u-av').textContent='KB';document.getElementById('u-name').textContent='Karim Belkacem';document.getElementById('u-role').textContent='Chercheur — Biochimie';go('recherche');}}
-function loginAs(role){document.getElementById('screen-login').style.display='none';document.getElementById('screen-app').style.display='block';document.getElementById('btn-resp').classList.toggle('on',role==='responsable');document.getElementById('btn-user').classList.toggle('on',role==='utilisateur');document.getElementById('sb-resp').style.display=role==='responsable'?'block':'none';document.getElementById('sb-user').style.display=role==='utilisateur'?'block':'none';if(role==='responsable'){document.getElementById('u-av').textContent='MG';document.getElementById('u-name').textContent='Marie Gagnon';document.getElementById('u-role').textContent='Responsable';go('dashboard');}else{document.getElementById('u-av').textContent='KB';document.getElementById('u-name').textContent='Karim Belkacem';document.getElementById('u-role').textContent='Chercheur — Biochimie';go('recherche');}}
+function goApp(role){
+  document.getElementById('screen-onboarding').style.display='none';
+  document.getElementById('screen-app').style.display='block';
+  document.getElementById('btn-resp').classList.toggle('on', role==='responsable');
+  document.getElementById('btn-user').classList.toggle('on', role==='utilisateur');
+  document.getElementById('sb-resp').style.display = role==='responsable' ? 'block' : 'none';
+  document.getElementById('sb-user').style.display = role==='utilisateur' ? 'block' : 'none';
+  if(role==='utilisateur'){
+    document.getElementById('u-av').textContent='KB';
+    document.getElementById('u-name').textContent='Karim Belkacem';
+    document.getElementById('u-role').textContent='Étudiant — En attente';
+    go('recherche');
+  } else {
+    document.getElementById('u-av').textContent='MG';
+    document.getElementById('u-name').textContent='Marie Gagnon';
+    document.getElementById('u-role').textContent='Professeure';
+    go('dashboard');
+  }
+}
+
+function loginAs(role){
+  document.getElementById('screen-login').style.display='none';
+  if(role==='utilisateur'){
+    document.getElementById('screen-onboarding').style.display='block';
+    return;
+  }
+  document.getElementById('screen-app').style.display='block';document.getElementById('btn-resp').classList.toggle('on',role==='responsable');document.getElementById('btn-user').classList.toggle('on',role==='utilisateur');document.getElementById('sb-resp').style.display=role==='responsable'?'block':'none';document.getElementById('sb-user').style.display=role==='utilisateur'?'block':'none';if(role==='responsable'){document.getElementById('u-av').textContent='MG';document.getElementById('u-name').textContent='Marie Gagnon';document.getElementById('u-role').textContent='Responsable';go('dashboard');}else{document.getElementById('u-av').textContent='KB';document.getElementById('u-name').textContent='Karim Belkacem';document.getElementById('u-role').textContent='Chercheur — Biochimie';go('recherche');}}
 function logout(){document.getElementById('screen-app').style.display='none';document.getElementById('screen-login').style.display='block';}
 function toggleDD(val){document.getElementById('equip-dd').style.display=val.length>1?'block':'none';}
 function selectEquip(){document.getElementById('equip-dd').style.display='none';document.getElementById('equip-search').value='';}
@@ -1427,6 +1680,138 @@ function refreshPreview(){
 
   const preview = document.getElementById('tarif-preview-rows');
   if(preview) preview.innerHTML = html;
+}
+
+
+// ── Onboarding ──
+let obRole = null;
+let obProfSelected = null;
+
+function selectRole(role){
+  obRole = role;
+  ['etudiant','prof','autre'].forEach(r => {
+    const card = document.getElementById('ob-card-'+r);
+    const icon = document.getElementById('ob-icon-'+r);
+    if(card && icon){
+      card.style.borderColor = r===role ? 'var(--teal)' : 'var(--bd)';
+      card.style.background  = r===role ? '#F0F9FC' : 'var(--card)';
+      icon.className = r===role ? 'ti ti-circle-check' : 'ti ti-circle';
+      icon.style.color = r===role ? 'var(--teal)' : 'var(--bd)';
+    }
+  });
+  const btn = document.getElementById('ob-btn-next');
+  if(btn){ btn.style.opacity='1'; btn.style.pointerEvents='auto'; }
+}
+
+function obNext(){
+  document.getElementById('ob-step-1').style.display='none';
+  if(obRole==='etudiant'){
+    document.getElementById('ob-step-2a').style.display='block';
+  } else {
+    document.getElementById('ob-step-2b').style.display='block';
+  }
+}
+
+function obBack(){
+  document.getElementById('ob-step-2a').style.display='none';
+  document.getElementById('ob-step-2b').style.display='none';
+  document.getElementById('ob-step-1').style.display='block';
+}
+
+function filterProfs(val){
+  const items = document.querySelectorAll('.ob-prof-item');
+  items.forEach(item => {
+    const name = item.querySelector('div > div')?.textContent.toLowerCase()||'';
+    item.style.display = name.includes(val.toLowerCase()) ? 'flex' : 'none';
+  });
+}
+
+function selectProf(el, name, dept){
+  obProfSelected = name;
+  document.querySelectorAll('.ob-prof-item').forEach(item => {
+    item.style.borderColor = 'var(--bd)';
+    item.style.background  = 'var(--card)';
+    const icon = item.querySelector('i.ti-circle, i.ti-circle-check');
+    if(icon){ icon.className='ti ti-circle'; icon.style.color='var(--bd)'; }
+  });
+  el.style.borderColor = 'var(--teal)';
+  el.style.background  = '#F0F9FC';
+  const icon = el.querySelector('i');
+  if(icon){ icon.className='ti ti-circle-check'; icon.style.color='var(--teal)'; }
+  const notice = document.getElementById('ob-prof-selected-notice');
+  const text   = document.getElementById('ob-prof-selected-text');
+  if(notice && text){
+    notice.style.display='flex';
+    text.textContent=`Une demande sera envoyée à ${name} pour approbation.`;
+  }
+  const btn = document.getElementById('ob-btn-submit-etudiant');
+  if(btn){ btn.style.opacity='1'; btn.style.pointerEvents='auto'; }
+}
+
+function obSubmitEtudiant(){
+  document.getElementById('ob-step-2a').style.display='none';
+  const txt = document.getElementById('ob-confirm-text');
+  if(txt && obProfSelected) txt.innerHTML=`Une demande a été envoyée à <strong>${obProfSelected}</strong>. Vous recevrez un courriel dès qu'elle sera approuvée.`;
+  document.getElementById('ob-step-3').style.display='block';
+}
+
+function obSubmitProf(){
+  document.getElementById('screen-onboarding').style.display='none';
+  document.getElementById('screen-app').style.display='block';
+  document.getElementById('btn-resp').classList.add('on');
+  document.getElementById('btn-user').classList.remove('on');
+  document.getElementById('sb-resp').style.display='block';
+  document.getElementById('sb-user').style.display='none';
+  document.getElementById('u-av').textContent='MG';
+  document.getElementById('u-name').textContent='Marie Gagnon';
+  document.getElementById('u-role').textContent='Professeure';
+  go('dashboard');
+}
+
+function toggleTarifAvance(){
+  const wrap = document.getElementById('reductions-wrap');
+  const icon = document.getElementById('icon-tarif-avance');
+  const btn  = document.getElementById('btn-tarif-avance');
+  if(!wrap) return;
+  const open = wrap.style.display !== 'none';
+  wrap.style.display = open ? 'none' : 'block';
+  if(icon) icon.style.transform = open ? '' : 'rotate(180deg)';
+  if(btn){
+    btn.style.background   = open ? '' : 'var(--info-bg)';
+    btn.style.borderColor  = open ? '' : '#B5D4F4';
+    btn.style.color        = open ? '' : 'var(--info)';
+  }
+}
+
+function trierParInfra(val){
+  // Prototype: just show a visual filter effect — all rows stay visible in demo
+  const rows = document.querySelectorAll('#page-reservations-resp .rri');
+  rows.forEach(r => { r.style.opacity = '1'; });
+  if(!val) return;
+  // In real app this would filter; in prototype we simulate
+}
+
+function approuverEtudiant(btn){
+  const row = btn.closest('div[style*="warn-bg"]');
+  if(!row) return;
+  row.style.background='var(--ok-bg)';
+  row.style.borderColor='#C0DD97';
+  const badge = row.querySelector('.badge');
+  if(badge){ badge.className='badge b-ok'; badge.textContent='Approuvé'; }
+  btn.parentElement.innerHTML='<span class="badge b-ok"><i class="ti ti-check"></i> Autorisé</span>';
+}
+
+function revoquerEtudiant(btn){
+  const row = btn.closest('div[style*="warn-bg"]');
+  if(row) row.remove();
+}
+
+function revoquerEtudiantApprouve(btn){
+  const row = btn.closest('.rri');
+  if(!row) return;
+  const badge = row.querySelector('.badge');
+  if(badge){ badge.className='badge b-neu'; badge.textContent='Révoqué'; }
+  btn.style.display='none';
 }
 
 </script>
