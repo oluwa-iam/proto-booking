@@ -531,7 +531,7 @@
     <div class="fg"><label class="fl">Description</label><textarea class="fi" rows="3">Séances de microscopie confocale supervisées par un opérateur qualifié. Idéal pour les chercheurs débutants ou les acquisitions complexes.</textarea></div>
     <div class="fr"><div class="fg"><label class="fl">Infrastructure <span style="color:var(--err)">*</span></label><select class="fs"><option value="">-- Sélectionner --</option><option selected>Labo. imagerie cellulaire — Roger-Gaudry</option><option>Plateforme cytométrie — Ste-Justine</option></select></div><div class="fg"><label class="fl">Type de service</label><select class="fs"><option>Avec opérateur</option><option>Autonomie (formation requise)</option><option>Formation initiale</option></select></div></div>
     <div class="fr"><div class="fg"><label class="fl">Durée minimale</label><select class="fs"><option>30 min</option><option selected>1 heure</option><option>2 heures</option></select></div><div class="fg"><label class="fl">Durée maximale</label><select class="fs"><option>2 heures</option><option selected>4 heures</option><option>Journée</option></select></div></div>
-    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('offres')">Annuler</button><button class="btn pri" onclick="validateStep1()">Continuer <i class="ti ti-arrow-right"></i></button></div>
+    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('offres')">Annuler</button><button class="btn ghost" onclick="saveDraft()" style="color:var(--t2)"><i class="ti ti-device-floppy"></i>Brouillon</button><button class="btn pri" onclick="validateStep1()">Continuer <i class="ti ti-arrow-right"></i></button></div>
   </div>
 </div>
 
@@ -544,7 +544,7 @@
     <div class="fg"><label class="fl">Ajouter un équipement depuis le RIÉ</label><input class="fi" type="text" id="equip-search" placeholder="Rechercher par nom, numéro de série..." oninput="toggleDD(this.value)" autocomplete="off"><div id="equip-dd" style="display:none" class="dd"><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Leica SP8 — Microscopie confocale</div><div class="dd-s">Roger-Gaudry G-1015 · #EQ-2041 · Actif</div></div><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Zeiss LSM 880 — Microscopie confocale</div><div class="dd-s">Pavillon Marcelle-Coutu · #EQ-1887 · Actif</div></div><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Nikon A1R — Microscopie confocale HD</div><div class="dd-s">3200 Jean-Brillant · #EQ-2203 · Actif</div></div></div></div>
     <div class="notice n-info"><i class="ti ti-info-circle"></i><span>Si deux équipements sont liés, la réservation de l'un bloquera automatiquement l'autre sur le même créneau.</span></div>
     <div class="fg"><label class="fl">Opérateur assigné (optionnel)</label><select class="fs"><option value="">Aucun — accès en autonomie</option><option selected>Jean-François Côté (technicien principal)</option><option>Amira Mansouri (technicienne)</option></select></div>
-    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn pri" onclick="go('nouvelle-offre-3')">Continuer <i class="ti ti-arrow-right"></i></button></div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn ghost" onclick="saveDraft()" style="color:var(--t2)"><i class="ti ti-device-floppy"></i>Brouillon</button><button class="btn pri" onclick="go('nouvelle-offre-3')">Continuer <i class="ti ti-arrow-right"></i></button></div>
   </div>
 </div>
 
@@ -689,7 +689,7 @@
       </div>
     </div>
 
-    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre-2')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn pri" onclick="go('nouvelle-offre-4')">Continuer <i class="ti ti-arrow-right"></i></button></div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre-2')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn ghost" onclick="saveDraft()" style="color:var(--t2)"><i class="ti ti-device-floppy"></i>Brouillon</button><button class="btn pri" onclick="go('nouvelle-offre-4')">Continuer <i class="ti ti-arrow-right"></i></button></div>
   </div>
 </div>
 
@@ -706,35 +706,46 @@
     <div class="step on"><div class="sn">4</div>Plages horaires</div>
   </div>
 
-  <!-- Zone 1 : règle récurrente -->
+  <!-- Zone 1 : règles cumulatives -->
   <div class="card" style="max-width:720px;margin-bottom:14px">
-    <div style="font-size:14px;font-weight:600;margin-bottom:4px">Règle de disponibilité de base</div>
-    <div style="font-size:12px;color:var(--t2);margin-bottom:14px">Définissez les jours et heures habituels de disponibilité. Le calendrier sera généré automatiquement.</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
-      <div class="fg" style="margin-bottom:0">
-        <label class="fl">Jours disponibles</label>
-        <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:2px" id="day-btns">
-          <div class="day-btn on" data-day="Lu" onclick="toggleDay(this)">Lu</div>
-          <div class="day-btn on" data-day="Ma" onclick="toggleDay(this)">Ma</div>
-          <div class="day-btn on" data-day="Me" onclick="toggleDay(this)">Me</div>
-          <div class="day-btn on" data-day="Je" onclick="toggleDay(this)">Je</div>
-          <div class="day-btn on" data-day="Ve" onclick="toggleDay(this)">Ve</div>
-          <div class="day-btn" data-day="Sa" onclick="toggleDay(this)">Sa</div>
-          <div class="day-btn" data-day="Di" onclick="toggleDay(this)">Di</div>
+    <div style="font-size:14px;font-weight:600;margin-bottom:2px">Règles de disponibilité</div>
+    <div style="font-size:12px;color:var(--t2);margin-bottom:14px">Ajoutez autant de règles que nécessaire — elles s'accumulent sur le calendrier.</div>
+
+    <!-- Formulaire nouvelle règle -->
+    <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-lg);padding:14px;margin-bottom:14px">
+      <div style="font-size:12px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px">Nouvelle règle</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div class="fg" style="margin-bottom:0">
+          <label class="fl">Jours</label>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:2px" id="day-btns">
+            <div class="day-btn" data-day="Lu" onclick="toggleDay(this)">Lu</div>
+            <div class="day-btn" data-day="Ma" onclick="toggleDay(this)">Ma</div>
+            <div class="day-btn" data-day="Me" onclick="toggleDay(this)">Me</div>
+            <div class="day-btn" data-day="Je" onclick="toggleDay(this)">Je</div>
+            <div class="day-btn" data-day="Ve" onclick="toggleDay(this)">Ve</div>
+            <div class="day-btn" data-day="Sa" onclick="toggleDay(this)">Sa</div>
+            <div class="day-btn" data-day="Di" onclick="toggleDay(this)">Di</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="fg" style="margin-bottom:0"><label class="fl">Heure de début</label><input class="fi" type="time" value="08:00" id="rule-start"></div>
+          <div class="fg" style="margin-bottom:0"><label class="fl">Heure de fin</label><input class="fi" type="time" value="17:00" id="rule-end"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="fg" style="margin-bottom:0"><label class="fl">Date de début</label><input class="fi" type="date" value="2026-06-01" id="rule-from"></div>
+          <div class="fg" style="margin-bottom:0"><label class="fl">Date de fin</label><input class="fi" type="date" value="2026-12-31" id="rule-to"></div>
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="fg" style="margin-bottom:0"><label class="fl">Heure de début</label><input class="fi" type="time" value="08:00" id="rule-start"></div>
-        <div class="fg" style="margin-bottom:0"><label class="fl">Heure de fin</label><input class="fi" type="time" value="17:00" id="rule-end"></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="fg" style="margin-bottom:0"><label class="fl">Date de début</label><input class="fi" type="date" value="2026-06-01" id="rule-from"></div>
-        <div class="fg" style="margin-bottom:0"><label class="fl">Date de fin</label><input class="fi" type="date" value="2026-12-31" id="rule-to"></div>
+      <div style="margin-top:12px;display:flex;align-items:center;gap:10px">
+        <button class="btn pri" onclick="addRule()"><i class="ti ti-plus"></i>Ajouter cette plage horaire</button>
+        <span id="gen-msg" style="font-size:12px;color:var(--ok);display:none"><i class="ti ti-circle-check" style="vertical-align:-2px"></i> Règle ajoutée</span>
       </div>
     </div>
-    <div style="margin-top:14px">
-      <button class="btn pri" onclick="generateCalendar()"><i class="ti ti-refresh"></i>Générer les créneaux</button>
-      <span id="gen-msg" style="font-size:12px;color:var(--ok);margin-left:12px;display:none"><i class="ti ti-circle-check" style="vertical-align:-2px"></i> Créneaux générés</span>
+
+    <!-- Liste des règles ajoutées -->
+    <div id="rules-list-wrap" style="display:none">
+      <div style="font-size:12px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Règles actives</div>
+      <div id="rules-list" style="display:flex;flex-direction:column;gap:6px"></div>
     </div>
   </div>
 
@@ -1288,67 +1299,130 @@ function selectEquip(){document.getElementById('equip-dd').style.display='none';
 function doSearch(){const q=document.getElementById('s-query').value.trim().toLowerCase();const empty=q&&!['microscopie','confocal','leica','zeiss','nikon','cytomètre','cytometre','imagerie','microscope'].some(k=>q.includes(k));document.getElementById('search-results').style.display=empty?'none':'block';document.getElementById('search-empty').style.display=empty?'block':'none';}
 function validateStep1(){const t=document.getElementById('f-titre');const existing=t.parentElement.querySelector('.err-msg');if(existing)existing.remove();if(!t.value.trim()){t.classList.add('err');const m=document.createElement('div');m.className='err-msg';m.textContent='Le titre est requis.';t.insertAdjacentElement('afterend',m);return;}t.classList.remove('err');go('nouvelle-offre-2');}
 
-// ── Interactive calendar (step 4) ──
-let calYear = 2026, calMonth = 5; // 0-indexed, June=5
-const activeDays = new Set(['Lu','Ma','Me','Je','Ve']);
-const blockedDates = new Map(); // "YYYY-MM-DD" -> reason
+// ── Interactive calendar (step 4) — cumulative rules ──
+let calYear = 2026, calMonth = 5;
+const blockedDates = new Map();   // "YYYY-MM-DD" -> reason
+const calRules = [];              // [{days:Set, from:"HH:MM", to:"HH:MM", dateFrom:"YYYY-MM-DD", dateTo:"YYYY-MM-DD", label}]
 const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 const DAYS_FR = ['Lu','Ma','Me','Je','Ve','Sa','Di'];
 let pendingBlockDate = null;
+// Track which days are available (union of all rules)
+function getAvailableDays(){
+  const set = new Set();
+  calRules.forEach(r => r.days.forEach(d => set.add(d)));
+  return set;
+}
 
 function toggleDay(el){
   el.classList.toggle('on');
-  if(el.classList.contains('on')) activeDays.add(el.dataset.day);
-  else activeDays.delete(el.dataset.day);
 }
 
-function generateCalendar(){
+function addRule(){
+  // Collect selected days
+  const days = new Set();
+  document.querySelectorAll('#day-btns .day-btn.on').forEach(btn => days.add(btn.dataset.day));
+  if(days.size === 0){
+    alert('Sélectionnez au moins un jour.');
+    return;
+  }
+  const from  = document.getElementById('rule-start').value || '08:00';
+  const to    = document.getElementById('rule-end').value   || '17:00';
+  const dFrom = document.getElementById('rule-from').value  || '2026-06-01';
+  const dTo   = document.getElementById('rule-to').value    || '2026-12-31';
+  const dayStr = [...days].join(', ');
+  const label = `${dayStr} · ${from}–${to} · du ${fmtDate(dFrom)} au ${fmtDate(dTo)}`;
+  calRules.push({ days, from, to, dateFrom: dFrom, dateTo: dTo, label });
+
+  // Reset form
+  document.querySelectorAll('#day-btns .day-btn').forEach(b => b.classList.remove('on'));
+
+  // Show rules list
+  renderRulesList();
   renderCalendar();
+
   const msg = document.getElementById('gen-msg');
-  msg.style.display = 'inline';
-  setTimeout(()=>{ msg.style.display='none'; }, 2500);
+  if(msg){ msg.style.display='inline'; setTimeout(()=>{ msg.style.display='none'; }, 2000); }
+}
+
+function fmtDate(ds){
+  if(!ds) return '';
+  const [y,m,d] = ds.split('-');
+  return `${parseInt(d)} ${MONTHS_FR[parseInt(m)-1].slice(0,3).toLowerCase()}. ${y}`;
+}
+
+function removeRule(idx){
+  calRules.splice(idx, 1);
+  renderRulesList();
+  renderCalendar();
+}
+
+function renderRulesList(){
+  const wrap = document.getElementById('rules-list-wrap');
+  const list = document.getElementById('rules-list');
+  if(!wrap || !list) return;
+  if(calRules.length === 0){ wrap.style.display='none'; return; }
+  wrap.style.display = 'block';
+  list.innerHTML = calRules.map((r,i) => `
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-md);font-size:12px">
+      <span style="color:var(--info)"><i class="ti ti-calendar-event" style="vertical-align:-2px"></i> ${r.label}</span>
+      <button class="btn sm ghost" onclick="removeRule(${i})" style="padding:2px 6px"><i class="ti ti-x" style="color:var(--err);font-size:13px"></i></button>
+    </div>`).join('');
+}
+
+function isDateInRule(ds, rule){
+  return ds >= rule.dateFrom && ds <= rule.dateTo;
+}
+
+function isDayInRule(dow, rule){
+  // dow 0=Lu ... 6=Di
+  return rule.days.has(DAYS_FR[dow]);
 }
 
 function renderCalendar(){
   const cal = document.getElementById('cal-interactive');
   const label = document.getElementById('cal-month-label');
+  if(!cal || !label) return;
   label.textContent = MONTHS_FR[calMonth] + ' ' + calYear;
 
-  // Count available days for summary
-  let availCount = 0;
-
-  // Build grid
   const firstDay = new Date(calYear, calMonth, 1);
   const lastDay  = new Date(calYear, calMonth+1, 0);
-  const startDow = (firstDay.getDay()+6)%7; // Mon=0
-  const today = new Date(2026,5,9); // prototype "today"
+  const startDow = (firstDay.getDay()+6)%7;
+  const today    = new Date(2026,5,9);
+  let availCount = 0;
 
   let html = '<div class="cal-h">Lu</div><div class="cal-h">Ma</div><div class="cal-h">Me</div><div class="cal-h">Je</div><div class="cal-h">Ve</div><div class="cal-h">Sa</div><div class="cal-h">Di</div>';
-
-  // Empty cells before first day
   for(let i=0;i<startDow;i++) html += '<div class="cal-d empty"></div>';
 
   for(let d=1;d<=lastDay.getDate();d++){
-    const date = new Date(calYear, calMonth, d);
-    const dow  = (date.getDay()+6)%7; // Mon=0
-    const dayName = DAYS_FR[dow];
+    const date    = new Date(calYear, calMonth, d);
+    const dow     = (date.getDay()+6)%7;
     const dateStr = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const isPast  = date < today;
+
+    // A day is available if ANY rule covers it
+    const matchingRule = calRules.find(r => isDayInRule(dow,r) && isDateInRule(dateStr,r));
 
     if(isPast){
       html += `<div class="cal-d past-day">${d}</div>`;
     } else if(blockedDates.has(dateStr)){
-      html += `<div class="cal-d blocked-manual" onclick="unblockDate('${dateStr}')" title="Bloqué: ${blockedDates.get(dateStr)}\nCliquer pour débloquer">${d}<div class="dot w"></div></div>`;
-    } else if(activeDays.has(dayName)){
+      const ruleHint = matchingRule ? ` (${matchingRule.from}–${matchingRule.to})` : '';
+      html += `<div class="cal-d blocked-manual" onclick="unblockDate('${dateStr}')" title="Bloqué: ${blockedDates.get(dateStr)}${ruleHint}\nCliquer pour débloquer">${d}<div class="dot w"></div></div>`;
+    } else if(matchingRule){
       availCount++;
-      html += `<div class="cal-d available" onclick="startBlock('${dateStr}', ${d})">${d}<div class="dot"></div></div>`;
-    } else {
+      const timeHint = matchingRule.from + '–' + matchingRule.to;
+      html += `<div class="cal-d available" onclick="startBlock('${dateStr}',${d})" title="${timeHint}">${d}<div class="dot"></div></div>`;
+    } else if(calRules.length > 0){
       html += `<div class="cal-d unavailable">${d}</div>`;
+    } else {
+      html += `<div class="cal-d empty" style="color:var(--t3);font-size:11px">${d}</div>`;
     }
   }
 
   cal.innerHTML = html;
-  document.getElementById('cal-summary').textContent = availCount + ' jour' + (availCount>1?'s':'') + ' disponible' + (availCount>1?'s':'');
+  const summary = document.getElementById('cal-summary');
+  if(summary) summary.textContent = calRules.length === 0
+    ? 'Ajoutez une règle pour voir les créneaux'
+    : availCount + ' jour' + (availCount>1?'s':'') + ' disponible' + (availCount>1?'s':'') + ' ce mois';
   renderBlocksSummary();
 }
 
@@ -1812,6 +1886,20 @@ function revoquerEtudiantApprouve(btn){
   const badge = row.querySelector('.badge');
   if(badge){ badge.className='badge b-neu'; badge.textContent='Révoqué'; }
   btn.style.display='none';
+}
+
+
+// ── Brouillon ──
+function saveDraft(){
+  const toast = document.getElementById('draft-toast');
+  if(!toast) return;
+  toast.style.display = 'flex';
+  toast.style.opacity = '1';
+  setTimeout(()=>{
+    toast.style.transition = 'opacity .4s';
+    toast.style.opacity = '0';
+    setTimeout(()=>{ toast.style.display='none'; toast.style.opacity='1'; toast.style.transition=''; }, 420);
+  }, 2800);
 }
 
 </script>
