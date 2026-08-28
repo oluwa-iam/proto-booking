@@ -88,7 +88,7 @@
     .fi:focus,.fs:focus,textarea.fi:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,61,124,.08);}
     textarea.fi{resize:vertical;}
     .fr{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-    .fi.err{border-color:#E24B4A;} .err-msg{font-size:11px;color:var(--err);margin-top:4px;}
+    .fi.err{border-color:#E24B4A;} .fs.err{border-color:#E24B4A;} .err-msg{font-size:11px;color:var(--err);margin-top:4px;}
     .stepper{display:flex;margin-bottom:24px;border-bottom:1px solid var(--bd);}
     .step{display:flex;align-items:center;gap:8px;padding:10px 16px;font-size:12px;color:var(--t3);flex:1;border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:500;}
     .step.on{color:var(--blue);border-bottom-color:var(--blue);}
@@ -181,12 +181,97 @@
     .cal-d.blocked-manual:hover{background:#FAC775;}
     .cal-d.unavailable{background:var(--bg3);color:var(--t3);cursor:default;}
     .cal-d.past-day{color:var(--t3);cursor:default;opacity:.5;}
+
+    /* ===== RIÉ (façade externe — découvrabilité) ===== */
+    .rie{--rn:#003D7C;font-family:'Inter',system-ui,sans-serif;min-height:100vh;background:#fff;display:flex;}
+    .rie-rail{width:44px;min-width:44px;background:#0A1628;display:flex;flex-direction:column;align-items:center;gap:18px;padding:16px 0;}
+    .rie-rail i{color:rgba(255,255,255,.5);font-size:17px;}
+    .rie-rail .dot{position:absolute;}
+    .rie-main{flex:1;display:flex;flex-direction:column;min-width:0;}
+    .rie-topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;border-bottom:1px solid var(--bd);}
+    .rie-brand{display:flex;align-items:center;gap:14px;}
+    .rie-brand .rt{font-family:Georgia,'Times New Roman',serif;font-size:19px;font-weight:700;color:#0A1628;line-height:1.15;}
+    .rie-brand .rs{font-size:14px;color:var(--t2);border-left:1px solid var(--bd);padding-left:14px;}
+    .rie-topr{display:flex;align-items:center;gap:18px;font-size:13px;color:var(--t2);}
+    .rie-topr a{color:var(--rn);font-weight:600;text-decoration:none;}
+    .rie-nav{background:var(--rn);display:flex;color:#fff;}
+    .rie-nav div{padding:13px 22px;font-size:14px;font-weight:600;cursor:default;opacity:.92;}
+    .rie-body{flex:1;display:flex;overflow:hidden;}
+    .rie-sidebar{width:220px;min-width:220px;background:#F7F7F6;border-right:1px solid var(--bd);padding:20px 0;}
+    .rie-sidebar .lbl{padding:0 20px 10px;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;font-weight:600;}
+    .rie-sidebar .it{display:flex;align-items:center;gap:9px;padding:9px 20px;font-size:13px;color:var(--t2);cursor:pointer;}
+    .rie-sidebar .it.on{background:#fff;color:var(--rn);font-weight:600;border-right:3px solid var(--rn);}
+    .rie-sidebar .it i{font-size:16px;}
+    .rie-content{flex:1;overflow-y:auto;padding:28px 32px;}
+    .rie-searchrow{display:flex;gap:10px;margin-bottom:18px;}
+    .rie-count{font-size:14px;font-weight:600;color:var(--t1);margin-bottom:16px;}
+    .rie-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+    .rie-card{border:1px solid var(--bd);border-radius:var(--r-lg);padding:18px 20px;background:#fff;box-shadow:var(--shadow-sm);}
+    .rie-eyebrow{font-size:11px;color:var(--t3);margin-bottom:6px;}
+    .rie-title{font-size:16px;font-weight:700;color:#0A1628;margin-bottom:10px;}
+    .rie-pill{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;background:#EAF3DE;color:#27500A;margin-bottom:12px;}
+    .rie-field{font-size:12.5px;color:var(--t2);margin-bottom:6px;line-height:1.5;}
+    .rie-field b{color:#0A1628;font-weight:600;}
+    .rie-field a{color:var(--rn);}
+    .rie-avail{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:6px 10px;border-radius:var(--r-md);margin:12px 0;}
+    .rie-avail.ok{background:var(--ok-bg);color:var(--ok);}
+    .rie-avail.warn{background:var(--warn-bg);color:var(--warn);}
+    .rie-avail.neu{background:var(--bg2);color:var(--t2);}
+    .rie-btn{padding:8px 16px;border-radius:var(--r-md);font-size:13px;font-weight:600;border:1px solid var(--rn);background:var(--rn);color:#fff;cursor:pointer;font-family:inherit;}
+    .rie-btn.ghost{background:#fff;color:var(--rn);}
+    .rie-tabs{display:flex;gap:2px;border-bottom:1px solid var(--bd);margin:20px 0 22px;}
+    .rie-tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--t2);cursor:pointer;border-bottom:2px solid transparent;}
+    .rie-tab.on{color:var(--rn);border-bottom-color:var(--rn);background:#F0F5FB;border-radius:6px 6px 0 0;}
+    .rie-h2{font-family:Georgia,serif;font-size:22px;font-weight:700;color:#0A1628;margin:18px 0 12px;}
+    .rie-booking-cta{border:1px solid #B5D4F4;background:#F0F9FC;border-radius:var(--r-lg);padding:20px 22px;margin-top:6px;}
+    .rie-pill-tab{border:1px solid var(--bd);border-radius:20px;padding:8px 16px;cursor:pointer;font-size:13px;font-weight:600;color:var(--t2);background:#fff;display:inline-flex;align-items:center;}
+    .rie-pill-tab.on{background:var(--rn);color:#fff;border-color:var(--rn);}
+    .rie .cal-d.available{background:#EEF3FA;color:var(--rn);}
+    .rie .cal-d.available:hover{background:#DCE8F5;}
+    .rie .cal-d.range-in{background:#DCE8F5;color:var(--rn);}
+    .rie .cal-d.range-start,.rie .cal-d.range-end,.rie .cal-d.range-single{background:var(--rn);color:#fff;}
+
+    /* ===== Recherche par disponibilité (calendrier type Airbnb) ===== */
+    .search-tabs{display:flex;gap:8px;margin-bottom:18px;}
+    .search-tab{padding:8px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--t2);display:flex;align-items:center;gap:6px;}
+    .search-tab.on{background:var(--blue);color:#fff;border-color:var(--blue);}
+    .avail-cal-wrap{display:flex;gap:24px;flex-wrap:wrap;}
+    .avail-cal{width:290px;}
+    .avail-cal-month{font-size:13px;font-weight:700;text-align:center;margin-bottom:10px;text-transform:capitalize;}
+    .cal-d.range-in{background:#DCEEFB;color:var(--blue);border-radius:0;}
+    .cal-d.range-start{background:var(--blue);color:#fff;font-weight:700;border-radius:var(--r-sm) 0 0 var(--r-sm);}
+    .cal-d.range-end{background:var(--blue);color:#fff;font-weight:700;border-radius:0 var(--r-sm) var(--r-sm) 0;}
+    .cal-d.range-single{background:var(--blue);color:#fff;font-weight:700;}
   </style>
 </head>
 <body>
 
 <!-- LOGIN -->
-<div id="screen-login">
+<!-- ÉCRAN D'ACCUEIL — choix RIÉ ou Booking -->
+<div id="screen-landing">
+<div class="login-wrap" style="flex-direction:column;gap:28px">
+  <div style="text-align:center">
+    <div style="font-size:20px;font-weight:700;color:var(--t1);letter-spacing:-0.02em">Infrastructures et équipements — Université de Montréal</div>
+    <div style="font-size:13px;color:var(--t2);margin-top:5px">Deux points d'entrée, une seule expérience : découvrez un équipement dans le RIÉ, réservez-le dans Booking.</div>
+  </div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;justify-content:center">
+    <div onclick="showRie()" style="cursor:pointer;width:300px;background:#fff;border:1px solid var(--bd);border-radius:var(--r-xl);padding:28px 26px;box-shadow:var(--shadow-sm);transition:all .15s" onmouseover="this.style.borderColor='#003D7C';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='var(--bd)';this.style.boxShadow='var(--shadow-sm)'">
+      <div style="width:46px;height:46px;border-radius:12px;background:#E7EFF8;display:flex;align-items:center;justify-content:center;margin-bottom:16px"><i class="ti ti-microscope" style="font-size:22px;color:#003D7C"></i></div>
+      <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:6px">RIÉ — Découvrabilité</div>
+      <div style="font-size:12.5px;color:var(--t2);line-height:1.6;margin-bottom:16px">Explorez le registre des infrastructures et équipements, consultez leur disponibilité et rejoignez Booking pour réserver.</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#003D7C">Explorer le RIÉ <i class="ti ti-arrow-right"></i></div>
+    </div>
+    <div onclick="showLoginFromLanding()" style="cursor:pointer;width:300px;background:#fff;border:1px solid var(--bd);border-radius:var(--r-xl);padding:28px 26px;box-shadow:var(--shadow-sm);transition:all .15s" onmouseover="this.style.borderColor='var(--teal)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.borderColor='var(--bd)';this.style.boxShadow='var(--shadow-sm)'">
+      <div style="width:46px;height:46px;border-radius:12px;background:var(--info-bg);display:flex;align-items:center;justify-content:center;margin-bottom:16px"><i class="ti ti-calendar-check" style="font-size:22px;color:var(--teal)"></i></div>
+      <div style="font-size:16px;font-weight:700;color:#0A1628;margin-bottom:6px">Booking — Réservation</div>
+      <div style="font-size:12.5px;color:var(--t2);line-height:1.6;margin-bottom:16px">Connectez-vous pour créer des offres de service, gérer vos réservations ou réserver un équipement.</div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--teal)">Ouvrir Booking <i class="ti ti-arrow-right"></i></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="screen-login" style="display:none">
 <div class="login-wrap">
   <div class="login-card">
     <div style="text-align:center;margin-bottom:28px">
@@ -216,8 +301,159 @@
       <button class="btn" style="flex:1;justify-content:center;font-size:12px" onclick="loginAs('responsable')"><i class="ti ti-shield"></i>Responsable</button>
       <button class="btn" style="flex:1;justify-content:center;font-size:12px" onclick="loginAs('utilisateur')"><i class="ti ti-user"></i>Utilisateur</button>
     </div>
+    <div style="text-align:center;margin-top:16px">
+      <button class="btn ghost sm" style="font-size:11px;color:var(--t2)" onclick="backToLanding()"><i class="ti ti-arrow-left"></i>Retour au choix RIÉ / Booking</button>
+    </div>
   </div>
 </div>
+</div>
+
+<!-- RIÉ — DÉCOUVRABILITÉ (façade externe, démo) -->
+<div id="screen-rie" style="display:none">
+  <div class="rie">
+    <div class="rie-rail">
+      <i class="ti ti-sparkles"></i><i class="ti ti-device-desktop"></i><i class="ti ti-clock"></i><i class="ti ti-star"></i>
+    </div>
+    <div class="rie-main">
+      <div class="rie-topbar">
+        <div class="rie-brand">
+          <div class="rt">Université<br>de Montréal</div>
+          <div class="rs">RIÉ : Registre des Infrastructures et des Équipements</div>
+        </div>
+        <div class="rie-topr">
+          <span>Français</span>
+          <a href="#" onclick="hideRie();return false;">← Retour au choix RIÉ / Booking</a>
+        </div>
+      </div>
+      <div class="rie-nav"><div>À propos</div><div>Consulter le registre</div><div>Ressources</div><div>Accès rapide</div></div>
+      <div class="rie-body">
+        <div class="rie-sidebar">
+          <div class="lbl">Menu principal</div>
+          <div class="it"><i class="ti ti-gauge"></i>Tableau de bord</div>
+          <div class="it"><i class="ti ti-building"></i>Infrastructures</div>
+          <div class="it on"><i class="ti ti-microscope"></i>Équipements</div>
+        </div>
+        <div class="rie-content">
+
+          <!-- Sous-page : liste des équipements -->
+          <div id="rie-page-liste">
+            <div style="display:flex;gap:8px;margin-bottom:18px">
+              <div class="rie-pill-tab on" id="rie-tab-kw" onclick="rieSetSearchMode('kw')"><i class="ti ti-search" style="margin-right:6px"></i>Recherche par mots-clés</div>
+              <div class="rie-pill-tab" id="rie-tab-cal" onclick="rieSetSearchMode('cal')"><i class="ti ti-calendar" style="margin-right:6px"></i>Recherche par disponibilité</div>
+            </div>
+
+            <!-- Mode mots-clés (existant) -->
+            <div id="rie-view-kw">
+              <div class="rie-searchrow">
+                <button class="btn"><i class="ti ti-adjustments"></i>Filtres</button>
+                <div class="si-wrap" style="flex:1"><i class="ti ti-search"></i><input class="si" value="microscope confocal" placeholder="Chercher un équipement"></div>
+                <button class="btn" style="padding:8px 14px"><i class="ti ti-search"></i></button>
+              </div>
+              <div class="rie-count">3 équipements accessibles</div>
+              <div class="rie-grid">
+
+                <div class="rie-card">
+                  <div class="rie-eyebrow">Équipement</div>
+                  <div class="rie-title">Microscope confocal Leica SP8</div>
+                  <span class="rie-pill">Fonctionnel</span>
+                  <div class="rie-field"><b>Infrastructure :</b> <a href="#">Labo. imagerie cellulaire — Roger-Gaudry</a></div>
+                  <div class="rie-field"><b>Emplacement :</b> Roger-Gaudry, G-1015</div>
+                  <div class="rie-field"><b>Modèle :</b> TCS SP8</div>
+                  <div class="rie-avail ok"><i class="ti ti-calendar-check"></i>5 créneaux disponibles cette semaine</div>
+                  <button class="rie-btn" style="width:100%;justify-content:center" onclick="rieShowDetail('leica')">Afficher</button>
+                </div>
+
+                <div class="rie-card">
+                  <div class="rie-eyebrow">Équipement</div>
+                  <div class="rie-title">Zeiss LSM 880 — Confocal HD</div>
+                  <span class="rie-pill">Fonctionnel</span>
+                  <div class="rie-field"><b>Infrastructure :</b> <a href="#">Plateforme imagerie — Marcelle-Coutu</a></div>
+                  <div class="rie-field"><b>Emplacement :</b> Marcelle-Coutu, M-4210</div>
+                  <div class="rie-field"><b>Modèle :</b> LSM 880 Airyscan</div>
+                  <div class="rie-avail warn"><i class="ti ti-school"></i>Formation requise avant réservation</div>
+                  <button class="rie-btn" style="width:100%;justify-content:center" onclick="rieShowDetail('zeiss')">Afficher</button>
+                </div>
+
+                <div class="rie-card">
+                  <div class="rie-eyebrow">Équipement</div>
+                  <div class="rie-title">Microscopie électronique FEI Tecnai</div>
+                  <span class="rie-pill">Fonctionnel</span>
+                  <div class="rie-field"><b>Infrastructure :</b> <a href="#">Labo. imagerie cellulaire — Roger-Gaudry</a></div>
+                  <div class="rie-field"><b>Emplacement :</b> Roger-Gaudry, G-1022</div>
+                  <div class="rie-field"><b>Modèle :</b> Tecnai Spirit</div>
+                  <div class="rie-avail neu"><i class="ti ti-info-circle"></i>Aucune offre de réservation publiée</div>
+                  <button class="rie-btn ghost" style="width:100%;justify-content:center" disabled>Non réservable pour l'instant</button>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Mode disponibilité (calendrier type Airbnb) -->
+            <div id="rie-view-cal" style="display:none">
+              <div class="rie-card" style="max-width:920px;margin-bottom:18px">
+                <div style="font-size:12px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Type d'équipement</div>
+                <input class="fi" type="text" id="rie-s-query-cal" value="Microscope" style="max-width:320px;margin-bottom:14px">
+                <div style="font-size:12px;color:var(--t2);margin-bottom:14px">Sélectionnez une date d'arrivée puis une date de départ. Seuls les équipements <strong>réservables sur toute la période</strong>, tous services Booking confondus, seront affichés.</div>
+                <div class="avail-cal-wrap">
+                  <div class="avail-cal" id="rie-cal-1"></div>
+                  <div class="avail-cal" id="rie-cal-2"></div>
+                </div>
+                <div class="divider"></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+                  <div id="rie-range-label" style="font-size:13px;font-weight:600;color:var(--t2)">Choisissez vos dates</div>
+                  <div style="display:flex;gap:8px">
+                    <button class="rie-btn ghost" onclick="rieResetRange()"><i class="ti ti-refresh"></i> Réinitialiser</button>
+                    <button class="rie-btn" id="rie-btn-search-avail" onclick="rieDoSearchAvailability()" disabled>Rechercher <i class="ti ti-arrow-right"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div id="rie-avail-results" style="display:none"></div>
+            </div>
+          </div>
+
+          <!-- Sous-page : fiche équipement -->
+          <div id="rie-page-detail" style="display:none;max-width:760px">
+            <button class="btn ghost sm" style="padding-left:0;margin-bottom:14px" onclick="rieShowListe()"><i class="ti ti-arrow-left"></i> Retour aux résultats</button>
+            <div class="rie-h2" id="rie-d-title">Microscope confocal Leica SP8</div>
+            <div style="margin-bottom:8px"><a href="#" style="color:var(--rn);font-weight:600">Labo. imagerie cellulaire — Roger-Gaudry</a></div>
+            <span class="rie-pill">Fonctionnel</span>
+
+            <div class="rie-tabs">
+              <div class="rie-tab">Description</div>
+              <div class="rie-tab">Documents</div>
+              <div class="rie-tab">Exigences</div>
+              <div class="rie-tab on"><i class="ti ti-calendar-check" style="vertical-align:-2px;margin-right:4px"></i>Réservation</div>
+            </div>
+
+            <div style="font-size:13px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Disponibilité — via Booking</div>
+            <div id="rie-d-avail-ok">
+              <div class="notice n-ok" style="margin-bottom:14px"><i class="ti ti-circle-check"></i><span>Cet équipement est actuellement <strong>réservable</strong>. Les données de disponibilité proviennent du service Booking.</span></div>
+              <div class="rie-field" style="margin-bottom:14px"><b>Prochain créneau libre :</b> Mardi 11 juin 2026 · 9h00 – 11h00</div>
+              <div class="slots" style="margin-bottom:18px">
+                <div class="chip">Lun 10 · 8h–10h</div><div class="chip">Mar 11 · 9h–11h</div><div class="chip">Mer 12 · 14h–16h</div><div class="chip">Jeu 13 · 8h–12h</div>
+              </div>
+              <div class="rie-booking-cta">
+                <div style="display:flex;align-items:center;gap:14px">
+                  <i class="ti ti-external-link" style="font-size:24px;color:var(--info)"></i>
+                  <div style="flex:1">
+                    <div style="font-size:13px;font-weight:700;color:#0A1628">Réserver via le service Booking</div>
+                    <div style="font-size:12px;color:var(--t2);margin-top:2px">Vous serez redirigé·e vers la plateforme de réservation pour compléter votre demande.</div>
+                  </div>
+                  <button class="rie-btn" onclick="rieToBooking()">Réserver via Booking <i class="ti ti-arrow-right"></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div style="font-size:13px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin:24px 0 10px">Identification</div>
+            <div class="rie-field"><b>Modèle :</b> TCS SP8</div>
+            <div class="rie-field"><b>Titulaire :</b> Catherine Paradis-Bleau</div>
+            <div class="rie-field"><b>Infrastructure auquel l'équipement appartient :</b> Labo. imagerie cellulaire — Roger-Gaudry</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- APP -->
@@ -373,6 +609,7 @@
       <div class="s-item" onclick="go('offres')" id="nav-offres"><i class="ti ti-package"></i>Mes offres</div>
       <div class="s-item" onclick="go('reservations-resp')" id="nav-reservations-resp"><i class="ti ti-list-check"></i>Réservations</div>
       <div class="s-item" onclick="go('mes-etudiants')" id="nav-mes-etudiants"><i class="ti ti-users"></i>Mes étudiants</div>
+      <div class="s-item" onclick="go('rapports')" id="nav-rapports"><i class="ti ti-chart-bar"></i>Rapports</div>
     </div>
     <div class="s-sec" id="sb-user" style="display:none">
       <div class="s-lbl">Navigation</div>
@@ -387,7 +624,37 @@
   <div class="main">
     <div class="topbar">
       <div class="topbar-t" id="topbar-t">Tableau de bord</div>
-      <div class="topbar-r" onclick="logout()"><i class="ti ti-external-link" style="color:var(--teal)"></i><span>Retour au RIÉ</span></div>
+      <div style="display:flex;align-items:center;gap:6px;position:relative">
+        <div class="topbar-r" onclick="toggleNotifs()" style="position:relative">
+          <i class="ti ti-bell" style="color:var(--t2)"></i>
+          <span id="notif-badge" style="position:absolute;top:2px;right:2px;width:15px;height:15px;border-radius:50%;background:var(--err);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center">3</span>
+        </div>
+        <div id="notif-panel" style="display:none;position:absolute;top:44px;right:100px;width:340px;background:var(--card);border:1px solid var(--bd);border-radius:var(--r-lg);box-shadow:var(--shadow-md);z-index:100;overflow:hidden">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--bd)">
+            <span style="font-size:13px;font-weight:600">Notifications</span>
+            <button class="btn ghost sm" onclick="go('preferences');toggleNotifs()" style="font-size:11px"><i class="ti ti-settings"></i>Préférences</button>
+          </div>
+          <div style="max-height:320px;overflow-y:auto">
+            <div style="display:flex;gap:10px;padding:11px 14px;border-bottom:1px solid var(--bd);background:#F0F9FC">
+              <i class="ti ti-calendar-check" style="color:var(--info);font-size:16px;margin-top:1px"></i>
+              <div><div style="font-size:12px;font-weight:500">Réservation confirmée</div><div style="font-size:11px;color:var(--t2)">Karim Belkacem · Leica SP8 · Mar 11 juin</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Il y a 12 min</div></div>
+            </div>
+            <div style="display:flex;gap:10px;padding:11px 14px;border-bottom:1px solid var(--bd);background:#F0F9FC">
+              <i class="ti ti-clock-hour-4" style="color:var(--warn);font-size:16px;margin-top:1px"></i>
+              <div><div style="font-size:12px;font-weight:500">Demande en attente</div><div style="font-size:11px;color:var(--t2)">1 réservation hors fenêtre à approuver</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Il y a 2h</div></div>
+            </div>
+            <div style="display:flex;gap:10px;padding:11px 14px;border-bottom:1px solid var(--bd);background:#F0F9FC">
+              <i class="ti ti-user-check" style="color:var(--ok);font-size:16px;margin-top:1px"></i>
+              <div><div style="font-size:12px;font-weight:500">Nouvel étudiant à autoriser</div><div style="font-size:11px;color:var(--t2)">Demande de rattachement reçue</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Hier</div></div>
+            </div>
+            <div style="display:flex;gap:10px;padding:11px 14px">
+              <i class="ti ti-flask" style="color:var(--t3);font-size:16px;margin-top:1px"></i>
+              <div><div style="font-size:12px;font-weight:500;color:var(--t2)">Stock bas — Milieu de montage</div><div style="font-size:11px;color:var(--t2)">6 unités restantes</div><div style="font-size:10px;color:var(--t3);margin-top:2px">Il y a 2 jours</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="topbar-r" onclick="logout()"><i class="ti ti-external-link" style="color:var(--teal)"></i><span>Retour au RIÉ</span></div>
+      </div>
     </div>
     <div class="content">
 
@@ -458,6 +725,26 @@
         <div class="ir"><span class="ir-l">Formation requise</span><span>Formation Leica SP8 — Niveau 1</span></div>
         <div class="ir" style="border:none"><span class="ir-l">Groupes autorisés</span><div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end"><span class="badge b-info">Chercheurs UdeM</span><span class="badge b-info">Étudiants gradués</span><span class="badge b-info">Partenaires RQCHP</span></div></div>
       </div>
+      <div class="card" style="margin-top:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+          <div style="font-size:14px;font-weight:600">Consommables</div>
+          <button class="btn sm" onclick="toggleAddConsumable()"><i class="ti ti-plus"></i>Ajouter</button>
+        </div>
+        <div id="consumables-list">
+          <div class="ri">
+            <div style="flex:1"><div style="font-size:13px;font-weight:500">Lames microscope</div><div style="font-size:11px;color:var(--t2)">2,50 $ / unité · Stock : 84 · Seuil d'alerte : 20</div></div>
+          </div>
+          <div class="ri">
+            <div style="flex:1"><div style="font-size:13px;font-weight:500">Milieu de montage (10 mL)</div><div style="font-size:11px;color:var(--t2)">18,00 $ / unité · Stock : 6 · Seuil d'alerte : 5</div></div>
+            <span class="badge b-warn">Stock bas</span>
+          </div>
+        </div>
+        <div id="add-consumable-form" style="display:none;margin-top:12px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-lg);padding:14px">
+          <div class="fr"><div class="fg" style="margin-bottom:0"><label class="fl">Nom</label><input class="fi" id="cons-name" type="text" placeholder="Ex. Réactif X"></div><div class="fg" style="margin-bottom:0"><label class="fl">Coût unitaire</label><input class="fi" id="cons-cost" type="number" step="0.01" placeholder="0,00"></div></div>
+          <div class="fr" style="margin-top:10px"><div class="fg" style="margin-bottom:0"><label class="fl">Stock disponible</label><input class="fi" id="cons-stock" type="number" placeholder="0"></div><div class="fg" style="margin-bottom:0"><label class="fl">Seuil d'alerte</label><input class="fi" id="cons-threshold" type="number" placeholder="0"></div></div>
+          <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px"><button class="btn sm" onclick="toggleAddConsumable()">Annuler</button><button class="btn sm pri" onclick="addConsumable()">Ajouter le consommable</button></div>
+        </div>
+      </div>
     </div>
     <div>
       <div class="card" style="margin-bottom:12px">
@@ -475,6 +762,46 @@
           <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Mar 11 juin · 9h–11h</div><div style="color:var(--t2)">1 place disponible</div></div>
           <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Mer 12 juin · 14h–16h</div><div style="color:var(--t2)">Disponible</div></div>
           <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Jeu 13 juin · 8h–12h</div><div style="color:var(--t2)">Disponible</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL OFFRE-FORMATION (la formation est elle-même une offre de service) -->
+<div class="page" id="page-detail-formation">
+  <div class="ph">
+    <div><button class="btn ghost sm" onclick="history.back()" style="margin-bottom:8px;padding-left:0"><i class="ti ti-arrow-left"></i> Retour</button><div class="pt">Formation Leica SP8 — Niveau 1</div><div class="ps">Labo. imagerie cellulaire — Roger-Gaudry, G-1015</div></div>
+    <span class="badge b-info" style="align-self:flex-start;margin-top:4px">Type : Formation</span>
+  </div>
+  <div class="notice n-info" style="max-width:780px"><i class="ti ti-info-circle"></i><span>Une formation est une offre de service à part entière : elle possède ses propres créneaux et réservations, indépendants des offres qui l'exigent.</span></div>
+  <div class="det-grid" style="max-width:1000px">
+    <div>
+      <div class="card" style="margin-bottom:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><div style="font-size:14px;font-weight:600">Informations générales</div><span class="badge b-ok">Active</span></div>
+        <div class="ir"><span class="ir-l">Type de service</span><span>Formation initiale</span></div>
+        <div class="ir"><span class="ir-l">Infrastructure</span><span>Labo. imagerie cellulaire</span></div>
+        <div class="ir"><span class="ir-l">Formateur</span><span>Jean-François Côté</span></div>
+        <div class="ir"><span class="ir-l">Durée</span><span>2h</span></div>
+        <div class="ir"><span class="ir-l">Tarif</span><span>Gratuit</span></div>
+      </div>
+      <div class="card">
+        <div style="font-size:14px;font-weight:600;margin-bottom:12px">Offres exigeant cette formation</div>
+        <div class="ir"><span class="ir-l">Microscopie confocale Leica SP8</span><span class="badge b-info">Autonomie</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Ce mois-ci</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Réservations</span><span style="font-weight:600">6</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--t2)">Places restantes</span><span style="font-weight:600">3</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Prochains créneaux</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Ven 14 juin · 13h–15h</div><div style="color:var(--t2)">3 places disponibles</div></div>
         </div>
       </div>
     </div>
@@ -515,7 +842,7 @@
     </div>
   </div>
   <div class="card" style="margin-bottom:0">
-    <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--info);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Mar 11 juin · 9h–11h</div></div><span class="badge b-ok">Confirmée</span><button class="btn sm" onclick="go('modal-annul-resp')" style="margin-left:8px">Annuler</button></div>
+    <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--info);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Mar 11 juin · 9h–11h</div></div><span class="badge b-ok">Confirmée</span><button class="btn sm" onclick="go('modal-consommables')" style="margin-left:8px"><i class="ti ti-flask"></i>Consommables</button><button class="btn sm" onclick="go('modal-annul-resp')">Annuler</button></div>
     <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-filter" style="color:var(--info);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Amira Ben Salah</div><div style="font-size:11px;color:var(--t2)">Cytomètre BD LSR · Mer 12 juin · 10h–12h</div></div><span class="badge b-ok">Confirmée</span><button class="btn sm" onclick="go('modal-annul-resp')" style="margin-left:8px">Annuler</button></div>
     <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--warn-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--warn);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Lun 15 juil. · 8h–10h · Hors fenêtre active</div></div><span class="badge b-warn">En attente</span><div style="display:flex;gap:5px;margin-left:8px"><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
     <div class="rri" style="border:none"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--t3);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--t2)">Léa Fontaine</div><div style="font-size:11px;color:var(--t3)">Leica SP8 · Mar 3 juin · 9h–11h</div></div><span class="badge b-neu">Annulée</span></div>
@@ -529,7 +856,7 @@
   <div class="card" style="max-width:620px">
     <div class="fg"><label class="fl">Titre de l'offre <span style="color:var(--err)">*</span></label><input class="fi" id="f-titre" type="text" value="Microscopie confocale Leica SP8 — avec opérateur"></div>
     <div class="fg"><label class="fl">Description</label><textarea class="fi" rows="3">Séances de microscopie confocale supervisées par un opérateur qualifié. Idéal pour les chercheurs débutants ou les acquisitions complexes.</textarea></div>
-    <div class="fr"><div class="fg"><label class="fl">Infrastructure <span style="color:var(--err)">*</span></label><select class="fs"><option value="">-- Sélectionner --</option><option selected>Labo. imagerie cellulaire — Roger-Gaudry</option><option>Plateforme cytométrie — Ste-Justine</option></select></div><div class="fg"><label class="fl">Type de service</label><select class="fs"><option>Avec opérateur</option><option>Autonomie (formation requise)</option><option>Formation initiale</option></select></div></div>
+    <div class="fr"><div class="fg"><label class="fl">Infrastructure <span style="color:var(--err)">*</span></label><select class="fs" id="f-infra" onchange="onInfraChange(this)"><option value="">-- Sélectionner --</option><option value="Labo. imagerie cellulaire — Roger-Gaudry" selected>Labo. imagerie cellulaire — Roger-Gaudry</option><option value="Plateforme cytométrie — Ste-Justine">Plateforme cytométrie — Ste-Justine</option></select></div><div class="fg"><label class="fl">Type de service</label><select class="fs"><option>Avec opérateur</option><option>Autonomie (formation requise)</option><option>Formation initiale</option></select></div></div>
     <div class="fr"><div class="fg"><label class="fl">Durée minimale</label><select class="fs"><option>30 min</option><option selected>1 heure</option><option>2 heures</option></select></div><div class="fg"><label class="fl">Durée maximale</label><select class="fs"><option>2 heures</option><option selected>4 heures</option><option>Journée</option></select></div></div>
     <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('offres')">Annuler</button><button class="btn" onclick="saveDraft()"><i class="ti ti-device-floppy" style="color:var(--teal)"></i>Sauvegarder le brouillon</button><button class="btn pri" onclick="validateStep1()">Continuer <i class="ti ti-arrow-right"></i></button></div>
   </div>
@@ -540,11 +867,14 @@
   <div class="ph"><div><div class="pt">Nouvelle offre de service</div><div class="ps">Sélectionnez les équipements inclus</div></div><button class="btn ghost" onclick="go('offres')"><i class="ti ti-x"></i>Annuler</button></div>
   <div class="stepper"><div class="step done"><div class="sn">✓</div>Informations générales</div><div class="step on"><div class="sn">2</div>Équipements</div><div class="step"><div class="sn">3</div>Conditions d'accès</div><div class="step"><div class="sn">4</div>Plages horaires</div></div>
   <div class="card" style="max-width:620px">
-    <div class="fg"><label class="fl">Équipements sélectionnés</label><div class="tags" id="equip-tags"><div class="tag"><i class="ti ti-microscope" style="font-size:13px"></i>Leica SP8 — #EQ-2041<button onclick="this.parentElement.remove()">×</button></div></div></div>
-    <div class="fg"><label class="fl">Ajouter un équipement depuis le RIÉ</label><input class="fi" type="text" id="equip-search" placeholder="Rechercher par nom, numéro de série..." oninput="toggleDD(this.value)" autocomplete="off"><div id="equip-dd" style="display:none" class="dd"><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Leica SP8 — Microscopie confocale</div><div class="dd-s">Roger-Gaudry G-1015 · #EQ-2041 · Actif</div></div><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Zeiss LSM 880 — Microscopie confocale</div><div class="dd-s">Pavillon Marcelle-Coutu · #EQ-1887 · Actif</div></div><div class="dd-item" onclick="selectEquip()"><div class="dd-t">Nikon A1R — Microscopie confocale HD</div><div class="dd-s">3200 Jean-Brillant · #EQ-2203 · Actif</div></div></div></div>
-    <div class="notice n-info"><i class="ti ti-info-circle"></i><span>Si deux équipements sont liés, la réservation de l'un bloquera automatiquement l'autre sur le même créneau.</span></div>
-    <div class="fg"><label class="fl">Opérateur assigné (optionnel)</label><select class="fs"><option value="">Aucun — accès en autonomie</option><option selected>Jean-François Côté (technicien principal)</option><option>Amira Mansouri (technicienne)</option></select></div>
-    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn" onclick="saveDraft()"><i class="ti ti-device-floppy" style="color:var(--teal)"></i>Sauvegarder le brouillon</button><button class="btn pri" onclick="go('nouvelle-offre-3')">Continuer <i class="ti ti-arrow-right"></i></button></div>
+    <div id="notice-step2-reset" class="notice n-warn" style="display:none"><i class="ti ti-alert-triangle"></i><span>Les équipements, la formation requise et l'opérateur ont été réinitialisés suite à un changement d'infrastructure — veuillez les sélectionner à nouveau.</span></div>
+    <div class="fg"><label class="fl">Équipements sélectionnés</label>
+      <div id="equip-list" style="border:1px solid var(--bd);border-radius:var(--r-md);background:var(--card);padding:4px;"></div>
+    </div>
+    <div class="fg"><label class="fl">Ajouter un équipement depuis le RIÉ — <span id="equip-infra-label" style="font-weight:400;color:var(--t3)">Labo. imagerie cellulaire — Roger-Gaudry</span></label><input class="fi" type="text" id="equip-search" placeholder="Rechercher par nom, numéro de série..." oninput="toggleDD(this.value)" autocomplete="off"><div id="equip-dd" style="display:none" class="dd"></div></div>
+    <div class="notice n-info"><i class="ti ti-info-circle"></i><span>Les composantes RIÉ de l'équipement (objectifs, détecteurs...) sont ajoutées automatiquement — les accessoires, logiciels et collections physiques ne le sont pas.</span></div>
+    <div class="fg"><label class="fl">Opérateur assigné (optionnel)</label><select class="fs" id="f-operateur"><option value="">Aucun — accès en autonomie</option><option selected value="Jean-François Côté (technicien principal)">Jean-François Côté (technicien principal)</option><option value="Amira Mansouri (technicienne)">Amira Mansouri (technicienne)</option></select></div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px"><button class="btn" onclick="go('nouvelle-offre')"><i class="ti ti-arrow-left"></i> Retour</button><button class="btn" onclick="saveDraft()"><i class="ti ti-device-floppy" style="color:var(--teal)"></i>Sauvegarder le brouillon</button><button class="btn pri" onclick="proceedToStep3()">Continuer <i class="ti ti-arrow-right"></i></button></div>
   </div>
 </div>
 
@@ -553,7 +883,14 @@
   <div class="ph"><div><div class="pt">Nouvelle offre de service</div><div class="ps">Conditions d'accès et fenêtre de réservation</div></div><button class="btn ghost" onclick="go('offres')"><i class="ti ti-x"></i>Annuler</button></div>
   <div class="stepper"><div class="step done"><div class="sn">✓</div>Informations générales</div><div class="step done"><div class="sn">✓</div>Équipements</div><div class="step on"><div class="sn">3</div>Conditions d'accès</div><div class="step"><div class="sn">4</div>Plages horaires</div></div>
   <div class="card" style="max-width:780px">
-    <div class="fg"><label class="fl">Formation requise</label><select class="fs"><option>Aucune</option><option selected>Formation Leica SP8 — Niveau 1</option><option>Formation Leica SP8 — Niveau 2</option></select></div>
+    <div id="notice-step3-reset" class="notice n-warn" style="display:none"><i class="ti ti-alert-triangle"></i><span>La formation requise a été réinitialisée suite à un changement d'équipements.</span></div>
+    <div class="fg"><label class="fl">Formation requise</label><select class="fs" id="f-formation"><option>Aucune</option><option selected>Formation Leica SP8 — Niveau 1</option><option>Formation Leica SP8 — Niveau 2</option></select>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md)">
+        <i class="ti ti-info-circle" style="color:var(--teal);font-size:14px"></i>
+        <span style="font-size:11px;color:var(--t2);flex:1">Une formation est une offre de service booking, avec ses propres créneaux.</span>
+        <button class="btn ghost sm" onclick="go('detail-formation')" style="font-size:11px">Voir l'offre <i class="ti ti-arrow-right"></i></button>
+      </div>
+    </div>
     <div class="fg"><label class="fl">Groupes d'accès autorisés</label><div class="tags"><div class="tag">Chercheurs UdeM<button>×</button></div><div class="tag">Étudiants gradués<button>×</button></div><div class="tag">Partenaires RQCHP<button>×</button></div></div></div>
     <div class="divider"></div>
     <div style="font-size:13px;font-weight:600;margin-bottom:12px">Fenêtre de réservation</div>
@@ -823,7 +1160,27 @@
 <!-- RECHERCHE UTILISATEUR -->
 <div class="page" id="page-recherche">
   <div class="ph"><div><div class="pt">Rechercher un équipement</div><div class="ps">Trouvez un créneau disponible sur les plateformes de l'UdeM</div></div></div>
-  <div class="search-bar"><div class="si-wrap"><i class="ti ti-search"></i><input class="si" type="text" id="s-query" value="microscopie confocale"></div><input class="fi" type="date" value="2026-06-10" style="flex:1"><input class="fi" type="date" value="2026-06-30" style="flex:1"><button class="btn pri" onclick="doSearch()">Rechercher</button></div>
+  <div class="search-bar">
+    <div class="si-wrap"><i class="ti ti-search"></i><input class="si" type="text" id="s-query" value="microscopie confocale"></div>
+    <div style="position:relative;flex:1">
+      <button class="btn" id="btn-date-range" onclick="toggleDatePopover()" style="width:100%;justify-content:flex-start;font-weight:500;color:var(--t1)"><i class="ti ti-calendar" style="color:var(--teal)"></i><span id="date-range-label">10 – 30 juin 2026</span></button>
+      <div id="date-popover" style="display:none;position:absolute;top:40px;left:0;z-index:50;background:var(--card);border:1px solid var(--bd);border-radius:var(--r-lg);box-shadow:var(--shadow-md);padding:18px 20px">
+        <div class="avail-cal-wrap">
+          <div class="avail-cal" id="bk-cal-1"></div>
+          <div class="avail-cal" id="bk-cal-2"></div>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <span id="bk-range-label" style="font-size:12px;color:var(--t2)">Choisissez vos dates</span>
+          <div style="display:flex;gap:8px">
+            <button class="btn sm" onclick="resetBkRange()">Réinitialiser</button>
+            <button class="btn sm pri" onclick="applyBkRange()">Appliquer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn pri" onclick="doSearch()">Rechercher</button>
+  </div>
   <div class="fc"><div class="fchip on">Tous types</div><div class="fchip">Microscopie</div><div class="fchip">Cytométrie</div><div class="fchip">Imagerie in vivo</div><div class="fchip">Avec opérateur</div></div>
   <div id="search-results">
     <div style="font-size:12px;color:var(--t2);margin-bottom:14px">3 offres disponibles pour «&nbsp;microscopie confocale&nbsp;»</div>
@@ -839,8 +1196,10 @@
 </div>
 
 
+
 <!-- DETAIL OFFRE UTILISATEUR -->
 <div class="page" id="page-offre-detail-user">
+  <div id="from-rie-banner" style="display:none;margin-bottom:14px" class="notice n-info"><i class="ti ti-external-link"></i><span>Vous arrivez depuis la fiche équipement du <strong>RIÉ</strong>. Complétez votre réservation ci-dessous.</span></div>
   <div class="ph">
     <div>
       <button class="btn ghost sm" onclick="go('recherche')" style="margin-bottom:8px;padding-left:0"><i class="ti ti-arrow-left"></i> Résultats de recherche</button>
@@ -877,7 +1236,7 @@
         <div style="display:flex;flex-direction:column;gap:8px">
           <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px">
             <i class="ti ti-circle-check" style="color:var(--ok);font-size:16px;flex-shrink:0;margin-top:1px"></i>
-            <div><div style="font-weight:500;color:var(--ok)">Formation validée</div><div style="color:var(--t2)">Formation Leica SP8 — Niveau 1<br>Complétée le 3 mars 2025</div></div>
+            <div><div style="font-weight:500;color:var(--ok)">Formation validée</div><div style="color:var(--t2)"><a href="#" onclick="go('detail-formation');return false;" style="color:var(--info);text-decoration:underline">Formation Leica SP8 — Niveau 1</a><br>Complétée le 3 mars 2025</div></div>
           </div>
           <div style="display:flex;align-items:flex-start;gap:8px;font-size:12px">
             <i class="ti ti-circle-check" style="color:var(--ok);font-size:16px;flex-shrink:0;margin-top:1px"></i>
@@ -981,6 +1340,23 @@
         <div class="fg"><label class="fl">Description de l'utilisation prévue <span style="color:var(--err)">*</span></label><textarea class="fi" rows="3" id="resa-desc">Acquisition d'images z-stack de coupes histologiques pour analyse de la distribution des cellules NK dans les ganglions lymphatiques.</textarea></div>
         <div class="fg"><label class="fl">Nombre d'échantillons prévus</label><input class="fi" type="number" value="12" style="width:120px"></div>
       </div>
+      <div class="card" id="reservation-consumables" style="margin-top:14px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:2px">Consommables prévus</div>
+        <div style="font-size:11px;color:var(--t2);margin-bottom:12px">Ajustez la quantité prévue pour cette séance ; la quantité réelle pourra être confirmée par le responsable après usage.</div>
+        <div class="cq-row" data-cost="2.50" style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd)">
+          <div style="flex:1"><div style="font-size:13px;font-weight:500">Lames microscope</div><div style="font-size:11px;color:var(--t2)">2,50 $ / unité</div></div>
+          <button class="btn ghost sm" onclick="adjustQty(this,-1)" style="padding:2px 8px">−</button>
+          <span class="qty-val num" style="min-width:20px;text-align:center;font-weight:600">3</span>
+          <button class="btn ghost sm" onclick="adjustQty(this,1)" style="padding:2px 8px">+</button>
+        </div>
+        <div class="cq-row" data-cost="18.00" style="display:flex;align-items:center;gap:10px;padding:8px 0">
+          <div style="flex:1"><div style="font-size:13px;font-weight:500">Milieu de montage (10 mL)</div><div style="font-size:11px;color:var(--t2)">18,00 $ / unité</div></div>
+          <button class="btn ghost sm" onclick="adjustQty(this,-1)" style="padding:2px 8px">−</button>
+          <span class="qty-val num" style="min-width:20px;text-align:center;font-weight:600">0</span>
+          <button class="btn ghost sm" onclick="adjustQty(this,1)" style="padding:2px 8px">+</button>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding-top:10px;font-size:12px;font-weight:600"><span>Sous-total consommables</span><span id="consumables-subtotal" class="num">7,50 $</span></div>
+      </div>
     </div>
     <div>
       <div class="card" style="margin-bottom:12px">
@@ -992,6 +1368,7 @@
           <tr><td>Durée</td><td>2 heures</td></tr>
           <tr><td>Opérateur</td><td>J.-F. Côté</td></tr>
           <tr><td>Local</td><td>Roger-Gaudry G-1015</td></tr>
+          <tr><td>Payeur</td><td id="recap-payeur">Moi-même</td></tr>
         </table>
         <div class="divider" style="margin:10px 0"></div>
         <table class="sum-t"><tr><td>Annulation avant</td><td>Lun 10 juin · 9h</td></tr></table>
@@ -1001,8 +1378,24 @@
           <i class="ti ti-circle-check" style="color:var(--ok);font-size:16px"></i>
           <span style="font-size:12px;font-weight:600;color:var(--ok)">Formation validée</span>
         </div>
-        <div style="font-size:11px;color:#3B6D11;line-height:1.5">Formation Leica SP8 — Niveau 1<br>Complétée le 3 mars 2025</div>
+        <div style="font-size:11px;color:#3B6D11;line-height:1.5"><a href="#" onclick="go('detail-formation');return false;" style="color:#3B6D11;text-decoration:underline;font-weight:600">Formation Leica SP8 — Niveau 1</a><br>Complétée le 3 mars 2025</div>
       </div>
+
+      <!-- Payeur -->
+      <div class="card" style="margin-bottom:12px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Qui paie cette réservation ?</div>
+        <label style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--bd);border-radius:var(--r-md);margin-bottom:6px;cursor:pointer;font-size:12px">
+          <input type="radio" name="payeur" checked onchange="refreshPayeur()">
+          <span style="flex:1">Moi-même</span>
+          <span style="color:var(--t3);font-size:11px">Compte K.B.-2201</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--bd);border-radius:var(--r-md);cursor:pointer;font-size:12px">
+          <input type="radio" name="payeur" onchange="refreshPayeur()">
+          <span style="flex:1">Mon professeur superviseur</span>
+          <span style="color:var(--t3);font-size:11px">M. Tremblay</span>
+        </label>
+      </div>
+
       <button class="btn pri" style="width:100%;justify-content:center" onclick="validateResa()">
         <i class="ti ti-check"></i>Confirmer la réservation
       </button>
@@ -1083,6 +1476,30 @@
         <span class="badge b-warn">En attente</span>
         <button class="btn sm" onclick="go('modal-annul-user')">Annuler</button>
       </div>
+    </div>
+  </div>
+
+  <div class="ph" style="margin-top:26px;margin-bottom:12px"><div><div class="pt" style="font-size:16px">Mes formations complétées</div><div class="ps">Prérequis validés pour réserver certains équipements en autonomie</div></div></div>
+  <div class="card">
+    <div class="ri">
+      <div style="display:flex;align-items:center;gap:12px;flex:1">
+        <div class="ri-ic" style="background:var(--ok-bg)"><i class="ti ti-certificate" style="color:var(--ok);font-size:18px"></i></div>
+        <div>
+          <div style="font-size:13px;font-weight:600"><a href="#" onclick="go('detail-formation');return false;" style="color:var(--t1);text-decoration:none">Formation Leica SP8 — Niveau 1</a></div>
+          <div style="font-size:11px;color:var(--t2)">Complétée le 3 mars 2025 · Labo. imagerie cellulaire</div>
+        </div>
+      </div>
+      <span class="badge b-ok">Validée</span>
+    </div>
+    <div class="ri" style="border:none">
+      <div style="display:flex;align-items:center;gap:12px;flex:1">
+        <div class="ri-ic" style="background:var(--bg2)"><i class="ti ti-certificate" style="color:var(--t3);font-size:18px"></i></div>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--t2)">Formation BD LSR — Niveau 1</div>
+          <div style="font-size:11px;color:var(--t2)">Non complétée — requise pour réserver le Cytomètre BD LSRFortessa en autonomie</div>
+        </div>
+      </div>
+      <button class="btn sm" onclick="go('detail-formation')">Voir l'offre</button>
     </div>
   </div>
 </div>
@@ -1224,6 +1641,57 @@
 </div>
 
 
+<!-- RAPPORTS D'UTILISATION -->
+<div class="page" id="page-rapports">
+  <div class="ph"><div><div class="pt">Rapports d'utilisation</div><div class="ps">Toutes vos offres — 30 derniers jours</div></div><button class="btn"><i class="ti ti-download"></i>Exporter (CSV)</button></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-l">Réservations</div><div class="stat-v num">142</div></div>
+    <div class="stat"><div class="stat-l">Heures utilisées</div><div class="stat-v num">318h</div></div>
+    <div class="stat"><div class="stat-l">Taux d'occupation moyen</div><div class="stat-v num">64%</div></div>
+    <div class="stat"><div class="stat-l">Revenus estimés</div><div class="stat-v num">9 480 $</div></div>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="font-size:14px;font-weight:600;margin-bottom:14px">Taux d'occupation par offre</div>
+    <div class="av-row"><div class="av-name">Microscopie confocale Leica SP8</div><div class="av-bar"><div class="av-fill res" style="width:78%"></div></div><span style="font-size:12px;font-weight:600;width:36px;text-align:right">78%</span></div>
+    <div class="av-row"><div class="av-name">Cytomètre BD LSRFortessa</div><div class="av-bar"><div class="av-fill res" style="width:61%"></div></div><span style="font-size:12px;font-weight:600;width:36px;text-align:right">61%</span></div>
+    <div class="av-row"><div class="av-name">Formation Leica SP8 — Niveau 1</div><div class="av-bar"><div class="av-fill res" style="width:44%"></div></div><span style="font-size:12px;font-weight:600;width:36px;text-align:right">44%</span></div>
+    <div class="av-row"><div class="av-name">Microscopie électronique FEI Tecnai</div><div class="av-bar"><div class="av-fill blk" style="width:12%"></div></div><span style="font-size:12px;font-weight:600;width:36px;text-align:right">12%</span></div>
+  </div>
+  <div class="card">
+    <div style="font-size:14px;font-weight:600;margin-bottom:12px">Répartition par statut</div>
+    <div class="ir"><span class="ir-l">Confirmées</span><span>118</span></div>
+    <div class="ir"><span class="ir-l">En attente</span><span>9</span></div>
+    <div class="ir"><span class="ir-l">Annulées</span><span>11</span></div>
+    <div class="ir" style="border:none"><span class="ir-l">Absences (no-show)</span><span>4</span></div>
+  </div>
+</div>
+
+<!-- PRÉFÉRENCES DE NOTIFICATION -->
+<div class="page" id="page-preferences">
+  <div class="ph"><div><div class="pt">Préférences de notification</div><div class="ps">Choisissez comment vous souhaitez être averti·e</div></div></div>
+  <div class="card" style="max-width:560px">
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:10px;padding:8px 0;font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid var(--bd);margin-bottom:6px">
+      <span>Type d'évènement</span><span style="text-align:center">Dans l'app</span><span style="text-align:center">Courriel</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:10px;padding:10px 0;align-items:center;border-bottom:1px solid var(--bd);font-size:13px">
+      <span>Nouvelle réservation</span><span style="text-align:center"><input type="checkbox" checked></span><span style="text-align:center"><input type="checkbox" checked></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:10px;padding:10px 0;align-items:center;border-bottom:1px solid var(--bd);font-size:13px">
+      <span>Demande en attente d'approbation</span><span style="text-align:center"><input type="checkbox" checked></span><span style="text-align:center"><input type="checkbox" checked></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:10px;padding:10px 0;align-items:center;border-bottom:1px solid var(--bd);font-size:13px">
+      <span>Annulation par un usager</span><span style="text-align:center"><input type="checkbox" checked></span><span style="text-align:center"><input type="checkbox"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:10px;padding:10px 0;align-items:center;border-bottom:1px solid var(--bd);font-size:13px">
+      <span>Stock de consommable bas</span><span style="text-align:center"><input type="checkbox" checked></span><span style="text-align:center"><input type="checkbox" checked></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 90px 90px;gap:10px;padding:10px 0;align-items:center;font-size:13px">
+      <span>Nouvelle demande d'étudiant</span><span style="text-align:center"><input type="checkbox" checked></span><span style="text-align:center"><input type="checkbox"></span>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:14px"><button class="btn pri" onclick="go('dashboard')"><i class="ti ti-check"></i>Enregistrer</button></div>
+  </div>
+</div>
+
 <!-- MODAL REFUS -->
 <div class="page" id="page-modal-refus"><div class="mb-bg"><div class="modal"><div class="modal-t">Refuser la réservation</div><div class="modal-s">Karim Belkacem · Leica SP8 · Lun 15 juil. · 8h–10h</div><div class="notice n-warn"><i class="ti ti-alert-triangle"></i><span>L'utilisateur sera notifié par courriel avec la raison fournie.</span></div><div class="fg"><label class="fl">Raison du refus <span style="color:var(--err)">*</span></label><select class="fs" style="margin-bottom:8px"><option value="">-- Sélectionner une raison --</option><option selected>Créneau réservé pour maintenance</option><option>Équipement hors service</option><option>Capacité dépassée</option><option>Autre raison</option></select><textarea class="fi" rows="3">Maintenance préventive planifiée par le fabricant Leica sur cette période.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('dashboard')">Annuler</button><button class="btn dng" onclick="go('dashboard')"><i class="ti ti-x"></i>Confirmer le refus</button></div></div></div></div>
 
@@ -1232,6 +1700,19 @@
 
 <!-- MODAL BLOCAGE -->
 <div class="page" id="page-modal-bloc"><div class="mb-bg"><div class="modal"><div class="modal-t">Bloquer une période</div><div class="modal-s">Les créneaux existants seront annulés et les utilisateurs notifiés.</div><div class="fg"><label class="fl">Offre concernée</label><select class="fs"><option selected>Microscopie confocale Leica SP8</option><option>Cytomètre BD LSRFortessa</option><option>Toutes mes offres</option></select></div><div class="fr"><div class="fg"><label class="fl">Date de début</label><input class="fi" type="date" value="2026-06-18"></div><div class="fg"><label class="fl">Date de fin</label><input class="fi" type="date" value="2026-06-18"></div></div><div class="fg"><label class="fl">Raison <span style="color:var(--err)">*</span></label><select class="fs" style="margin-bottom:8px"><option selected>Maintenance préventive</option><option>Maintenance d'urgence</option><option>Congé / fermeture</option><option>Autre</option></select><textarea class="fi" rows="2">Maintenance préventive annuelle planifiée par Leica Microsystems.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('plages')">Annuler</button><button class="btn pri" onclick="go('plages')"><i class="ti ti-check"></i>Confirmer le blocage</button></div></div></div></div>
+
+<!-- MODAL AJUSTEMENT CONSOMMABLES (post-usage) -->
+<div class="page" id="page-modal-consommables"><div class="mb-bg"><div class="modal" style="max-width:480px">
+  <div class="modal-t">Consommables — Karim Belkacem</div>
+  <div class="modal-s">Leica SP8 · Mar 11 juin · 9h–11h. Confirmez les quantités réellement utilisées.</div>
+  <table class="sum-t" style="margin-bottom:10px">
+    <tr><td style="font-weight:600;color:var(--t1)">Consommable</td><td style="text-align:center">Prévu</td><td style="text-align:right">Réel</td></tr>
+    <tr><td>Lames microscope</td><td style="text-align:center">3</td><td style="text-align:right"><input class="fi num" type="number" value="3" style="width:64px;text-align:right;display:inline-block;padding:4px 6px"></td></tr>
+    <tr><td>Milieu de montage</td><td style="text-align:center">0</td><td style="text-align:right"><input class="fi num" type="number" value="0" style="width:64px;text-align:right;display:inline-block;padding:4px 6px"></td></tr>
+  </table>
+  <div class="notice n-info"><i class="ti ti-info-circle"></i><span>Le coût final facturé sera recalculé à partir des quantités réelles.</span></div>
+  <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('reservations-resp')">Annuler</button><button class="btn pri" onclick="go('reservations-resp')"><i class="ti ti-check"></i>Enregistrer les quantités</button></div>
+</div></div></div>
 
 <!-- MODAL DÉSACTIVER -->
 <div class="page" id="page-modal-suppr"><div class="mb-bg"><div class="modal"><div class="modal-t">Désactiver l'offre</div><div class="modal-s">Microscopie confocale Leica SP8</div><div class="notice n-err"><i class="ti ti-alert-circle"></i><span>Cette offre sera masquée du catalogue. Les réservations confirmées existantes ne sont pas automatiquement annulées.</span></div><div class="fg"><label class="fl">Raison (optionnel)</label><textarea class="fi" rows="2" placeholder="Ex : Équipement retiré du service..."></textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('detail-offre')">Annuler</button><button class="btn dng" onclick="go('offres')"><i class="ti ti-eye-off"></i>Désactiver l'offre</button></div></div></div></div>
@@ -1243,6 +1724,7 @@ const routes={
   dashboard:{title:'Tableau de bord',page:'page-dashboard',sb:'sb-resp',nav:'nav-dashboard'},
   offres:{title:'Mes offres de service',page:'page-offres',sb:'sb-resp',nav:'nav-offres'},
   'detail-offre':{title:"Détail de l'offre",page:'page-detail-offre',sb:'sb-resp',nav:'nav-offres'},
+  'detail-formation':{title:"Détail de la formation",page:'page-detail-formation',sb:'sb-resp',nav:'nav-offres'},
   'modifier-offre':{title:"Modifier l'offre",page:'page-modifier-offre',sb:'sb-resp',nav:'nav-offres'},
   'reservations-resp':{title:'Réservations',page:'page-reservations-resp',sb:'sb-resp',nav:'nav-reservations-resp'},
   'nouvelle-offre':{title:'Nouvelle offre — Étape 1 / 4',page:'page-nouvelle-offre',sb:'sb-resp',nav:'nav-offres'},
@@ -1253,7 +1735,10 @@ const routes={
   'modal-refus':{title:'Refuser une réservation',page:'page-modal-refus',sb:'sb-resp',nav:'nav-dashboard'},
   'modal-annul-resp':{title:'Annuler une réservation',page:'page-modal-annul-resp',sb:'sb-resp',nav:'nav-reservations-resp'},
   'mes-etudiants':{title:'Mes étudiants autorisés',page:'page-mes-etudiants',sb:'sb-resp',nav:'nav-mes-etudiants'},
+  rapports:{title:"Rapports d'utilisation",page:'page-rapports',sb:'sb-resp',nav:'nav-rapports'},
+  preferences:{title:'Préférences de notification',page:'page-preferences',sb:'sb-resp',nav:''},
   'modal-bloc':{title:'Bloquer une période',page:'page-modal-bloc',sb:'sb-resp',nav:'nav-reservations-resp'},
+  'modal-consommables':{title:'Consommables — ajustement',page:'page-modal-consommables',sb:'sb-resp',nav:'nav-reservations-resp'},
   'modal-suppr':{title:"Désactiver l'offre",page:'page-modal-suppr',sb:'sb-resp',nav:'nav-offres'},
   recherche:{title:'Rechercher un équipement',page:'page-recherche',sb:'sb-user',nav:'nav-recherche'},
   'offre-detail-user':{title:"Détail de l'offre",page:'page-offre-detail-user',sb:'sb-user',nav:'nav-recherche'},
@@ -1293,11 +1778,357 @@ function loginAs(role){
     return;
   }
   document.getElementById('screen-app').style.display='block';document.getElementById('btn-resp').classList.toggle('on',role==='responsable');document.getElementById('btn-user').classList.toggle('on',role==='utilisateur');document.getElementById('sb-resp').style.display=role==='responsable'?'block':'none';document.getElementById('sb-user').style.display=role==='utilisateur'?'block':'none';if(role==='responsable'){document.getElementById('u-av').textContent='MG';document.getElementById('u-name').textContent='Marie Gagnon';document.getElementById('u-role').textContent='Responsable';go('dashboard');}else{document.getElementById('u-av').textContent='KB';document.getElementById('u-name').textContent='Karim Belkacem';document.getElementById('u-role').textContent='Chercheur — Biochimie';go('recherche');}}
-function logout(){document.getElementById('screen-app').style.display='none';document.getElementById('screen-login').style.display='block';}
+function logout(){document.getElementById('screen-app').style.display='none';document.getElementById('screen-landing').style.display='block';}
+function showLoginFromLanding(){document.getElementById('screen-landing').style.display='none';document.getElementById('screen-login').style.display='block';}
+function backToLanding(){document.getElementById('screen-login').style.display='none';document.getElementById('screen-landing').style.display='block';}
+function showRie(){document.getElementById('screen-landing').style.display='none';document.getElementById('screen-login').style.display='none';document.getElementById('screen-rie').style.display='block';rieShowListe();}
+function hideRie(){document.getElementById('screen-rie').style.display='none';document.getElementById('screen-landing').style.display='block';}
+function rieShowListe(){document.getElementById('rie-page-liste').style.display='block';document.getElementById('rie-page-detail').style.display='none';}
+function rieShowDetail(eq){
+  const data={
+    leica:{t:'Microscope confocal Leica SP8',infra:'Labo. imagerie cellulaire — Roger-Gaudry',modele:'TCS SP8',avail:true},
+    zeiss:{t:'Zeiss LSM 880 — Confocal HD',infra:'Plateforme imagerie — Marcelle-Coutu',modele:'LSM 880 Airyscan',avail:true}
+  };
+  const d=data[eq]||data.leica;
+  document.getElementById('rie-d-title').textContent=d.t;
+  document.getElementById('rie-page-liste').style.display='none';
+  document.getElementById('rie-page-detail').style.display='block';
+}
+function rieToBooking(){
+  document.getElementById('screen-rie').style.display='none';
+  document.getElementById('screen-landing').style.display='none';
+  document.getElementById('screen-login').style.display='none';
+  document.getElementById('screen-app').style.display='block';
+  document.getElementById('btn-user').classList.add('on');
+  document.getElementById('btn-resp').classList.remove('on');
+  document.getElementById('sb-user').style.display='block';
+  document.getElementById('sb-resp').style.display='none';
+  document.getElementById('u-av').textContent='KB';
+  document.getElementById('u-name').textContent='Karim Belkacem';
+  document.getElementById('u-role').textContent='Chercheur — Biochimie';
+  go('offre-detail-user');
+  document.getElementById('from-rie-banner').style.display='flex';
+}
+/* ===== P2 — Notifications ===== */
+function toggleNotifs(){
+  const p=document.getElementById('notif-panel');
+  const willShow=p.style.display==='none';
+  p.style.display=willShow?'block':'none';
+  if(willShow)document.getElementById('notif-badge').style.display='none';
+}
+document.addEventListener('click',function(e){
+  const p=document.getElementById('notif-panel');
+  if(!p||p.style.display==='none')return;
+  if(!e.target.closest('#notif-panel') && !e.target.closest('[onclick="toggleNotifs()"]'))p.style.display='none';
+});
+/* ===== P2 — Consommables ===== */
+function toggleAddConsumable(){
+  const f=document.getElementById('add-consumable-form');
+  f.style.display=f.style.display==='none'?'block':'none';
+}
+function addConsumable(){
+  const name=document.getElementById('cons-name').value.trim();
+  const cost=document.getElementById('cons-cost').value;
+  const stock=document.getElementById('cons-stock').value;
+  const threshold=document.getElementById('cons-threshold').value;
+  if(!name)return;
+  const row=document.createElement('div');
+  row.className='ri';
+  row.innerHTML='<div style="flex:1"><div style="font-size:13px;font-weight:500">'+name+'</div><div style="font-size:11px;color:var(--t2)">'+(cost?parseFloat(cost).toFixed(2)+' $ / unité · ':'')+'Stock : '+(stock||0)+' · Seuil d\'alerte : '+(threshold||0)+'</div></div>';
+  document.getElementById('consumables-list').appendChild(row);
+  ['cons-name','cons-cost','cons-stock','cons-threshold'].forEach(function(id){document.getElementById(id).value='';});
+  toggleAddConsumable();
+}
+function adjustQty(el,delta,max){
+  const span=el.parentElement.querySelector('.qty-val');
+  let v=parseInt(span.textContent,10)+delta;
+  if(v<0)v=0; if(max&&v>max)v=max;
+  span.textContent=v;
+  refreshConsumablesCost();
+}
+function refreshConsumablesCost(){
+  const rows=document.querySelectorAll('#reservation-consumables .cq-row');
+  let total=0;
+  rows.forEach(function(r){
+    const qty=parseInt(r.querySelector('.qty-val').textContent,10);
+    const cost=parseFloat(r.dataset.cost);
+    total+=qty*cost;
+  });
+  const el=document.getElementById('consumables-subtotal');
+  if(el)el.textContent=total.toFixed(2)+' $';
+}
+
+const EQUIP_BY_INFRA={
+  'Labo. imagerie cellulaire — Roger-Gaudry':[
+    {name:'Leica SP8',ref:'#EQ-2041',loc:'Roger-Gaudry G-1015',comps:['Objectif 63x Huile à immersion','Détecteur HyD spectral']},
+    {name:'Microscope FEI Tecnai',ref:'#EQ-1500',loc:'Roger-Gaudry G-1022',comps:['Caméra CCD Eagle']}
+  ],
+  'Plateforme cytométrie — Ste-Justine':[
+    {name:'BD LSRFortessa',ref:'#EQ-3010',loc:'Ste-Justine C-210',comps:['Laser violet 405nm','Module ADC']},
+    {name:'Cytoflex S',ref:'#EQ-3050',loc:'Ste-Justine C-212',comps:['Module de tri automatisé']}
+  ]
+};
+let offerState={infra:'Labo. imagerie cellulaire — Roger-Gaudry',step2Touched:true,step3Touched:true,equipChangedSinceStep3:false};
+
+function showConfirmModal(title,msg,onConfirm){
+  const ov=document.createElement('div');
+  ov.id='confirm-overlay';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;z-index:999;';
+  ov.innerHTML='<div class="modal" style="max-width:420px"><div class="modal-t">'+title+'</div><div class="modal-s">'+msg+'</div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" id="cm-cancel">Annuler</button><button class="btn dng" id="cm-confirm"><i class="ti ti-refresh"></i>Confirmer et réinitialiser</button></div></div>';
+  document.body.appendChild(ov);
+  document.getElementById('cm-cancel').onclick=function(){ov.remove();};
+  document.getElementById('cm-confirm').onclick=function(){ov.remove();onConfirm();};
+}
+
+function renderEquipList(items){
+  const list=document.getElementById('equip-list');
+  list.innerHTML='';
+  items.forEach(function(eq){
+    const block=document.createElement('div');
+    block.className='eq-block';
+    block.style.cssText='padding:8px 10px;border-bottom:1px solid var(--bd)';
+    let sub=eq.comps.map(function(c){return '<div style="display:flex;align-items:center;gap:8px;margin-top:6px;margin-left:22px"><i class="ti ti-corner-down-right" style="font-size:12px;color:var(--t3)"></i><span style="font-size:12px;color:var(--t2);flex:1">'+c+'</span><span class="badge b-info">Composante</span></div>';}).join('');
+    block.innerHTML='<div style="display:flex;align-items:center;gap:8px"><i class="ti ti-microscope" style="font-size:14px;color:var(--teal)"></i><span style="font-size:13px;font-weight:600;flex:1">'+eq.name+' <span style="color:var(--t3);font-weight:400">— '+eq.ref+'</span></span><button class="btn ghost sm" onclick="removeEquipBlock(this)" style="padding:2px 6px"><i class="ti ti-x" style="color:var(--err)"></i></button></div>'+sub;
+    list.appendChild(block);
+  });
+}
+function renderEquipDropdown(infra){
+  const catalog=EQUIP_BY_INFRA[infra]||[];
+  const dd=document.getElementById('equip-dd');
+  dd.innerHTML=catalog.map(function(eq){
+    return '<div class="dd-item" onclick="selectEquip(\''+eq.name+'\')"><div class="dd-t">'+eq.name+'</div><div class="dd-s">'+eq.loc+' · '+eq.ref+' · Actif</div></div>';
+  }).join('');
+  const lbl=document.getElementById('equip-infra-label');
+  if(lbl)lbl.textContent=infra||'— sélectionnez une infrastructure à l\'étape 1 —';
+}
+function selectEquip(name){
+  document.getElementById('equip-dd').style.display='none';
+  document.getElementById('equip-search').value='';
+  const catalog=EQUIP_BY_INFRA[offerState.infra]||[];
+  const eq=catalog.find(function(e){return e.name===name;});
+  if(!eq)return;
+  const list=document.getElementById('equip-list');
+  const block=document.createElement('div');
+  block.className='eq-block';
+  block.dataset.name=eq.name;
+  block.style.cssText='padding:8px 10px;border-bottom:1px solid var(--bd)';
+  let sub=eq.comps.map(function(c){return '<div style="display:flex;align-items:center;gap:8px;margin-top:6px;margin-left:22px"><i class="ti ti-corner-down-right" style="font-size:12px;color:var(--t3)"></i><span style="font-size:12px;color:var(--t2);flex:1">'+c+'</span><span class="badge b-info">Composante</span></div>';}).join('');
+  block.innerHTML='<div style="display:flex;align-items:center;gap:8px"><i class="ti ti-microscope" style="font-size:14px;color:var(--teal)"></i><span style="font-size:13px;font-weight:600;flex:1">'+eq.name+' <span style="color:var(--t3);font-weight:400">— '+eq.ref+'</span></span><button class="btn ghost sm" onclick="removeEquipBlock(this)" style="padding:2px 6px"><i class="ti ti-x" style="color:var(--err)"></i></button></div>'+sub;
+  list.appendChild(block);
+  offerState.step2Touched=true;
+  offerState.equipChangedSinceStep3=true;
+}
+function removeEquipBlock(btn){
+  btn.closest('.eq-block').remove();
+  offerState.equipChangedSinceStep3=true;
+}
+function resetEquipList(){document.getElementById('equip-list').innerHTML='';}
+function resetFormationAndOperateur(){
+  const f=document.getElementById('f-formation'); if(f)f.value='Aucune';
+  const o=document.getElementById('f-operateur'); if(o)o.value='';
+}
+function resetFormationOnly(){
+  const f=document.getElementById('f-formation'); if(f)f.value='Aucune';
+}
+function onInfraChange(sel){
+  const prev=offerState.infra;
+  const next=sel.value;
+  if(prev && next!==prev && (offerState.step2Touched||offerState.step3Touched)){
+    sel.value=prev;
+    showConfirmModal(
+      "Confirmer le changement d'infrastructure",
+      "Les équipements, la formation requise et l'opérateur assignés seront réinitialisés, car ils doivent appartenir à la nouvelle infrastructure.",
+      function(){
+        sel.value=next;
+        offerState.infra=next;
+        offerState.step2Touched=false;
+        offerState.step3Touched=false;
+        offerState.equipChangedSinceStep3=false;
+        resetEquipList();
+        resetFormationAndOperateur();
+        renderEquipDropdown(next);
+        const n2=document.getElementById('notice-step2-reset'); if(n2)n2.style.display='flex';
+      }
+    );
+  } else {
+    offerState.infra=next;
+    renderEquipDropdown(next);
+  }
+}
+function proceedToStep3(){
+  if(offerState.equipChangedSinceStep3 && offerState.step3Touched){
+    showConfirmModal(
+      "Confirmer la mise à jour des équipements",
+      "La formation requise déjà configurée sera réinitialisée, car elle est rattachée aux équipements de cette offre.",
+      function(){
+        resetFormationOnly();
+        offerState.step3Touched=false;
+        offerState.equipChangedSinceStep3=false;
+        const n3=document.getElementById('notice-step3-reset'); if(n3)n3.style.display='flex';
+        go('nouvelle-offre-3');
+      }
+    );
+  } else {
+    go('nouvelle-offre-3');
+  }
+}
 function toggleDD(val){document.getElementById('equip-dd').style.display=val.length>1?'block':'none';}
-function selectEquip(){document.getElementById('equip-dd').style.display='none';document.getElementById('equip-search').value='';}
+/* ===== Moteur générique de calendrier de plage (style Airbnb) — réutilisé par Booking (popover) et RIÉ (recherche par disponibilité) ===== */
 function doSearch(){const q=document.getElementById('s-query').value.trim().toLowerCase();const empty=q&&!['microscopie','confocal','leica','zeiss','nikon','cytomètre','cytometre','imagerie','microscope'].some(k=>q.includes(k));document.getElementById('search-results').style.display=empty?'none':'block';document.getElementById('search-empty').style.display=empty?'block':'none';}
-function validateStep1(){const t=document.getElementById('f-titre');const existing=t.parentElement.querySelector('.err-msg');if(existing)existing.remove();if(!t.value.trim()){t.classList.add('err');const m=document.createElement('div');m.className='err-msg';m.textContent='Le titre est requis.';t.insertAdjacentElement('afterend',m);return;}t.classList.remove('err');go('nouvelle-offre-2');}
+const AVAIL_MONTH_NAMES=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const AVAIL_DAY_LABELS=['L','M','M','J','V','S','D'];
+function availPad(n){return n<10?'0'+n:''+n;}
+function availIso(y,m,d){return y+'-'+availPad(m+1)+'-'+availPad(d);}
+function fmtAvailDate(iso){const p=iso.split('-').map(Number);return p[2]+' '+AVAIL_MONTH_NAMES[p[1]-1]+' '+p[0];}
+function fmtAvailRange(s,e){
+  const ps=s.split('-').map(Number), pe=e.split('-').map(Number);
+  const nights=Math.round((new Date(pe[0],pe[1]-1,pe[2])-new Date(ps[0],ps[1]-1,ps[2]))/86400000);
+  const txt=ps[1]===pe[1]?ps[2]+' – '+pe[2]+' '+AVAIL_MONTH_NAMES[ps[1]-1]+' '+ps[0]:ps[2]+' '+AVAIL_MONTH_NAMES[ps[1]-1]+' – '+pe[2]+' '+AVAIL_MONTH_NAMES[pe[1]-1]+' '+pe[0];
+  return txt+' ('+nights+' jour'+(nights>1?'s':'')+')';
+}
+function createRangeCalendar(opts){
+  const state={start:null,end:null};
+  function hasUnavailableInRange(s,e){let has=false;opts.unavailable.forEach(function(d){if(d>=s&&d<=e)has=true;});return has;}
+  function handleClick(iso){
+    if(opts.unavailable.has(iso))return;
+    if(!state.start||(state.start&&state.end)){state.start=iso;state.end=null;}
+    else {
+      let s=iso<state.start?iso:state.start;
+      let e=iso<state.start?state.start:iso;
+      if(hasUnavailableInRange(s,e)){state.start=iso;state.end=null;}
+      else {state.start=s;state.end=e;}
+    }
+    render();
+    if(opts.onChange)opts.onChange(state.start,state.end);
+  }
+  function buildMonth(containerId,year,month){
+    const container=document.getElementById(containerId);
+    if(!container)return;
+    const first=new Date(year,month,1);
+    let startDow=(first.getDay()+6)%7;
+    const daysInMonth=new Date(year,month+1,0).getDate();
+    let html='<div class="avail-cal-month">'+AVAIL_MONTH_NAMES[month]+' '+year+'</div><div class="cal">';
+    AVAIL_DAY_LABELS.forEach(function(l){html+='<div class="cal-h">'+l+'</div>';});
+    for(let i=0;i<startDow;i++){html+='<div class="cal-d empty"></div>';}
+    for(let d=1;d<=daysInMonth;d++){
+      const iso=availIso(year,month,d);
+      const cls='cal-d '+(opts.unavailable.has(iso)?'unavailable':'available');
+      html+='<div class="'+cls+'" data-date="'+iso+'">'+d+'</div>';
+    }
+    html+='</div>';
+    container.innerHTML=html;
+    container.querySelectorAll('.cal-d[data-date]').forEach(function(el){
+      el.addEventListener('click',function(){handleClick(el.dataset.date);});
+    });
+  }
+  function applyClasses(){
+    [opts.cal1,opts.cal2].forEach(function(id){
+      const c=document.getElementById(id); if(!c)return;
+      c.querySelectorAll('.cal-d[data-date]').forEach(function(el){
+        const iso=el.dataset.date;
+        el.classList.remove('range-in','range-start','range-end','range-single');
+        if(state.start&&!state.end&&iso===state.start){el.classList.add('range-single');}
+        else if(state.start&&state.end){
+          if(iso===state.start)el.classList.add('range-start');
+          else if(iso===state.end)el.classList.add('range-end');
+          else if(iso>state.start&&iso<state.end)el.classList.add('range-in');
+        }
+      });
+    });
+  }
+  function render(){
+    buildMonth(opts.cal1,opts.months[0][0],opts.months[0][1]);
+    buildMonth(opts.cal2,opts.months[1][0],opts.months[1][1]);
+    applyClasses();
+  }
+  function reset(){state.start=null;state.end=null;render();if(opts.onChange)opts.onChange(null,null);}
+  function getRange(){return {start:state.start,end:state.end};}
+  return {render:render,reset:reset,getRange:getRange};
+}
+
+/* --- Instance Booking : popover de dates dans la recherche par mots-clés --- */
+const bkCal=createRangeCalendar({
+  cal1:'bk-cal-1',cal2:'bk-cal-2',
+  months:[[2026,5],[2026,6]],
+  unavailable:new Set(['2026-06-05','2026-06-06','2026-07-20']),
+  onChange:function(s,e){
+    const label=document.getElementById('bk-range-label');
+    if(!label)return;
+    if(s&&e)label.textContent=fmtAvailRange(s,e);
+    else if(s)label.textContent='Départ ? — arrivée le '+fmtAvailDate(s);
+    else label.textContent='Choisissez vos dates';
+  }
+});
+function toggleDatePopover(){
+  const p=document.getElementById('date-popover');
+  const willShow=p.style.display==='none';
+  p.style.display=willShow?'block':'none';
+  if(willShow)bkCal.render();
+}
+document.addEventListener('click',function(e){
+  const p=document.getElementById('date-popover');
+  if(!p||p.style.display==='none')return;
+  if(!e.target.closest('#date-popover')&&!e.target.closest('#btn-date-range'))p.style.display='none';
+});
+function resetBkRange(){bkCal.reset();}
+function applyBkRange(){
+  const r=bkCal.getRange();
+  if(r.start&&r.end)document.getElementById('date-range-label').textContent=fmtAvailRange(r.start,r.end);
+  document.getElementById('date-popover').style.display='none';
+}
+
+/* --- Instance RIÉ : recherche par disponibilité (deuxième mode de recherche) --- */
+const rieCal=createRangeCalendar({
+  cal1:'rie-cal-1',cal2:'rie-cal-2',
+  months:[[2026,3],[2026,4]],
+  unavailable:new Set(['2026-04-05','2026-04-06','2026-04-20','2026-05-14','2026-05-15','2026-05-22']),
+  onChange:function(s,e){
+    const label=document.getElementById('rie-range-label');
+    const btn=document.getElementById('rie-btn-search-avail');
+    if(!label)return;
+    document.getElementById('rie-avail-results').style.display='none';
+    if(s&&e){label.textContent=fmtAvailRange(s,e);btn.disabled=false;}
+    else if(s){label.textContent='Arrivée le '+fmtAvailDate(s)+' — choisissez la date de départ';btn.disabled=true;}
+    else {label.textContent='Choisissez vos dates';btn.disabled=true;}
+  }
+});
+function rieResetRange(){rieCal.reset();}
+function rieSetSearchMode(mode){
+  document.getElementById('rie-tab-kw').classList.toggle('on',mode==='kw');
+  document.getElementById('rie-tab-cal').classList.toggle('on',mode==='cal');
+  document.getElementById('rie-view-kw').style.display=mode==='kw'?'block':'none';
+  document.getElementById('rie-view-cal').style.display=mode==='cal'?'block':'none';
+  if(mode==='cal')rieCal.render();
+}
+function rieDoSearchAvailability(){
+  const r=rieCal.getRange();
+  if(!r.start||!r.end)return;
+  const results=document.getElementById('rie-avail-results');
+  results.style.display='block';
+  results.innerHTML=
+    '<div class="rie-count">2 équipements réservables du '+fmtAvailDate(r.start)+' au '+fmtAvailDate(r.end)+'</div>'+
+    '<div class="rie-grid">'+
+    '<div class="rie-card"><div class="rie-eyebrow">Équipement</div><div class="rie-title">Microscope confocal Leica SP8</div><span class="rie-pill">Fonctionnel</span><div class="rie-field"><b>Infrastructure :</b> Labo. imagerie cellulaire — Roger-Gaudry</div><div class="rie-field"><b>Emplacement :</b> Roger-Gaudry, G-1015</div><div class="rie-avail ok"><i class="ti ti-calendar-check"></i>Disponible sur toute la période</div><button class="rie-btn" style="width:100%;justify-content:center" onclick="rieShowDetail(\'leica\')">Afficher</button></div>'+
+    '<div class="rie-card"><div class="rie-eyebrow">Équipement</div><div class="rie-title">Zeiss LSM 880 — Confocal HD</div><span class="rie-pill">Fonctionnel</span><div class="rie-field"><b>Infrastructure :</b> Plateforme imagerie — Marcelle-Coutu</div><div class="rie-field"><b>Emplacement :</b> Marcelle-Coutu, M-4210</div><div class="rie-avail ok"><i class="ti ti-calendar-check"></i>Disponible sur toute la période</div><button class="rie-btn" style="width:100%;justify-content:center" onclick="rieShowDetail(\'zeiss\')">Afficher</button></div>'+
+    '</div>';
+}
+function validateStep1(){
+  const t=document.getElementById('f-titre');
+  const infraSel=document.getElementById('f-infra');
+  [t,infraSel].forEach(function(el){const ex=el.parentElement.querySelector('.err-msg'); if(ex)ex.remove(); el.classList.remove('err');});
+  let hasError=false;
+  if(!t.value.trim()){t.classList.add('err');const m=document.createElement('div');m.className='err-msg';m.textContent='Le titre est requis.';t.insertAdjacentElement('afterend',m);hasError=true;}
+  if(!infraSel.value){infraSel.classList.add('err');const m2=document.createElement('div');m2.className='err-msg';m2.textContent="L'infrastructure est requise : elle détermine les équipements disponibles à l'étape suivante.";infraSel.insertAdjacentElement('afterend',m2);hasError=true;}
+  if(hasError)return;
+  offerState.infra=infraSel.value;
+  renderEquipDropdown(offerState.infra);
+  go('nouvelle-offre-2');
+}
+document.addEventListener('DOMContentLoaded',function(){
+  renderEquipDropdown(offerState.infra);
+  renderEquipList((EQUIP_BY_INFRA[offerState.infra]||[]).slice(0,1));
+});
+
 
 // ── Interactive calendar (step 4) — cumulative rules ──
 let calYear = 2026, calMonth = 5;
@@ -1591,6 +2422,12 @@ go = function(n){
   if(n==='select-creneau') renderUserCalendar();
 };
 
+function refreshPayeur(){
+  const checked=document.querySelector('input[name="payeur"]:checked');
+  const label=checked&&checked.closest('label').querySelector('span').textContent;
+  const el=document.getElementById('recap-payeur');
+  if(el&&label)el.textContent=label;
+}
 function validateResa(){
   const desc=document.getElementById('resa-desc');
   const errEl=document.getElementById('resa-err');
