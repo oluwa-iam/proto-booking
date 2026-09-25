@@ -969,6 +969,12 @@
           <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:12px"><button class="btn sm" onclick="toggleAddCompSlot()">Annuler</button><button class="btn sm pri" onclick="addCompSlot()">Ajouter le créneau</button></div>
         </div>
       </div>
+      <div class="card" style="margin-bottom:14px">
+        <div style="font-size:14px;font-weight:600;margin-bottom:12px">Utilisation prévue</div>
+        <div style="font-size:12.5px;color:var(--t1);line-height:1.6;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);padding:11px 13px;margin-bottom:12px" id="resa-desc-txt"></div>
+        <div class="ir"><span class="ir-l">Échantillons prévus</span><span id="resa-samples"></span></div>
+        <div class="ir" style="border:none"><span class="ir-l">Durée totale</span><span id="resa-duree"></span></div>
+      </div>
       <div class="card">
         <div style="font-size:14px;font-weight:600;margin-bottom:4px">Fil d'activité</div>
         <div style="font-size:11.5px;color:var(--t2);margin-bottom:14px">Toutes les décisions prises sur cette réservation, dans l'ordre. L'usager voit le même fil.</div>
@@ -978,10 +984,15 @@
     <div>
       <div class="card" style="margin-bottom:12px">
         <div style="font-size:13px;font-weight:600;margin-bottom:10px">Informations</div>
+        <div class="ir"><span class="ir-l">Référence</span><span id="resa-i-ref"></span></div>
         <div class="ir"><span class="ir-l">Usager</span><span id="resa-i-user"></span></div>
         <div class="ir"><span class="ir-l">Payeur</span><span id="resa-i-payer"></span></div>
         <div class="ir"><span class="ir-l">Projet</span><span id="resa-i-projet" style="text-align:right"></span></div>
         <div class="ir" style="border:none"><span class="ir-l">Formation</span><span id="resa-i-form"></span></div>
+      </div>
+      <div class="card" style="margin-bottom:12px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Coûts</div>
+        <table class="sum-t" id="resa-couts"></table>
       </div>
       <div id="resa-actions"></div>
     </div>
@@ -2302,13 +2313,14 @@ function renderRapportEtudiant(){
 /* ===== Détail d'une réservation (responsable) — piloté par les données ===== */
 const RESA_DATA={
   'R-0847':{ref:'RES-2026-0847',user:'Karim Belkacem',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
+    desc:"Acquisition d'images z-stack de coupes histologiques pour analyser la distribution des cellules NK dans les ganglions lymphatiques.",samples:12,
     status:'Confirmée',statusCls:'b-ok',
     window:"Réservation active du <strong>lundi 10 juin</strong> au <strong>samedi 15 juin 2026</strong>. Pendant cette période, vous pouvez annuler un créneau (ex. panne équipement) ou en ajouter un pour compenser — l'usager ne peut plus modifier la composition une fois la réservation approuvée.",
     payer:'Lui-même',projet:'FRQNT-2024-8812',formation:'Validée',formCls:'b-ok',canEdit:true,
     slots:[
-      {label:'Lundi 10 juin 2026 · 7h00 – 13h00',note:"Plage personnalisée demandée par l'usager · Lames microscope ×2",short:'Lundi 10 juin · 7h00–13h00',status:'active'},
-      {label:'Jeudi 13 juin 2026 · 8h00 – 9h00',note:'Créneau prédéfini',short:'Jeudi 13 juin · 8h00–9h00',status:'active'},
-      {label:'Samedi 15 juin 2026 · 10h00 – 11h00',note:'Créneau prédéfini',short:'Samedi 15 juin · 10h00–11h00',status:'active'}
+      {label:'Lundi 10 juin 2026 · 7h00 – 13h00',note:"Plage personnalisée demandée par l'usager · Lames microscope ×2",short:'Lundi 10 juin · 7h00–13h00',status:'active',hours:6,rate:270.0,cons:[{n:'Lames microscope',q:2,u:2.50}]},
+      {label:'Jeudi 13 juin 2026 · 8h00 – 9h00',note:'Créneau prédéfini',short:'Jeudi 13 juin · 8h00–9h00',status:'active',hours:1,rate:45.0,cons:[{n:'Lames microscope',q:1,u:2.50}]},
+      {label:'Samedi 15 juin 2026 · 10h00 – 11h00',note:'Créneau prédéfini',short:'Samedi 15 juin · 10h00–11h00',status:'active',hours:1,rate:45.0}
     ],
     history:[
       {type:'created',when:'4 juin 2026, 14h12',actor:'Karim Belkacem',role:'usager',
@@ -2319,11 +2331,12 @@ const RESA_DATA={
        title:'Réservation approuvée',detail:"L'ensemble des 3 créneaux a été approuvé."}
     ]},
   'R-0852':{ref:'RES-2026-0852',user:'Marie Tremblay',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
+    desc:"Comparaison des marqueurs CD4/CD8 sur lames fixées, en vue de la publication de printemps.",samples:6,
     status:'Confirmée',statusCls:'b-ok',
     window:"Réservation active le <strong>mardi 11 juin 2026</strong>. Vous pouvez annuler ce créneau ou en ajouter un autre à cette réservation.",
     payer:'Elle-même',projet:'IRSC-2025-3390',formation:'Validée',formCls:'b-ok',canEdit:true,
     slots:[
-      {label:'Mardi 11 juin 2026 · 9h00 – 10h00',note:'Créneau prédéfini',short:'Mardi 11 juin · 9h00–10h00',status:'active'}
+      {label:'Mardi 11 juin 2026 · 9h00 – 10h00',note:'Créneau prédéfini',short:'Mardi 11 juin · 9h00–10h00',status:'active',hours:1,rate:45.0}
     ],
     history:[
       {type:'created',when:'7 juin 2026, 8h50',actor:'Marie Tremblay',role:'usager',
@@ -2332,12 +2345,13 @@ const RESA_DATA={
        title:'Approuvée automatiquement',detail:'Créneau unique et prédéfini : le mode automatique de l\u2019offre s\u2019applique.'}
     ]},
   'R-0851':{ref:'RES-2026-0851',user:'Amira Ben Salah',offer:'Cytomètre BD LSRFortessa',loc:'Roger-Gaudry G-1020',
+    desc:"Tri cellulaire sur échantillons sanguins pour la cohorte FRQS, avec contrôle qualité en fin de séance.",samples:24,
     status:'Confirmée',statusCls:'b-ok',
     window:"Réservation active du <strong>mercredi 12 juin</strong> au <strong>vendredi 14 juin 2026</strong>. Vous pouvez annuler un créneau ou en ajouter un pour compenser.",
     payer:'M. Tremblay (superviseure)',projet:'FRQS-2024-7720',formation:'Validée',formCls:'b-ok',canEdit:true,
     slots:[
-      {label:'Mercredi 12 juin 2026 · 10h00 – 12h00',note:'Créneau prédéfini · Milieu de montage ×1',short:'Mercredi 12 juin · 10h00–12h00',status:'active'},
-      {label:'Vendredi 14 juin 2026 · 13h00 – 15h00',note:'Créneau prédéfini',short:'Vendredi 14 juin · 13h00–15h00',status:'active'}
+      {label:'Mercredi 12 juin 2026 · 10h00 – 12h00',note:'Créneau prédéfini · Milieu de montage ×1',short:'Mercredi 12 juin · 10h00–12h00',status:'active',hours:2,rate:90.0,cons:[{n:'Milieu de montage (10 mL)',q:1,u:18.00}]},
+      {label:'Vendredi 14 juin 2026 · 13h00 – 15h00',note:'Créneau prédéfini',short:'Vendredi 14 juin · 13h00–15h00',status:'active',hours:2,rate:90.0}
     ],
     history:[
       {type:'created',when:'6 juin 2026, 10h40',actor:'Amira Ben Salah',role:'usager',
@@ -2348,11 +2362,12 @@ const RESA_DATA={
        title:'Réservation approuvée',detail:"L'ensemble des 2 créneaux a été approuvé."}
     ]},
   'R-0862':{ref:'RES-2026-0862',user:'Sophie Tremblay',offer:'Cytomètre BD LSRFortessa',loc:'Roger-Gaudry G-1020',
+    desc:"Analyse de viabilité cellulaire sur cultures primaires.",samples:8,
     status:'En attente',statusCls:'b-warn',
     window:"Demande <strong>en attente d'approbation</strong> — le créneau demandé se situe hors de la fenêtre de réservation active.",
     payer:'Elle-même',projet:'CRSNG-2023-4471',formation:'Validée',formCls:'b-ok',canEdit:false,
     slots:[
-      {label:'Vendredi 18 juillet 2026 · 13h00 – 14h00',note:'Hors fenêtre de réservation active',short:'Vendredi 18 juillet · 13h00–14h00',status:'active'}
+      {label:'Vendredi 18 juillet 2026 · 13h00 – 14h00',note:'Hors fenêtre de réservation active',short:'Vendredi 18 juillet · 13h00–14h00',status:'active',hours:1,rate:45.0}
     ],
     history:[
       {type:'created',when:'9 juin 2026, 14h05',actor:'Sophie Tremblay',role:'usagère',
@@ -2361,11 +2376,12 @@ const RESA_DATA={
        title:'Approbation manuelle requise',detail:'Le créneau demandé est hors de la fenêtre de réservation active.'}
     ]},
   'R-0863':{ref:'RES-2026-0863',user:'Léa Fontaine',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
+    desc:"Observation préliminaire de coupes de tissu hépatique.",samples:0,
     status:'En attente',statusCls:'b-warn',
     window:"Demande <strong>en attente d'approbation</strong> — la formation requise pour cette offre n'a pas encore été suivie.",
     payer:'Elle-même',projet:'CRSNG-2023-4471',formation:'Requise — non suivie',formCls:'b-warn',canEdit:false,
     slots:[
-      {label:'Mardi 22 juillet 2026 · 10h00 – 11h00',note:'Créneau prédéfini',short:'Mardi 22 juillet · 10h00–11h00',status:'active'}
+      {label:'Mardi 22 juillet 2026 · 10h00 – 11h00',note:'Créneau prédéfini',short:'Mardi 22 juillet · 10h00–11h00',status:'active',hours:1,rate:45.0}
     ],
     history:[
       {type:'created',when:'10 juin 2026, 8h15',actor:'Léa Fontaine',role:'usagère',
@@ -2374,11 +2390,12 @@ const RESA_DATA={
        title:'En attente de décision',detail:"La formation requise pour cette offre n'a pas encore été suivie."}
     ]},
   'R-0805':{ref:'RES-2026-0805',user:'Léa Fontaine',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
+    desc:"Test de mise au point sur lames témoins.",samples:0,
     status:'Annulée',statusCls:'b-neu',
     window:"Réservation <strong>annulée</strong> par l'usagère avant le début du créneau. Le créneau a été remis à la disposition des autres usagers.",
     payer:'Elle-même',projet:'CRSNG-2023-4471',formation:'Validée',formCls:'b-ok',canEdit:false,
     slots:[
-      {label:'Mardi 3 juin 2026 · 9h00 – 10h00',note:'Créneau prédéfini',short:'Mardi 3 juin · 9h00–10h00',status:'cancelled',reason:'Annulée par l\u2019usagère'}
+      {label:'Mardi 3 juin 2026 · 9h00 – 10h00',note:'Créneau prédéfini',short:'Mardi 3 juin · 9h00–10h00',status:'cancelled',reason:'Annulée par l\u2019usagère',hours:1,rate:45.0}
     ],
     history:[
       {type:'created',when:'28 mai 2026, 13h05',actor:'Léa Fontaine',role:'usagère',
@@ -2389,12 +2406,13 @@ const RESA_DATA={
        title:'Réservation annulée',detail:'Annulation par l\u2019usagère, dans le délai permis.'}
     ]},
   'R-0821':{ref:'RES-2026-0821',user:'Karim Belkacem',offer:'Cytomètre BD LSRFortessa',loc:'Roger-Gaudry G-1020',
+    desc:"Immunophénotypage de lymphocytes T sur échantillons congelés.",samples:18,
     status:'Confirmée',statusCls:'b-ok',
     window:"Réservation active le <strong>jeudi 25 juin 2026</strong>.",
     payer:'Lui-même',projet:'CRSNG-2023-4471',formation:'Validée',formCls:'b-ok',canEdit:true,
     slots:[
-      {label:'Jeudi 25 juin 2026 · 13h00 – 14h00',note:'Créneau prédéfini',short:'Jeudi 25 juin · 13h00–14h00',status:'active'},
-      {label:'Jeudi 25 juin 2026 · 14h00 – 15h00',note:'Créneau prédéfini',short:'Jeudi 25 juin · 14h00–15h00',status:'active'}
+      {label:'Jeudi 25 juin 2026 · 13h00 – 14h00',note:'Créneau prédéfini',short:'Jeudi 25 juin · 13h00–14h00',status:'active',hours:1,rate:45.0,cons:[{n:'Lames microscope',q:3,u:2.50},{n:'Milieu de montage (10 mL)',q:1,u:18.00}]},
+      {label:'Jeudi 25 juin 2026 · 14h00 – 15h00',note:'Créneau prédéfini',short:'Jeudi 25 juin · 14h00–15h00',status:'active',hours:1,rate:45.0}
     ],
     history:[
       {type:'created',when:'8 juin 2026, 11h05',actor:'Karim Belkacem',role:'usager',
@@ -2403,11 +2421,12 @@ const RESA_DATA={
        title:'Réservation approuvée',detail:"L'ensemble des 2 créneaux a été approuvé."}
     ]},
   'R-0860':{ref:'RES-2026-0860',user:'Karim Belkacem',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
+    desc:"Imagerie longue durée sur cellules vivantes, hors fenêtre de réservation standard.",samples:4,
     status:'En attente',statusCls:'b-warn',
     window:"Demande <strong>en attente d'approbation</strong> — le créneau demandé se situe hors de la fenêtre de réservation active.",
     payer:'Lui-même',projet:'FRQNT-2024-8812',formation:'Validée',formCls:'b-ok',canEdit:false,
     slots:[
-      {label:'Lundi 15 juillet 2026 · 8h00 – 9h00',note:'Hors fenêtre de réservation active',short:'Lundi 15 juillet · 8h00–9h00',status:'active'}
+      {label:'Lundi 15 juillet 2026 · 8h00 – 9h00',note:'Hors fenêtre de réservation active',short:'Lundi 15 juillet · 8h00–9h00',status:'active',hours:1,rate:45.0}
     ],
     history:[
       {type:'created',when:'9 juin 2026, 9h20',actor:'Karim Belkacem',role:'usager',
@@ -2416,11 +2435,12 @@ const RESA_DATA={
        title:'Approbation manuelle requise',detail:'Le créneau demandé est hors de la fenêtre de réservation active.'}
     ]},
   'R-0855':{ref:'RES-2026-0855',user:'Léa Fontaine',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
+    desc:"Repérage de structures tissulaires avant acquisition définitive.",samples:0,
     status:'En attente',statusCls:'b-warn',
     window:"Demande <strong>en attente d'approbation</strong>. La composition ne peut pas être modifiée avant qu'elle soit approuvée ou refusée — l'approbation porte sur l'ensemble des créneaux.",
     payer:'Elle-même',projet:'CRSNG-2023-4471',formation:'Requise — non suivie',formCls:'b-warn',canEdit:false,
     slots:[
-      {label:'Mercredi 12 juin 2026 · 14h00 – 16h00',note:'Créneau prédéfini',short:'Mercredi 12 juin · 14h00–16h00',status:'active'}
+      {label:'Mercredi 12 juin 2026 · 14h00 – 16h00',note:'Créneau prédéfini',short:'Mercredi 12 juin · 14h00–16h00',status:'active',hours:2,rate:90.0}
     ],
     history:[
       {type:'created',when:'9 juin 2026, 16h30',actor:'Léa Fontaine',role:'usager',
@@ -2491,7 +2511,10 @@ function renderResaDetail(){
     return '<div class="ri" style="opacity:'+(off?'.55':'1')+last+'">'+
       '<div style="display:flex;align-items:center;gap:12px;flex:1">'+
         '<div class="ri-ic" style="background:'+icBg+'"><i class="ti '+ic+'" style="color:'+icCol+';font-size:18px"></i></div>'+
-        '<div><div style="font-size:13px;font-weight:600">'+s.label+'</div><div style="font-size:11px;color:var(--t2)">'+s.note+'</div></div>'+
+        '<div style="flex:1"><div style="font-size:13px;font-weight:600">'+s.label+'</div>'+
+        '<div style="font-size:11px;color:var(--t2)">'+s.note+'</div>'+
+        '<div style="font-size:11px;color:var(--t3);margin-top:2px">'+(s.hours||1)+' h · '+fmtMoney(s.rate||0)+
+          ((s.cons&&s.cons.length)?' · '+s.cons.map(function(c){return c.n+' ×'+c.q;}).join(', '):'')+'</div></div>'+
       '</div>'+badge+btn+
     '</div>';
   }).join('');
@@ -2508,6 +2531,28 @@ function renderResaDetail(){
   } else {
     act.innerHTML='<div style="font-size:12px;color:var(--t2);text-align:center;padding:10px 0">Réservation '+r.status.toLowerCase()+' — aucune action possible.</div>';
   }
+
+  // Utilisation prévue
+  document.getElementById('resa-i-ref').textContent='#'+r.ref;
+  document.getElementById('resa-desc-txt').textContent=r.desc||'Aucune description fournie.';
+  document.getElementById('resa-samples').textContent=(r.samples||0)===0?'Non précisé':r.samples;
+  const actifs=r.slots.filter(function(s){return s.status==='active';});
+  const heures=actifs.reduce(function(a,s){return a+(s.hours||1);},0);
+  document.getElementById('resa-duree').textContent=heures+' h';
+
+  // Coûts : créneaux actifs + consommables, annulés déduits
+  const coutSlots=actifs.reduce(function(a,s){return a+(s.rate||0);},0);
+  const coutCons=actifs.reduce(function(a,s){
+    return a+((s.cons||[]).reduce(function(b,c){return b+c.q*c.u;},0));},0);
+  const annules=r.slots.filter(function(s){return s.status==='cancelled';});
+  const coutAnnule=annules.reduce(function(a,s){return a+(s.rate||0);},0);
+  const fini=(r.status==='Confirmée'||r.status==='Annulée'||r.status==='Refusée');
+  document.getElementById('resa-couts').innerHTML=
+    '<tr><td>Créneaux ('+actifs.length+')</td><td class="num" style="text-align:right">'+fmtMoney(coutSlots)+'</td></tr>'+
+    '<tr><td>Consommables</td><td class="num" style="text-align:right">'+fmtMoney(coutCons)+'</td></tr>'+
+    (annules.length?'<tr><td style="color:var(--t3)">Créneaux annulés ('+annules.length+')</td><td class="num" style="text-align:right;color:var(--t3);text-decoration:line-through">'+fmtMoney(coutAnnule)+'</td></tr>':'')+
+    '<tr style="font-weight:700"><td>'+(fini?'Total':'Total estimé')+'</td><td class="num" style="text-align:right">'+fmtMoney(coutSlots+coutCons)+'</td></tr>'+
+    '<tr><td style="color:var(--t3)">Tarif horaire</td><td class="num" style="text-align:right;color:var(--t3)">45,00 $ / h</td></tr>';
 
   renderFeed('resa-feed',r.history);
 }
