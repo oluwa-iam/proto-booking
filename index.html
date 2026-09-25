@@ -489,9 +489,9 @@
             <div style="font-size:13px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Disponibilité — via Booking</div>
             <div id="rie-d-avail-ok">
               <div class="notice n-ok" style="margin-bottom:14px"><i class="ti ti-circle-check"></i><span>Cet équipement est actuellement <strong>réservable</strong>. Les données de disponibilité proviennent du service Booking.</span></div>
-              <div class="rie-field" style="margin-bottom:14px"><b>Prochain créneau libre :</b> Mardi 11 juin 2026 · 9h00 – 11h00</div>
+              <div class="rie-field" style="margin-bottom:14px"><b>Prochain créneau libre :</b> Mardi 11 juin 2026 · 9h00 – 10h00</div>
               <div class="slots" style="margin-bottom:18px">
-                <div class="chip">Lun 10 · 8h–10h</div><div class="chip">Mar 11 · 9h–11h</div><div class="chip">Mer 12 · 14h–16h</div><div class="chip">Jeu 13 · 8h–12h</div>
+                <div class="chip">Lun 10 · 8h–9h</div><div class="chip">Mar 11 · 9h–10h</div><div class="chip">Mer 12 · 14h–15h</div><div class="chip">Jeu 13 · 8h–9h</div>
               </div>
               <div class="rie-booking-cta">
                 <div style="display:flex;align-items:center;gap:14px">
@@ -740,9 +740,9 @@
     <div style="font-size:14px;font-weight:600;margin-bottom:4px">Réservations en attente de confirmation</div>
     <div style="font-size:12px;color:var(--t2);margin-bottom:12px">Hors fenêtre active — approbation requise</div>
     <div style="display:flex;flex-direction:column;gap:8px">
-      <div class="pi"><div><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Lun 15 juil. · 8h–10h</div></div><div style="display:flex;gap:6px"><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
-      <div class="pi"><div><div style="font-size:13px;font-weight:500">Sophie Tremblay</div><div style="font-size:11px;color:var(--t2)">Cytomètre BD LSR · Ven 18 juil. · 13h–15h</div></div><div style="display:flex;gap:6px"><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
-      <div class="pi"><div><div style="font-size:13px;font-weight:500">Léa Fontaine</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Mar 22 juil. · 10h–12h</div></div><div style="display:flex;gap:6px"><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
+      <div class="pi"><div><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Lun 15 juil. · 8h–9h</div></div><div style="display:flex;gap:6px"><button class="btn sm" onclick="openResa('R-0860')">Détails</button><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
+      <div class="pi"><div><div style="font-size:13px;font-weight:500">Sophie Tremblay</div><div style="font-size:11px;color:var(--t2)">Cytomètre BD LSR · Ven 18 juil. · 13h–14h</div></div><div style="display:flex;gap:6px"><button class="btn sm" onclick="openResa('R-0862')">Détails</button><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
+      <div class="pi"><div><div style="font-size:13px;font-weight:500">Léa Fontaine</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Mar 22 juil. · 10h–11h</div></div><div style="display:flex;gap:6px"><button class="btn sm" onclick="openResa('R-0863')">Détails</button><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
     </div>
   </div>
 </div>
@@ -821,9 +821,9 @@
       <div class="card">
         <div style="font-size:13px;font-weight:600;margin-bottom:10px">Prochains créneaux ouverts</div>
         <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Mar 11 juin · 9h–11h</div><div style="color:var(--t2)">1 place disponible</div></div>
-          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Mer 12 juin · 14h–16h</div><div style="color:var(--t2)">Disponible</div></div>
-          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Jeu 13 juin · 8h–12h</div><div style="color:var(--t2)">Disponible</div></div>
+          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Mar 11 juin · 9h–10h</div><div style="color:var(--t2)">1 place disponible</div></div>
+          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Mer 12 juin · 14h–15h</div><div style="color:var(--t2)">Disponible</div></div>
+          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Jeu 13 juin · 8h–9h</div><div style="color:var(--t2)">Disponible</div></div>
         </div>
       </div>
     </div>
@@ -894,7 +894,7 @@
       <div class="card">
         <div style="font-size:13px;font-weight:600;margin-bottom:10px">Prochains créneaux</div>
         <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Ven 14 juin · 13h–15h</div><div style="color:var(--t2)">3 places disponibles</div></div>
+          <div style="padding:7px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500">Ven 14 juin · 13h–14h</div><div style="color:var(--t2)">3 places disponibles</div></div>
         </div>
       </div>
     </div>
@@ -936,9 +936,9 @@
   </div>
   <div class="card" style="margin-bottom:0">
     <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--info);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · 3 créneaux · Lun 10 → Sam 15 juin</div></div><span class="badge b-ok">Confirmée</span><button class="btn sm" onclick="openResa('R-0847')" style="margin-left:8px"><i class="ti ti-list-details"></i>Détails</button></div>
-    <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-filter" style="color:var(--info);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Amira Ben Salah</div><div style="font-size:11px;color:var(--t2)">Cytomètre BD LSR · Mer 12 juin · 10h–12h</div></div><span class="badge b-ok">Confirmée</span><button class="btn sm" onclick="openResa('R-0851')" style="margin-left:8px"><i class="ti ti-list-details"></i>Détails</button><button class="btn sm" onclick="go('modal-annul-resp')" style="margin-left:8px">Annuler</button></div>
-    <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--warn-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--warn);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Lun 15 juil. · 8h–10h · Hors fenêtre active</div></div><span class="badge b-warn">En attente</span><div style="display:flex;gap:5px;margin-left:8px"><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
-    <div class="rri" style="border:none"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--t3);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--t2)">Léa Fontaine</div><div style="font-size:11px;color:var(--t3)">Leica SP8 · Mar 3 juin · 9h–11h</div></div><span class="badge b-neu">Annulée</span></div>
+    <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--info-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-filter" style="color:var(--info);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Amira Ben Salah</div><div style="font-size:11px;color:var(--t2)">Cytomètre BD LSR · Mer 12 juin · 10h–11h</div></div><span class="badge b-ok">Confirmée</span><button class="btn sm" onclick="openResa('R-0851')" style="margin-left:8px"><i class="ti ti-list-details"></i>Détails</button><button class="btn sm" onclick="go('modal-annul-resp')" style="margin-left:8px">Annuler</button></div>
+    <div class="rri"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--warn-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--warn);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500">Karim Belkacem</div><div style="font-size:11px;color:var(--t2)">Leica SP8 · Lun 15 juil. · 8h–9h · Hors fenêtre active</div></div><span class="badge b-warn">En attente</span><div style="display:flex;gap:5px;margin-left:8px"><button class="btn sm" onclick="openResa('R-0860')"><i class="ti ti-list-details"></i>Détails</button><button class="btn sm pri">Confirmer</button><button class="btn sm" onclick="go('modal-refus')">Refuser</button></div></div>
+    <div class="rri" style="border:none"><div style="width:36px;height:36px;border-radius:var(--r-md);background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-microscope" style="color:var(--t3);font-size:18px"></i></div><div style="flex:1"><div style="font-size:13px;font-weight:500;color:var(--t2)">Léa Fontaine</div><div style="font-size:11px;color:var(--t3)">Leica SP8 · Mar 3 juin · 9h–10h</div></div><span class="badge b-neu">Annulée</span><button class="btn sm" onclick="openResa('R-0805')" style="margin-left:8px"><i class="ti ti-list-details"></i>Détails</button></div>
   </div>
 </div>
 
@@ -983,7 +983,7 @@
         <div class="ir"><span class="ir-l">Projet</span><span id="resa-i-projet" style="text-align:right"></span></div>
         <div class="ir" style="border:none"><span class="ir-l">Formation</span><span id="resa-i-form"></span></div>
       </div>
-      <button class="btn dng" style="width:100%;justify-content:center" onclick="go('modal-annul-resp')"><i class="ti ti-ban"></i>Annuler toute la réservation</button>
+      <div id="resa-actions"></div>
     </div>
   </div>
 </div>
@@ -1325,10 +1325,10 @@
     <div style="font-size:12px;color:var(--t2);margin-bottom:14px">3 offres disponibles pour «&nbsp;microscopie confocale&nbsp;»</div>
     <div class="rc" onclick="go('offre-detail-user')">
       <div class="rc-icon"><i class="ti ti-microscope"></i></div>
-      <div style="flex:1"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="rc-title">Microscopie confocale Leica SP8</div><span class="badge b-info">Avec opérateur</span></div><div class="rc-meta">Labo. imagerie cellulaire · Pavillon Roger-Gaudry, G-1015<br>Opérateur : Jean-François Côté · Formation Leica SP8 requise</div><div style="font-size:11px;font-weight:600;margin-bottom:6px;color:var(--t2);text-transform:uppercase;letter-spacing:.04em">Créneaux disponibles</div><div class="slots"><div class="chip">Lun 10 · 8h–10h</div><div class="chip">Lun 10 · 10h–12h</div><div class="chip on">Mar 11 · 9h–11h</div><div class="chip">Mer 12 · 14h–16h</div><div class="chip">Jeu 13 · 8h–12h</div></div></div>
+      <div style="flex:1"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="rc-title">Microscopie confocale Leica SP8</div><span class="badge b-info">Avec opérateur</span></div><div class="rc-meta">Labo. imagerie cellulaire · Pavillon Roger-Gaudry, G-1015<br>Opérateur : Jean-François Côté · Formation Leica SP8 requise</div><div style="font-size:11px;font-weight:600;margin-bottom:6px;color:var(--t2);text-transform:uppercase;letter-spacing:.04em">Créneaux disponibles</div><div class="slots"><div class="chip">Lun 10 · 8h–9h</div><div class="chip">Lun 10 · 9h–10h</div><div class="chip on">Mar 11 · 9h–10h</div><div class="chip">Mer 12 · 14h–15h</div><div class="chip">Jeu 13 · 8h–9h</div></div></div>
       <button class="btn pri sm" onclick="event.stopPropagation();go('offre-detail-user')">Voir l'offre</button>
     </div>
-    <div class="rc"><div class="rc-icon"><i class="ti ti-microscope"></i></div><div style="flex:1"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="rc-title">Zeiss LSM 880 — Confocal HD</div><span class="badge b-ok">Autonomie</span></div><div class="rc-meta">Plateforme imagerie · Pavillon Marcelle-Coutu, M-4210<br>Formation Zeiss LSM requise · 6 créneaux disponibles</div><div class="slots"><div class="chip">Mar 11 · 8h–10h</div><div class="chip">Mer 12 · 10h–12h</div><div class="chip">Ven 14 · 13h–17h</div></div></div><button class="btn sm">Voir</button></div>
+    <div class="rc"><div class="rc-icon"><i class="ti ti-microscope"></i></div><div style="flex:1"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="rc-title">Zeiss LSM 880 — Confocal HD</div><span class="badge b-ok">Autonomie</span></div><div class="rc-meta">Plateforme imagerie · Pavillon Marcelle-Coutu, M-4210<br>Formation Zeiss LSM requise · 6 créneaux disponibles</div><div class="slots"><div class="chip">Mar 11 · 8h–9h</div><div class="chip">Mer 12 · 10h–11h</div><div class="chip">Ven 14 · 13h–14h</div></div></div><button class="btn sm">Voir</button></div>
     <div class="rc" style="cursor:default"><div class="rc-icon" style="background:var(--warn-bg)"><i class="ti ti-microscope" style="color:var(--warn)"></i></div><div style="flex:1"><div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><div class="rc-title">Nikon A1R — Imagerie HD</div><span class="badge b-warn">Maintenance</span></div><div class="rc-meta">Plateforme 3200 Jean-Brillant · Reprise des réservations le 17 juin 2026</div></div><button class="btn sm" disabled>Indisponible</button></div>
   </div>
   <div id="search-empty" style="display:none"><div class="empty-st"><i class="ti ti-search-off"></i><div style="font-size:15px;font-weight:600;margin-bottom:6px">Aucun résultat trouvé</div><div style="font-size:13px;max-width:300px;margin:0 auto;line-height:1.6">Aucun équipement disponible ne correspond à votre recherche sur cette période. Essayez d'élargir les dates ou de modifier les termes.</div></div></div>
@@ -1386,7 +1386,7 @@
       <div class="card" style="margin-bottom:12px">
         <div style="font-size:13px;font-weight:600;margin-bottom:10px">Prochaines disponibilités</div>
         <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="padding:7px 10px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500;color:var(--info)">Lun 10 juin</div><div style="color:var(--t2)">8h–10h · 10h–12h</div></div>
+          <div style="padding:7px 10px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500;color:var(--info)">Lun 10 juin</div><div style="color:var(--t2)">8h–9h · 9h–10h</div></div>
           <div style="padding:7px 10px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500;color:var(--info)">Mar 11 juin</div><div style="color:var(--t2)">9h–11h</div></div>
           <div style="padding:7px 10px;background:var(--info-bg);border:1px solid #B5D4F4;border-radius:var(--r-sm);font-size:12px"><div style="font-weight:500;color:var(--info)">Mer 12 juin</div><div style="color:var(--t2)">14h–16h</div></div>
         </div>
@@ -1492,9 +1492,9 @@
       <div class="notice n-warn" style="max-width:100%;margin-bottom:14px"><i class="ti ti-users"></i><span>Cette réservation comporte plusieurs créneaux : elle sera examinée <strong>manuellement</strong> par le responsable et approuvée ou refusée dans son ensemble.</span></div>
       <div class="card">
         <div style="font-size:13px;font-weight:600;margin-bottom:12px">Informations complémentaires</div>
-        <div class="fg"><label class="fl">Projet de recherche</label><select class="fs"><option>Analyse morphologique des cellules NK — IRSC 2024-2027</option><option>Étude comparative des marqueurs CD4/CD8</option></select></div>
+        
         <div class="fg"><label class="fl">Description de l'utilisation prévue <span style="color:var(--err)">*</span></label><textarea class="fi" rows="3" id="resa-desc">Acquisition d'images z-stack de coupes histologiques pour analyse de la distribution des cellules NK dans les ganglions lymphatiques.</textarea></div>
-        <div class="fg"><label class="fl">Nombre d'échantillons prévus</label><input class="fi" type="number" value="12" style="width:120px"></div>
+        <div class="fg"><label class="fl">Nombre d'échantillons prévus <span style="color:var(--t3);font-weight:400">(optionnel)</span></label><input class="fi" type="number" min="0" value="0" placeholder="0" style="width:120px"></div>
       </div>
       <div class="card" id="reservation-consumables" style="margin-top:14px">
         <div style="font-size:13px;font-weight:600;margin-bottom:2px">Consommables prévus — par créneau</div>
@@ -1513,6 +1513,7 @@
           <tr><td>Opérateur</td><td>J.-F. Côté</td></tr>
           <tr><td>Local</td><td>Roger-Gaudry G-1015</td></tr>
           <tr><td>Payeur</td><td id="recap-payeur">Moi-même</td></tr>
+          <tr><td>Facturation</td><td id="recap-projet">—</td></tr>
         </table>
         <div class="divider" style="margin:10px 0"></div>
         <table class="sum-t">
@@ -1531,19 +1532,31 @@
         <div style="font-size:11px;color:#3B6D11;line-height:1.5"><a href="#" onclick="go('detail-formation');return false;" style="color:#3B6D11;text-decoration:underline;font-weight:600">Formation Leica SP8 — Niveau 1</a><br>Complétée le 3 mars 2025</div>
       </div>
 
-      <!-- Payeur -->
+      <!-- Facturation -->
       <div class="card" style="margin-bottom:12px">
-        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Qui paie cette réservation ?</div>
-        <label style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--bd);border-radius:var(--r-md);margin-bottom:6px;cursor:pointer;font-size:12px">
-          <input type="radio" name="payeur" checked onchange="refreshPayeur()">
-          <span style="flex:1">Moi-même</span>
-          <span style="color:var(--t3);font-size:11px">Compte K.B.-2201</span>
-        </label>
-        <label style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--bd);border-radius:var(--r-md);cursor:pointer;font-size:12px">
-          <input type="radio" name="payeur" onchange="refreshPayeur()">
-          <span style="flex:1">Mon professeur superviseur</span>
-          <span style="color:var(--t3);font-size:11px">M. Tremblay</span>
-        </label>
+        <div style="font-size:13px;font-weight:600;margin-bottom:2px">Facturation</div>
+        <div style="font-size:11px;color:var(--t2);margin-bottom:10px">Toute réservation doit être imputée à un projet de financement ou à une adresse de facturation.</div>
+
+        <div style="display:flex;gap:6px;margin-bottom:12px">
+          <div class="fchip on" id="bt-projet" onclick="setBillingType('projet')">Projet de financement</div>
+          <div class="fchip" id="bt-externe" onclick="setBillingType('externe')">Facturation externe</div>
+        </div>
+
+        <div id="billing-projet">
+          <div style="font-size:11px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.04em;margin:0 0 6px">Projet à facturer</div>
+          <div id="projet-list"></div>
+          <div id="projet-excluded"></div>
+        </div>
+
+        <div id="billing-externe" style="display:none">
+          <div class="fg"><label class="fl">Organisation <span style="color:var(--err)">*</span></label><input class="fi" type="text" id="bx-org" placeholder="Ex. Institut de recherche XYZ"></div>
+          <div class="fg"><label class="fl">Adresse <span style="color:var(--err)">*</span></label><input class="fi" type="text" id="bx-addr" placeholder="Numéro et rue"></div>
+          <div class="fr">
+            <div class="fg"><label class="fl">Ville</label><input class="fi" type="text" id="bx-city" placeholder="Montréal"></div>
+            <div class="fg"><label class="fl">Code postal</label><input class="fi" type="text" id="bx-zip" placeholder="H3T 1J4"></div>
+          </div>
+          <div class="fg" style="margin-bottom:0"><label class="fl">Courriel de facturation <span style="color:var(--err)">*</span></label><input class="fi" type="email" id="bx-mail" placeholder="comptes@exemple.org"></div>
+        </div>
       </div>
 
       <button class="btn pri" style="width:100%;justify-content:center" onclick="validateResa()">
@@ -1564,7 +1577,7 @@
       <table class="sum-t">
         <tr><td>Équipement</td><td>Leica SP8 — Confocal</td></tr>
         <tr><td>Date</td><td>Mar 11 juin 2026</td></tr>
-        <tr><td>Heure</td><td>9h00 – 11h00</td></tr>
+        <tr><td>Heure</td><td>9h00 – 10h00</td></tr>
         <tr><td>Local</td><td>Roger-Gaudry G-1015</td></tr>
         <tr><td>Opérateur</td><td>Jean-François Côté</td></tr>
         <tr><td>Total facturé</td><td style="font-weight:700;color:var(--blue)">150,00 $</td></tr>
@@ -1582,40 +1595,10 @@
 <!-- MES RESERVATIONS -->
 <div class="page" id="page-mes-reservations">
   <div class="ph"><div><div class="pt">Mes réservations</div><div class="ps">Vos réservations à venir et passées</div></div><button class="btn pri" onclick="go('recherche')"><i class="ti ti-plus"></i>Nouvelle réservation</button></div>
-  <div class="card">
-    <div id="user-resa-0847"></div>
-    
-<div class="ri">
-      <div style="display:flex;align-items:center;gap:12px;flex:1">
-        <div class="ri-ic" style="background:var(--info-bg)"><i class="ti ti-filter" style="color:var(--info);font-size:18px"></i></div>
-        <div>
-          <div style="font-size:13px;font-weight:600">Cytomètre BD LSRFortessa</div>
-          <div style="font-size:11px;color:var(--t2)">Jeu 25 juin 2026 · 13h00–15h00 · Roger-Gaudry G-1020</div>
-          <div style="font-size:11px;color:var(--t2)">#RES-2026-0821</div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="badge b-ok">Confirmée</span>
-        <button class="btn sm" onclick="go('modal-annul-user')">Annuler</button>
-      </div>
-    </div>
-    <div class="ri" style="border:none">
-      <div style="display:flex;align-items:center;gap:12px;flex:1">
-        <div class="ri-ic" style="background:var(--warn-bg)"><i class="ti ti-microscope" style="color:var(--warn);font-size:18px"></i></div>
-        <div>
-          <div style="font-size:13px;font-weight:600">Microscopie confocale Leica SP8</div>
-          <div style="font-size:11px;color:var(--t2)">Lun 15 juillet 2026 · 8h00–10h00 · Hors fenêtre active</div>
-          <div style="font-size:11px;color:var(--t2)">#RES-2026-0803</div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="badge b-warn">En attente</span>
-        <button class="btn sm" onclick="go('modal-annul-user')">Annuler</button>
-      </div>
-    </div>
-  </div>
+  <div class="card" id="user-resa-list"></div>
 
-  <div class="ph" style="margin-top:26px;margin-bottom:12px"><div><div class="pt" style="font-size:16px">Mes formations complétées</div><div class="ps">Prérequis validés pour réserver certains équipements en autonomie</div></div></div>
+  
+<div class="ph" style="margin-top:26px;margin-bottom:12px"><div><div class="pt" style="font-size:16px">Mes formations complétées</div><div class="ps">Prérequis validés pour réserver certains équipements en autonomie</div></div></div>
   <div class="card">
     <div class="ri">
       <div style="display:flex;align-items:center;gap:12px;flex:1">
@@ -1640,17 +1623,62 @@
   </div>
 </div>
 
+<!-- DETAIL RÉSERVATION (usager) — lecture seule -->
+<div class="page" id="page-resa-detail-user">
+  <div class="ph">
+    <div>
+      <button class="btn ghost sm" onclick="go('mes-reservations')" style="margin-bottom:8px;padding-left:0"><i class="ti ti-arrow-left"></i> Mes réservations</button>
+      <div class="pt" id="ru-title">Réservation</div>
+      <div class="ps" id="ru-sub"></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;align-self:flex-start;margin-top:4px">
+      <span class="badge b-ok" id="ru-status">Confirmée</span>
+      <button class="btn sm" id="ru-cancel" onclick="go('modal-annul-user')">Annuler la réservation</button>
+    </div>
+  </div>
+  <div class="notice n-info" id="ru-window" style="max-width:820px"><i class="ti ti-info-circle"></i><span></span></div>
+
+  <div class="det-grid" style="max-width:1000px">
+    <div>
+      <div class="card" style="margin-bottom:14px">
+        <div style="font-size:14px;font-weight:600;margin-bottom:2px">Créneaux <span id="ru-count" style="font-weight:400;color:var(--t3)"></span></div>
+        <div style="font-size:11.5px;color:var(--t2);margin-bottom:12px">La composition est gérée par le responsable de l'équipement. Vous pouvez annuler l'ensemble de la réservation, mais pas un créneau isolé.</div>
+        <div id="ru-slots"></div>
+      </div>
+      <div class="card">
+        <div style="font-size:14px;font-weight:600;margin-bottom:4px">Fil d'activité</div>
+        <div style="font-size:11.5px;color:var(--t2);margin-bottom:14px">Toutes les décisions prises sur cette réservation, dans l'ordre.</div>
+        <div class="tl" id="ru-feed"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:12px">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Facturation</div>
+        <div class="ir"><span class="ir-l">Payeur</span><span id="ru-payer"></span></div>
+        <div class="ir"><span class="ir-l">Projet</span><span id="ru-projet" style="text-align:right"></span></div>
+        <div class="ir" style="border:none"><span class="ir-l">Référence</span><span id="ru-ref"></span></div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Accès</div>
+        <div class="ir"><span class="ir-l">Équipement</span><span id="ru-eq" style="text-align:right"></span></div>
+        <div class="ir"><span class="ir-l">Local</span><span id="ru-loc"></span></div>
+        <div class="ir" style="border:none"><span class="ir-l">Formation</span><span id="ru-form" class="badge b-ok"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL ANNULATION UTILISATEUR -->
 <div class="page" id="page-modal-annul-user">
   <div class="mb-bg">
     <div class="modal">
       <div class="modal-t">Annuler la réservation</div>
-      <div class="modal-s">Microscopie confocale Leica SP8 · Mar 11 juin 2026 · 9h00–11h00</div>
+      <div class="modal-s">Microscopie confocale Leica SP8 · Mar 11 juin 2026 · 9h00–10h00</div>
       <div class="card" style="margin-bottom:14px;background:var(--bg2)">
         <table class="sum-t">
           <tr><td>Équipement</td><td>Leica SP8 — Confocal</td></tr>
           <tr><td>Date</td><td>Mar 11 juin 2026</td></tr>
-          <tr><td>Heure</td><td>9h00 – 11h00</td></tr>
+          <tr><td>Heure</td><td>9h00 – 10h00</td></tr>
           <tr><td>Numéro</td><td style="color:var(--blue);font-weight:700">#RES-2026-0847</td></tr>
         </table>
       </div>
@@ -1749,7 +1777,7 @@
           <div style="font-size:11px;color:var(--t2)">Doctorat · Biochimie · Autorisée depuis le 3 mai 2026</div>
           <div style="font-size:11px;color:var(--t2);margin-top:2px">4 réservations · Dernier accès : 2 juin 2026</div>
         </div>
-        <span class="badge b-ok">Active</span><button class="btn sm" onclick="openRapportEtudiant('AT')" style="margin-left:8px"><i class="ti ti-report-analytics"></i>Rapport d'utilisation</button>
+        <span class="badge b-ok">Active</span><button class="btn sm" onclick="openProjetsEtudiant('AT')" style="margin-left:8px"><i class="ti ti-wallet"></i>Financement</button><button class="btn sm" onclick="openRapportEtudiant('AT')" style="margin-left:8px"><i class="ti ti-report-analytics"></i>Rapport</button>
         <button class="btn sm dng" onclick="revoquerEtudiantApprouve(this)" style="margin-left:8px"><i class="ti ti-user-x"></i>Révoquer</button>
       </div>
       <div class="rri">
@@ -1759,7 +1787,7 @@
           <div style="font-size:11px;color:var(--t2)">Maîtrise · Biochimie · Autorisé depuis le 15 avr. 2026</div>
           <div style="font-size:11px;color:var(--t2);margin-top:2px">7 réservations · Dernier accès : 5 juin 2026</div>
         </div>
-        <span class="badge b-ok">Active</span><button class="btn sm" onclick="openRapportEtudiant('SP')" style="margin-left:8px"><i class="ti ti-report-analytics"></i>Rapport d'utilisation</button>
+        <span class="badge b-ok">Active</span><button class="btn sm" onclick="openProjetsEtudiant('SP')" style="margin-left:8px"><i class="ti ti-wallet"></i>Financement</button><button class="btn sm" onclick="openRapportEtudiant('SP')" style="margin-left:8px"><i class="ti ti-report-analytics"></i>Rapport</button>
         <button class="btn sm dng" onclick="revoquerEtudiantApprouve(this)" style="margin-left:8px"><i class="ti ti-user-x"></i>Révoquer</button>
       </div>
       <div class="rri" style="border:none">
@@ -1769,13 +1797,56 @@
           <div style="font-size:11px;color:var(--t2)">Doctorat · Biochimie · Autorisée depuis le 2 mars 2026</div>
           <div style="font-size:11px;color:var(--t2);margin-top:2px">12 réservations · Dernier accès : 7 juin 2026</div>
         </div>
-        <span class="badge b-ok">Active</span><button class="btn sm" onclick="openRapportEtudiant('NB')" style="margin-left:8px"><i class="ti ti-report-analytics"></i>Rapport d'utilisation</button>
+        <span class="badge b-ok">Active</span><button class="btn sm" onclick="openProjetsEtudiant('NB')" style="margin-left:8px"><i class="ti ti-wallet"></i>Financement</button><button class="btn sm" onclick="openRapportEtudiant('NB')" style="margin-left:8px"><i class="ti ti-report-analytics"></i>Rapport</button>
         <button class="btn sm dng" onclick="revoquerEtudiantApprouve(this)" style="margin-left:8px"><i class="ti ti-user-x"></i>Révoquer</button>
       </div>
     </div>
   </div>
 </div>
 
+
+<!-- ASSIGNATION DE PROJETS DE FINANCEMENT (professeur) -->
+<div class="page" id="page-projets-etudiant">
+  <div class="ph">
+    <div>
+      <button class="btn ghost sm" onclick="go('mes-etudiants')" style="margin-bottom:8px;padding-left:0"><i class="ti ti-arrow-left"></i> Mes étudiants</button>
+      <div class="pt" id="pe-name">Projets de financement</div>
+      <div class="ps" id="pe-sub"></div>
+    </div>
+  </div>
+  <div class="notice n-info" style="max-width:820px"><i class="ti ti-info-circle"></i><span>Cet étudiant ne pourra imputer ses réservations qu'aux projets que vous lui assignez ici. Un projet dont la date de fin précède celle de la réservation ne lui sera pas proposé.</span></div>
+
+  <div class="det-grid" style="max-width:1000px">
+    <div>
+      <div class="card">
+        <div style="font-size:14px;font-weight:600;margin-bottom:4px">Vos projets de financement</div>
+        <div style="font-size:11.5px;color:var(--t2);margin-bottom:12px">Projets dont vous êtes chercheuse principale ou co-chercheuse, transmis par le RIÉ.</div>
+        <div id="pe-list"></div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:14px">
+          <button class="btn" onclick="go('mes-etudiants')">Annuler</button>
+          <button class="btn pri" onclick="saveProjetsEtudiant()"><i class="ti ti-check"></i>Enregistrer les assignations</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:10px">Résumé</div>
+        <div class="ir"><span class="ir-l">Étudiant</span><span id="pe-i-nom"></span></div>
+        <div class="ir"><span class="ir-l">Programme</span><span id="pe-i-prog" style="text-align:right"></span></div>
+        <div class="ir" style="border:none"><span class="ir-l">Projets assignés</span><span id="pe-i-count"></span></div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:600;margin-bottom:2px">Enveloppe annuelle</div>
+        <div style="font-size:11px;color:var(--t2);margin-bottom:10px">Montant maximal que cet étudiant peut imputer à vos projets sur l'année financière.</div>
+        <div class="fg" style="margin-bottom:8px">
+          <label class="fl">Montant maximal ($)</label>
+          <input class="fi" type="number" min="0" step="100" id="pe-budget" oninput="previewBudget()">
+        </div>
+        <div id="pe-budget-preview" style="font-size:11px;color:var(--t2)"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- RAPPORT D'UTILISATION PAR ÉTUDIANT (professeur) -->
 <div class="page" id="page-rapport-etudiant">
@@ -1882,10 +1953,10 @@
 </div>
 
 <!-- MODAL REFUS -->
-<div class="page" id="page-modal-refus"><div class="mb-bg"><div class="modal"><div class="modal-t">Refuser la réservation</div><div class="modal-s">Karim Belkacem · Leica SP8 · Lun 15 juil. · 8h–10h</div><div class="notice n-warn"><i class="ti ti-alert-triangle"></i><span>L'utilisateur sera notifié par courriel avec la raison fournie.</span></div><div class="fg"><label class="fl">Raison du refus <span style="color:var(--err)">*</span></label><select class="fs" style="margin-bottom:8px"><option value="">-- Sélectionner une raison --</option><option selected>Créneau réservé pour maintenance</option><option>Équipement hors service</option><option>Capacité dépassée</option><option>Autre raison</option></select><textarea class="fi" rows="3">Maintenance préventive planifiée par le fabricant Leica sur cette période.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('dashboard')">Annuler</button><button class="btn dng" onclick="go('dashboard')"><i class="ti ti-x"></i>Confirmer le refus</button></div></div></div></div>
+<div class="page" id="page-modal-refus"><div class="mb-bg"><div class="modal"><div class="modal-t">Refuser la réservation</div><div class="modal-s" id="refus-sub">Karim Belkacem · Leica SP8 · Lun 15 juil. · 8h–9h</div><div class="notice n-warn"><i class="ti ti-alert-triangle"></i><span>L'utilisateur sera notifié par courriel avec la raison fournie.</span></div><div class="fg"><label class="fl">Raison du refus <span style="color:var(--err)">*</span></label><select class="fs" id="refus-reason" style="margin-bottom:8px"><option value="">-- Sélectionner une raison --</option><option selected>Créneau réservé pour maintenance</option><option>Équipement hors service</option><option>Capacité dépassée</option><option>Autre raison</option></select><textarea class="fi" rows="3">Maintenance préventive planifiée par le fabricant Leica sur cette période.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="cancelRefus()">Annuler</button><button class="btn dng" onclick="confirmRefus()"><i class="ti ti-x"></i>Confirmer le refus</button></div></div></div></div>
 
 <!-- MODAL ANNULATION RESP -->
-<div class="page" id="page-modal-annul-resp"><div class="mb-bg"><div class="modal"><div class="modal-t">Annuler la réservation</div><div class="modal-s">Karim Belkacem · Leica SP8 · Mar 11 juin · 9h–11h</div><div class="notice n-warn"><i class="ti ti-alert-triangle"></i><span>L'utilisateur sera notifié par courriel. Cette action est irréversible.</span></div><div class="fg"><label class="fl">Raison de l'annulation <span style="color:var(--err)">*</span></label><select class="fs" style="margin-bottom:8px"><option value="">-- Sélectionner --</option><option selected>Bris d'équipement</option><option>Maintenance d'urgence</option><option>Équipement hors service</option><option>Autre raison</option></select><textarea class="fi" rows="3">Bris mécanique sur l'objectif principal. Réparation en cours, délai estimé 3–5 jours ouvrables.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('reservations-resp')">Annuler</button><button class="btn dng" onclick="go('reservations-resp')"><i class="ti ti-trash"></i>Annuler la réservation</button></div></div></div></div>
+<div class="page" id="page-modal-annul-resp"><div class="mb-bg"><div class="modal"><div class="modal-t">Annuler la réservation</div><div class="modal-s">Karim Belkacem · Leica SP8 · Mar 11 juin · 9h–10h</div><div class="notice n-warn"><i class="ti ti-alert-triangle"></i><span>L'utilisateur sera notifié par courriel. Cette action est irréversible.</span></div><div class="fg"><label class="fl">Raison de l'annulation <span style="color:var(--err)">*</span></label><select class="fs" style="margin-bottom:8px"><option value="">-- Sélectionner --</option><option selected>Bris d'équipement</option><option>Maintenance d'urgence</option><option>Équipement hors service</option><option>Autre raison</option></select><textarea class="fi" rows="3">Bris mécanique sur l'objectif principal. Réparation en cours, délai estimé 3–5 jours ouvrables.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('reservations-resp')">Annuler</button><button class="btn dng" onclick="go('reservations-resp')"><i class="ti ti-trash"></i>Annuler la réservation</button></div></div></div></div>
 
 <!-- MODAL BLOCAGE -->
 <div class="page" id="page-modal-bloc"><div class="mb-bg"><div class="modal"><div class="modal-t">Bloquer une période</div><div class="modal-s">Les créneaux existants seront annulés et les utilisateurs notifiés.</div><div class="fg"><label class="fl">Offre concernée</label><select class="fs"><option selected>Microscopie confocale Leica SP8</option><option>Cytomètre BD LSRFortessa</option><option>Toutes mes offres</option></select></div><div class="fr"><div class="fg"><label class="fl">Date de début</label><input class="fi" type="date" value="2026-06-18"></div><div class="fg"><label class="fl">Date de fin</label><input class="fi" type="date" value="2026-06-18"></div></div><div class="fg"><label class="fl">Raison <span style="color:var(--err)">*</span></label><select class="fs" style="margin-bottom:8px"><option selected>Maintenance préventive</option><option>Maintenance d'urgence</option><option>Congé / fermeture</option><option>Autre</option></select><textarea class="fi" rows="2">Maintenance préventive annuelle planifiée par Leica Microsystems.</textarea></div><div style="display:flex;justify-content:flex-end;gap:8px;margin-top:4px"><button class="btn" onclick="go('planning')">Annuler</button><button class="btn pri" onclick="confirmBloc()"><i class="ti ti-check"></i>Confirmer le blocage</button></div></div></div></div>
@@ -1893,7 +1964,7 @@
 <!-- MODAL AJUSTEMENT CONSOMMABLES (post-usage) -->
 <div class="page" id="page-modal-consommables"><div class="mb-bg"><div class="modal" style="max-width:480px">
   <div class="modal-t">Consommables — Karim Belkacem</div>
-  <div class="modal-s">Leica SP8 · Mar 11 juin · 9h–11h. Confirmez les quantités réellement utilisées.</div>
+  <div class="modal-s">Leica SP8 · Mar 11 juin · 9h–10h. Confirmez les quantités réellement utilisées.</div>
   <table class="sum-t" style="margin-bottom:10px">
     <tr><td style="font-weight:600;color:var(--t1)">Consommable</td><td style="text-align:center">Prévu</td><td style="text-align:right">Réel</td></tr>
     <tr><td>Lames microscope</td><td style="text-align:center">3</td><td style="text-align:right"><input class="fi num" type="number" value="3" style="width:64px;text-align:right;display:inline-block;padding:4px 6px"></td></tr>
@@ -1934,6 +2005,7 @@ const routes={
   'modal-annul-resp':{title:'Annuler une réservation',page:'page-modal-annul-resp',sb:'sb-resp',nav:'nav-reservations-resp'},
   'mes-etudiants':{title:'Mes étudiants autorisés',page:'page-mes-etudiants',sb:'sb-resp',nav:'nav-mes-etudiants'},
   'rapport-etudiant':{title:"Rapport d'utilisation",page:'page-rapport-etudiant',sb:'sb-resp',nav:'nav-mes-etudiants'},
+  'projets-etudiant':{title:'Financement de l\'étudiant',page:'page-projets-etudiant',sb:'sb-resp',nav:'nav-mes-etudiants'},
   rapports:{title:"Rapports d'utilisation",page:'page-rapports',sb:'sb-resp',nav:'nav-rapports'},
   preferences:{title:'Préférences de notification',page:'page-preferences',sb:'sb-resp',nav:''},
   'modal-bloc':{title:'Bloquer une période',page:'page-modal-bloc',sb:'sb-resp',nav:'nav-reservations-resp'},
@@ -1945,6 +2017,7 @@ const routes={
   'detail-reservation':{title:'Confirmer la réservation',page:'page-detail-reservation',sb:'sb-user',nav:'nav-recherche'},
   'reservation-confirmee':{title:'Réservation confirmée',page:'page-reservation-confirmee',sb:'sb-user',nav:'nav-recherche'},
   'mes-reservations':{title:'Mes réservations',page:'page-mes-reservations',sb:'sb-user',nav:'nav-mes-reservations'},
+  'resa-detail-user':{title:'Détail de la réservation',page:'page-resa-detail-user',sb:'sb-user',nav:'nav-mes-reservations'},
   'modal-annul-user':{title:'Annuler la réservation',page:'page-modal-annul-user',sb:'sb-user',nav:'nav-mes-reservations'},
   'annulation-confirmee':{title:'Réservation annulée',page:'page-annulation-confirmee',sb:'sb-user',nav:'nav-mes-reservations'},
 };
@@ -2020,6 +2093,75 @@ document.addEventListener('click',function(e){
   if(!p||p.style.display==='none')return;
   if(!e.target.closest('#notif-panel') && !e.target.closest('[onclick="toggleNotifs()"]'))p.style.display='none';
 });
+/* ===== Assignation de projets de financement (professeur) ===== */
+/* Projets assignés par le professeur à chaque étudiant */
+const ETUDIANT_PROJETS={
+  AT:['IRSC-2025-3390','CRSNG-2025-9014'],
+  SP:['IRSC-2025-3390'],
+  NB:['CRSNG-2025-9014','FRQS-2024-7720']
+};
+let currentProjEtudiant='AT', projDraft=[];
+
+function openProjetsEtudiant(id){
+  currentProjEtudiant=ETUDIANTS[id]?id:'AT';
+  projDraft=(ETUDIANT_PROJETS[currentProjEtudiant]||[]).slice();
+  go('projets-etudiant');
+  document.getElementById('pe-budget').value=ETUDIANTS[currentProjEtudiant].budget;
+  previewBudget();
+}
+function previewBudget(){
+  const e=ETUDIANTS[currentProjEtudiant];
+  const v=parseFloat(document.getElementById('pe-budget').value)||0;
+  const engage=e.periodes['annee'].cost;
+  const el=document.getElementById('pe-budget-preview');
+  if(!el)return;
+  if(v<=0){el.innerHTML='<span style="color:var(--warn)">Aucune enveloppe : l\'étudiant ne pourra rien imputer à vos projets.</span>';return;}
+  const pct=Math.round(engage/v*100);
+  const depasse=engage>v;
+  el.innerHTML='Déjà engagé cette année : <strong>'+fmtMoney(engage)+'</strong> — soit '+pct+' % de cette enveloppe.'+
+    (depasse?'<br><span style="color:var(--err);font-weight:600">Ce montant est inférieur à ce qui est déjà engagé.</span>'
+            :(pct>=80?'<br><span style="color:var(--warn);font-weight:600">Seuil d\'alerte déjà atteint.</span>':''));
+}
+function toggleProjetDraft(num){
+  const i=projDraft.indexOf(num);
+  if(i>-1)projDraft.splice(i,1); else projDraft.push(num);
+  renderProjetsEtudiant();
+}
+function saveProjetsEtudiant(){
+  ETUDIANT_PROJETS[currentProjEtudiant]=projDraft.slice();
+  const e=ETUDIANTS[currentProjEtudiant];
+  const v=parseFloat(document.getElementById('pe-budget').value);
+  if(!isNaN(v)&&v>=0)e.budget=v;
+  notify(projDraft.length+' projet'+(projDraft.length>1?'s':'')+' et une enveloppe de '+fmtMoney(e.budget)+' pour '+e.nom+'.');
+  go('mes-etudiants');
+}
+function renderProjetsEtudiant(){
+  const e=ETUDIANTS[currentProjEtudiant];
+  if(!e)return;
+  document.getElementById('pe-name').textContent='Financement — '+e.nom;
+  document.getElementById('pe-sub').textContent="Projets imputables et enveloppe annuelle de cet étudiant";
+  document.getElementById('pe-i-nom').textContent=e.nom;
+  document.getElementById('pe-i-prog').textContent=e.prog;
+  document.getElementById('pe-i-count').textContent=projDraft.length;
+
+  const today='2026-06-10';
+  document.getElementById('pe-list').innerHTML=PROJETS_PROF.map(function(num,i){
+    const p=PROJETS[num];
+    const on=projDraft.indexOf(num)>-1;
+    const expire=p.fin<today;
+    const last=i===PROJETS_PROF.length-1?';border:none':'';
+    return '<label style="display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--bd);cursor:pointer'+last+'">'+
+      '<input type="checkbox"'+(on?' checked':'')+' onchange="toggleProjetDraft(\''+num+'\')" style="margin-top:3px">'+
+      '<span style="flex:1">'+
+        '<span style="font-size:13px;font-weight:600">'+p.num+'</span>'+
+        (expire?' <span class="badge b-neu" style="margin-left:4px">Échu</span>':'')+
+        '<div style="font-size:12px;color:var(--t2)">'+p.titre+'</div>'+
+        '<div style="font-size:11px;color:var(--t3)">Du '+fmtDateFr(p.debut)+' au '+fmtDateFr(p.fin)+'</div>'+
+      '</span>'+
+    '</label>';
+  }).join('');
+}
+
 /* ===== Rapport d'utilisation par étudiant (professeur) ===== */
 const ETUDIANTS={
   AT:{nom:'Amira Tremblay',prog:'Doctorat · Biochimie',depuis:'3 mai 2026',dernier:'2 juin 2026',budget:2500,
@@ -2162,7 +2304,7 @@ const RESA_DATA={
   'R-0847':{ref:'RES-2026-0847',user:'Karim Belkacem',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
     status:'Confirmée',statusCls:'b-ok',
     window:"Réservation active du <strong>lundi 10 juin</strong> au <strong>samedi 15 juin 2026</strong>. Pendant cette période, vous pouvez annuler un créneau (ex. panne équipement) ou en ajouter un pour compenser — l'usager ne peut plus modifier la composition une fois la réservation approuvée.",
-    payer:'Lui-même',projet:'Analyse NK — IRSC',formation:'Validée',formCls:'b-ok',canEdit:true,
+    payer:'Lui-même',projet:'FRQNT-2024-8812',formation:'Validée',formCls:'b-ok',canEdit:true,
     slots:[
       {label:'Lundi 10 juin 2026 · 7h00 – 13h00',note:"Plage personnalisée demandée par l'usager · Lames microscope ×2",short:'Lundi 10 juin · 7h00–13h00',status:'active'},
       {label:'Jeudi 13 juin 2026 · 8h00 – 9h00',note:'Créneau prédéfini',short:'Jeudi 13 juin · 8h00–9h00',status:'active'},
@@ -2179,9 +2321,9 @@ const RESA_DATA={
   'R-0852':{ref:'RES-2026-0852',user:'Marie Tremblay',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
     status:'Confirmée',statusCls:'b-ok',
     window:"Réservation active le <strong>mardi 11 juin 2026</strong>. Vous pouvez annuler ce créneau ou en ajouter un autre à cette réservation.",
-    payer:'Elle-même',projet:'Marqueurs CD4/CD8',formation:'Validée',formCls:'b-ok',canEdit:true,
+    payer:'Elle-même',projet:'IRSC-2025-3390',formation:'Validée',formCls:'b-ok',canEdit:true,
     slots:[
-      {label:'Mardi 11 juin 2026 · 9h00 – 11h00',note:'Créneau prédéfini',short:'Mardi 11 juin · 9h00–11h00',status:'active'}
+      {label:'Mardi 11 juin 2026 · 9h00 – 10h00',note:'Créneau prédéfini',short:'Mardi 11 juin · 9h00–10h00',status:'active'}
     ],
     history:[
       {type:'created',when:'7 juin 2026, 8h50',actor:'Marie Tremblay',role:'usager',
@@ -2192,7 +2334,7 @@ const RESA_DATA={
   'R-0851':{ref:'RES-2026-0851',user:'Amira Ben Salah',offer:'Cytomètre BD LSRFortessa',loc:'Roger-Gaudry G-1020',
     status:'Confirmée',statusCls:'b-ok',
     window:"Réservation active du <strong>mercredi 12 juin</strong> au <strong>vendredi 14 juin 2026</strong>. Vous pouvez annuler un créneau ou en ajouter un pour compenser.",
-    payer:'M. Tremblay (superviseure)',projet:'Cytométrie — FRQS',formation:'Validée',formCls:'b-ok',canEdit:true,
+    payer:'M. Tremblay (superviseure)',projet:'FRQS-2024-7720',formation:'Validée',formCls:'b-ok',canEdit:true,
     slots:[
       {label:'Mercredi 12 juin 2026 · 10h00 – 12h00',note:'Créneau prédéfini · Milieu de montage ×1',short:'Mercredi 12 juin · 10h00–12h00',status:'active'},
       {label:'Vendredi 14 juin 2026 · 13h00 – 15h00',note:'Créneau prédéfini',short:'Vendredi 14 juin · 13h00–15h00',status:'active'}
@@ -2205,10 +2347,78 @@ const RESA_DATA={
       {type:'approved',when:'6 juin 2026, 15h20',actor:'Marie Gagnon',role:'responsable',
        title:'Réservation approuvée',detail:"L'ensemble des 2 créneaux a été approuvé."}
     ]},
+  'R-0862':{ref:'RES-2026-0862',user:'Sophie Tremblay',offer:'Cytomètre BD LSRFortessa',loc:'Roger-Gaudry G-1020',
+    status:'En attente',statusCls:'b-warn',
+    window:"Demande <strong>en attente d'approbation</strong> — le créneau demandé se situe hors de la fenêtre de réservation active.",
+    payer:'Elle-même',projet:'CRSNG-2023-4471',formation:'Validée',formCls:'b-ok',canEdit:false,
+    slots:[
+      {label:'Vendredi 18 juillet 2026 · 13h00 – 14h00',note:'Hors fenêtre de réservation active',short:'Vendredi 18 juillet · 13h00–14h00',status:'active'}
+    ],
+    history:[
+      {type:'created',when:'9 juin 2026, 14h05',actor:'Sophie Tremblay',role:'usagère',
+       title:'Demande soumise',detail:'1 créneau, au-delà de la fenêtre de réservation de 30 jours.'},
+      {type:'rule',when:'9 juin 2026, 14h05',actor:'Système',role:'',
+       title:'Approbation manuelle requise',detail:'Le créneau demandé est hors de la fenêtre de réservation active.'}
+    ]},
+  'R-0863':{ref:'RES-2026-0863',user:'Léa Fontaine',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
+    status:'En attente',statusCls:'b-warn',
+    window:"Demande <strong>en attente d'approbation</strong> — la formation requise pour cette offre n'a pas encore été suivie.",
+    payer:'Elle-même',projet:'CRSNG-2023-4471',formation:'Requise — non suivie',formCls:'b-warn',canEdit:false,
+    slots:[
+      {label:'Mardi 22 juillet 2026 · 10h00 – 11h00',note:'Créneau prédéfini',short:'Mardi 22 juillet · 10h00–11h00',status:'active'}
+    ],
+    history:[
+      {type:'created',when:'10 juin 2026, 8h15',actor:'Léa Fontaine',role:'usagère',
+       title:'Demande soumise',detail:'1 créneau prédéfini.'},
+      {type:'rule',when:'10 juin 2026, 8h15',actor:'Système',role:'',
+       title:'En attente de décision',detail:"La formation requise pour cette offre n'a pas encore été suivie."}
+    ]},
+  'R-0805':{ref:'RES-2026-0805',user:'Léa Fontaine',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
+    status:'Annulée',statusCls:'b-neu',
+    window:"Réservation <strong>annulée</strong> par l'usagère avant le début du créneau. Le créneau a été remis à la disposition des autres usagers.",
+    payer:'Elle-même',projet:'CRSNG-2023-4471',formation:'Validée',formCls:'b-ok',canEdit:false,
+    slots:[
+      {label:'Mardi 3 juin 2026 · 9h00 – 10h00',note:'Créneau prédéfini',short:'Mardi 3 juin · 9h00–10h00',status:'cancelled',reason:'Annulée par l\u2019usagère'}
+    ],
+    history:[
+      {type:'created',when:'28 mai 2026, 13h05',actor:'Léa Fontaine',role:'usagère',
+       title:'Demande soumise',detail:'1 créneau prédéfini.'},
+      {type:'approved',when:'28 mai 2026, 13h05',actor:'Système',role:'',
+       title:'Approuvée automatiquement',detail:'Créneau unique et prédéfini.'},
+      {type:'cancelled',when:'1 juin 2026, 17h42',actor:'Léa Fontaine',role:'usagère',
+       title:'Réservation annulée',detail:'Annulation par l\u2019usagère, dans le délai permis.'}
+    ]},
+  'R-0821':{ref:'RES-2026-0821',user:'Karim Belkacem',offer:'Cytomètre BD LSRFortessa',loc:'Roger-Gaudry G-1020',
+    status:'Confirmée',statusCls:'b-ok',
+    window:"Réservation active le <strong>jeudi 25 juin 2026</strong>.",
+    payer:'Lui-même',projet:'CRSNG-2023-4471',formation:'Validée',formCls:'b-ok',canEdit:true,
+    slots:[
+      {label:'Jeudi 25 juin 2026 · 13h00 – 14h00',note:'Créneau prédéfini',short:'Jeudi 25 juin · 13h00–14h00',status:'active'},
+      {label:'Jeudi 25 juin 2026 · 14h00 – 15h00',note:'Créneau prédéfini',short:'Jeudi 25 juin · 14h00–15h00',status:'active'}
+    ],
+    history:[
+      {type:'created',when:'8 juin 2026, 11h05',actor:'Karim Belkacem',role:'usager',
+       title:'Demande soumise',detail:'2 créneaux consécutifs, imputés au projet CRSNG-2023-4471.'},
+      {type:'approved',when:'8 juin 2026, 16h40',actor:'Marie Gagnon',role:'responsable',
+       title:'Réservation approuvée',detail:"L'ensemble des 2 créneaux a été approuvé."}
+    ]},
+  'R-0860':{ref:'RES-2026-0860',user:'Karim Belkacem',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
+    status:'En attente',statusCls:'b-warn',
+    window:"Demande <strong>en attente d'approbation</strong> — le créneau demandé se situe hors de la fenêtre de réservation active.",
+    payer:'Lui-même',projet:'FRQNT-2024-8812',formation:'Validée',formCls:'b-ok',canEdit:false,
+    slots:[
+      {label:'Lundi 15 juillet 2026 · 8h00 – 9h00',note:'Hors fenêtre de réservation active',short:'Lundi 15 juillet · 8h00–9h00',status:'active'}
+    ],
+    history:[
+      {type:'created',when:'9 juin 2026, 9h20',actor:'Karim Belkacem',role:'usager',
+       title:'Demande soumise',detail:'1 créneau, au-delà de la fenêtre de réservation de 30 jours.'},
+      {type:'rule',when:'9 juin 2026, 9h20',actor:'Système',role:'',
+       title:'Approbation manuelle requise',detail:'Le créneau demandé est hors de la fenêtre de réservation active.'}
+    ]},
   'R-0855':{ref:'RES-2026-0855',user:'Léa Fontaine',offer:'Microscopie confocale Leica SP8',loc:'Roger-Gaudry G-1015',
     status:'En attente',statusCls:'b-warn',
     window:"Demande <strong>en attente d'approbation</strong>. La composition ne peut pas être modifiée avant qu'elle soit approuvée ou refusée — l'approbation porte sur l'ensemble des créneaux.",
-    payer:'Elle-même',projet:'Imagerie tissulaire',formation:'Requise — non suivie',formCls:'b-warn',canEdit:false,
+    payer:'Elle-même',projet:'CRSNG-2023-4471',formation:'Requise — non suivie',formCls:'b-warn',canEdit:false,
     slots:[
       {label:'Mercredi 12 juin 2026 · 14h00 – 16h00',note:'Créneau prédéfini',short:'Mercredi 12 juin · 14h00–16h00',status:'active'}
     ],
@@ -2286,7 +2496,46 @@ function renderResaDetail(){
     '</div>';
   }).join('');
 
+  // Actions offertes selon le statut de la réservation
+  const act=document.getElementById('resa-actions');
+  if(r.status==='En attente'){
+    act.innerHTML=
+      '<button class="btn pri" style="width:100%;justify-content:center;margin-bottom:8px" onclick="approveResa()"><i class="ti ti-check"></i>Approuver la réservation</button>'+
+      '<button class="btn dng" style="width:100%;justify-content:center" onclick="openRefus()"><i class="ti ti-x"></i>Refuser la réservation</button>'+
+      '<div style="font-size:11px;color:var(--t2);margin-top:8px;line-height:1.5">L\'approbation porte sur l\'ensemble des créneaux : les '+r.slots.length+' créneau'+(r.slots.length>1?'x sont acceptés ou refusés ensemble':' est accepté ou refusé')+'.</div>';
+  } else if(r.status==='Confirmée'){
+    act.innerHTML='<button class="btn dng" style="width:100%;justify-content:center" onclick="go(\'modal-annul-resp\')"><i class="ti ti-ban"></i>Annuler toute la réservation</button>';
+  } else {
+    act.innerHTML='<div style="font-size:12px;color:var(--t2);text-align:center;padding:10px 0">Réservation '+r.status.toLowerCase()+' — aucune action possible.</div>';
+  }
+
   renderFeed('resa-feed',r.history);
+}
+function approveResa(){
+  const r=RESA_DATA[currentResa];
+  r.status='Confirmée'; r.statusCls='b-ok'; r.canEdit=true;
+  r.window="Réservation approuvée. Vous pouvez désormais annuler un créneau ou en ajouter un pour compenser.";
+  r.history.push({type:'approved',when:nowStamp(),actor:'Marie Gagnon',role:'responsable',
+    title:'Réservation approuvée',detail:"L'ensemble des "+r.slots.length+" créneau"+(r.slots.length>1?"x a":" a")+" été approuvé."});
+  renderResaDetail();
+  notify("Réservation approuvée — l'usager a été notifié.");
+}
+function openRefus(){
+  const r=RESA_DATA[currentResa];
+  document.getElementById('refus-sub').textContent=r.user+' · '+r.offer+' · '+r.slots[0].short;
+  go('modal-refus');
+}
+function cancelRefus(){ go('resa-detail-resp'); }
+function confirmRefus(){
+  const r=RESA_DATA[currentResa];
+  const reason=document.getElementById('refus-reason').value||'Autre raison';
+  r.status='Refusée'; r.statusCls='b-neu'; r.canEdit=false;
+  r.window="Demande <strong>refusée</strong>. Les créneaux demandés ont été remis à la disposition des autres usagers.";
+  r.slots.forEach(function(s){s.status='cancelled';s.reason='Demande refusée';});
+  r.history.push({type:'cancelled',when:nowStamp(),actor:'Marie Gagnon',role:'responsable',
+    title:'Réservation refusée',detail:'Motif : '+reason.toLowerCase()+'. Tous les créneaux ont été libérés.'});
+  go('resa-detail-resp');
+  notify("Réservation refusée — l'usager a été notifié.");
 }
 
 /* ===== Planning hebdomadaire (responsable) ===== */
@@ -2449,60 +2698,115 @@ function nowStamp(){
   return d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear()+', '+d.getHours()+'h'+String(d.getMinutes()).padStart(2,'0');
 }
 
-/* ===== Côté usager : composition en lecture seule + fil d'activité ===== */
-let userFeedOpen=false;
+/* ===== Côté usager : liste, détail en lecture seule et fil d'activité ===== */
+const MES_RESERVATIONS=['R-0847','R-0821','R-0860'];
+let userFeedOpen=false, currentResaUser='R-0847';
+
 function toggleUserFeed(){userFeedOpen=!userFeedOpen;renderMesReservations();}
+function openResaUser(id){
+  currentResaUser=RESA_DATA[id]?id:'R-0847';
+  go('resa-detail-user');
+}
 function renderMesReservations(){
-  const host=document.getElementById('user-resa-0847');
+  const host=document.getElementById('user-resa-list');
   if(!host)return;
-  const r=RESA_DATA['R-0847'];
-  const active=r.slots.filter(function(s){return s.status==='active';});
-  const changed=r.history.filter(function(e){return e.type==='cancelled'||e.type==='added';});
-  const last=changed.length?changed[changed.length-1]:null;
+  host.innerHTML=MES_RESERVATIONS.map(function(id,idx){
+    const r=RESA_DATA[id];
+    const active=r.slots.filter(function(s){return s.status==='active';});
+    const changed=r.history.filter(function(e){return e.type==='cancelled'||e.type==='added';});
+    const last=changed.length?changed[changed.length-1]:null;
+    const isFirst=idx===0;
+    const lastRow=idx===MES_RESERVATIONS.length-1?';border:none':'';
 
-  const banner=last
-    ? '<div class="notice n-warn" style="margin:0 0 10px 48px;width:calc(100% - 48px)"><i class="ti ti-info-circle"></i>'+
-      '<span>Cette réservation a été <strong>modifiée par le responsable</strong> — '+last.title.toLowerCase()+'. '+
-      '<a href="#" onclick="toggleUserFeed();return false;" style="color:var(--info);font-weight:600">'+
-      (userFeedOpen?'Masquer le détail':'Voir le détail')+'</a></span></div>'
-    : '';
+    const banner=(isFirst&&last)
+      ? '<div class="notice n-warn" style="margin:0 0 10px 48px;width:calc(100% - 48px)"><i class="ti ti-info-circle"></i>'+
+        '<span>Cette réservation a été <strong>modifiée par le responsable</strong> — '+last.title.toLowerCase()+'. '+
+        '<a href="#" onclick="toggleUserFeed();return false;" style="color:var(--info);font-weight:600">'+
+        (userFeedOpen?'Masquer le détail':'Voir le détail')+'</a></span></div>'
+      : '';
 
-  const slots=r.slots.map(function(s){
-    const off=s.status==='cancelled';
-    const col=off?'var(--err)':'var(--ok)';
-    const extra=off
-      ? ' <span class="badge b-err" style="margin-left:4px">Annulé — '+s.reason+'</span>'
-      : (s.addedBy?' <span class="badge b-info" style="margin-left:4px">Ajouté par le responsable</span>':'');
-    const custom=(s.note&&s.note.indexOf('personnalisée')>-1)?' <span class="badge b-info" style="margin-left:4px">Plage personnalisée</span>':'';
-    return '<div style="display:flex;align-items:center;gap:8px;font-size:12px;padding:3px 0'+(off?';opacity:.55;text-decoration:line-through':'')+'">'+
-      '<i class="ti ti-point-filled" style="font-size:8px;color:'+col+'"></i>'+s.label.replace(' 2026','')+custom+extra+'</div>';
+    const slots=isFirst?r.slots.map(function(s){
+      const off=s.status==='cancelled';
+      const col=off?'var(--err)':'var(--ok)';
+      const extra=off
+        ? ' <span class="badge b-err" style="margin-left:4px">Annulé — '+s.reason+'</span>'
+        : (s.addedBy?' <span class="badge b-info" style="margin-left:4px">Ajouté par le responsable</span>':'');
+      const custom=(s.note&&s.note.indexOf('personnalisée')>-1)?' <span class="badge b-info" style="margin-left:4px">Plage personnalisée</span>':'';
+      return '<div style="display:flex;align-items:center;gap:8px;font-size:12px;padding:3px 0'+(off?';opacity:.55;text-decoration:line-through':'')+'">'+
+        '<i class="ti ti-point-filled" style="font-size:8px;color:'+col+'"></i>'+s.label.replace(' 2026','')+custom+extra+'</div>';
+    }).join(''):'';
+
+    const compo=isFirst
+      ? '<div style="background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);padding:10px 14px;margin-left:48px;width:calc(100% - 48px)">'+
+        '<div style="font-size:11px;color:var(--t2);margin-bottom:6px">Composition de la réservation — gérée par le responsable, non modifiable par vous une fois approuvée</div>'+
+        slots+'</div>'
+      : '';
+
+    const feed=(isFirst&&userFeedOpen)
+      ? '<div style="margin:10px 0 0 48px;width:calc(100% - 48px);background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);padding:14px">'+
+        '<div style="font-size:12px;font-weight:600;margin-bottom:10px">Fil d\'activité</div><div class="tl" id="user-feed"></div></div>'
+      : '';
+
+    const icon=r.offer.indexOf('Cytomètre')>-1?'ti-filter':'ti-microscope';
+    const bg=r.statusCls==='b-warn'?'var(--warn-bg)':'var(--info-bg)';
+    const fg=r.statusCls==='b-warn'?'var(--warn)':'var(--info)';
+
+    return '<div class="ri" style="align-items:flex-start;flex-direction:column;gap:10px'+lastRow+'">'+
+      '<div style="display:flex;align-items:center;justify-content:space-between;width:100%">'+
+        '<div style="display:flex;align-items:center;gap:12px;flex:1">'+
+          '<div class="ri-ic" style="background:'+bg+'"><i class="ti '+icon+'" style="color:'+fg+';font-size:18px"></i></div>'+
+          '<div><div style="font-size:13px;font-weight:600">'+r.offer+'</div>'+
+          '<div style="font-size:11px;color:var(--t2)">'+active.length+' créneau'+(active.length>1?'x':'')+' · '+r.loc+'</div>'+
+          '<div style="font-size:11px;color:var(--t2)">#'+r.ref+'</div></div>'+
+        '</div>'+
+        '<div style="display:flex;align-items:center;gap:8px">'+
+          '<span class="badge '+r.statusCls+'">'+r.status+'</span>'+
+          '<button class="btn sm" onclick="openResaUser(\''+id+'\')"><i class="ti ti-list-details"></i>Détails</button>'+
+          '<button class="btn sm" onclick="go(\'modal-annul-user\')">Annuler</button>'+
+        '</div>'+
+      '</div>'+banner+compo+feed+
+    '</div>';
   }).join('');
 
-  const feed=userFeedOpen
-    ? '<div style="margin:10px 0 0 48px;width:calc(100% - 48px);background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);padding:14px">'+
-      '<div style="font-size:12px;font-weight:600;margin-bottom:10px">Fil d\'activité</div><div class="tl" id="user-feed"></div></div>'
-    : '';
+  if(userFeedOpen)renderFeed('user-feed',RESA_DATA['R-0847'].history);
+}
 
-  host.innerHTML='<div class="ri" style="align-items:flex-start;flex-direction:column;gap:10px">'+
-    '<div style="display:flex;align-items:center;justify-content:space-between;width:100%">'+
+function renderResaDetailUser(){
+  const r=RESA_DATA[currentResaUser];
+  if(!r)return;
+  document.getElementById('ru-title').textContent=r.offer;
+  document.getElementById('ru-sub').textContent='Réservation #'+r.ref;
+  const st=document.getElementById('ru-status');
+  st.className='badge '+r.statusCls; st.textContent=r.status;
+  document.getElementById('ru-window').querySelector('span').innerHTML=r.window;
+  const active=r.slots.filter(function(s){return s.status==='active';});
+  document.getElementById('ru-count').textContent='· '+active.length+' actif'+(active.length>1?'s':'');
+  document.getElementById('ru-payer').textContent=r.payer;
+  document.getElementById('ru-projet').textContent=r.projet;
+  document.getElementById('ru-ref').textContent='#'+r.ref;
+  document.getElementById('ru-eq').textContent=r.offer;
+  document.getElementById('ru-loc').textContent=r.loc;
+  const f=document.getElementById('ru-form');
+  f.className='badge '+r.formCls; f.textContent=r.formation;
+
+  document.getElementById('ru-slots').innerHTML=r.slots.map(function(s,i){
+    const off=s.status==='cancelled';
+    const last=i===r.slots.length-1?';border:none':'';
+    const ic=off?'ti-calendar-x':(s.addedBy?'ti-calendar-plus':'ti-calendar-check');
+    const bg=off?'var(--err-bg)':(s.addedBy?'var(--info-bg)':'var(--ok-bg)');
+    const col=off?'var(--err)':(s.addedBy?'var(--info)':'var(--ok)');
+    const badge=off
+      ? '<span class="badge b-err">Annulé — '+s.reason+'</span>'
+      : (s.addedBy?'<span class="badge b-info">Ajouté par le responsable</span>':'<span class="badge b-ok">Actif</span>');
+    return '<div class="ri" style="opacity:'+(off?'.55':'1')+last+'">'+
       '<div style="display:flex;align-items:center;gap:12px;flex:1">'+
-        '<div class="ri-ic" style="background:var(--info-bg)"><i class="ti ti-microscope" style="color:var(--info);font-size:18px"></i></div>'+
-        '<div><div style="font-size:13px;font-weight:600">'+r.offer+'</div>'+
-        '<div style="font-size:11px;color:var(--t2)">'+active.length+' créneau'+(active.length>1?'x':'')+' · '+r.loc+'</div>'+
-        '<div style="font-size:11px;color:var(--t2)">#'+r.ref+'</div></div>'+
-      '</div>'+
-      '<div style="display:flex;align-items:center;gap:8px"><span class="badge b-ok">Confirmée</span>'+
-      '<button class="btn sm" onclick="go(\'modal-annul-user\')">Annuler la réservation</button></div>'+
-    '</div>'+
-    banner+
-    '<div style="background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md);padding:10px 14px;margin-left:48px;width:calc(100% - 48px)">'+
-      '<div style="font-size:11px;color:var(--t2);margin-bottom:6px">Composition de la réservation — gérée par le responsable, non modifiable par vous une fois approuvée</div>'+
-      slots+
-    '</div>'+
-    feed+
-  '</div>';
+        '<div class="ri-ic" style="background:'+bg+'"><i class="ti '+ic+'" style="color:'+col+';font-size:18px"></i></div>'+
+        '<div><div style="font-size:13px;font-weight:600">'+s.label+'</div><div style="font-size:11px;color:var(--t2)">'+s.note+'</div></div>'+
+      '</div>'+badge+
+    '</div>';
+  }).join('');
 
-  if(userFeedOpen)renderFeed('user-feed',r.history);
+  renderFeed('ru-feed',r.history);
 }
 
 function toggleAddConsumable(){
@@ -3191,18 +3495,18 @@ const MONTHS_FR2=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Ao
 const DAYS_FR2=['Lu','Ma','Me','Je','Ve','Sa','Di'];
 
 const availableSlots = {
-  '2026-06-10': ['8h00 – 10h00','10h00 – 12h00'],
-  '2026-06-11': ['9h00 – 11h00'],
-  '2026-06-12': ['14h00 – 16h00'],
-  '2026-06-13': ['8h00 – 12h00'],
-  '2026-06-16': ['8h00 – 10h00','13h00 – 15h00'],
-  '2026-06-17': ['9h00 – 11h00','11h00 – 13h00'],
-  '2026-06-19': ['8h00 – 10h00'],
-  '2026-06-22': ['10h00 – 12h00','14h00 – 16h00'],
-  '2026-06-23': ['9h00 – 11h00'],
-  '2026-06-24': ['8h00 – 12h00'],
-  '2026-06-25': ['13h00 – 15h00'],
-  '2026-06-26': ['8h00 – 10h00','10h00 – 12h00'],
+  '2026-06-10': ['8h00 – 9h00','9h00 – 10h00','10h00 – 11h00','11h00 – 12h00'],
+  '2026-06-11': ['9h00 – 10h00','10h00 – 11h00','13h00 – 14h00'],
+  '2026-06-12': ['14h00 – 15h00','15h00 – 16h00'],
+  '2026-06-13': ['8h00 – 9h00','9h00 – 10h00','10h00 – 11h00','11h00 – 12h00'],
+  '2026-06-16': ['8h00 – 9h00','9h00 – 10h00','13h00 – 14h00','14h00 – 15h00'],
+  '2026-06-17': ['9h00 – 10h00','10h00 – 11h00','11h00 – 12h00','12h00 – 13h00'],
+  '2026-06-19': ['8h00 – 9h00','9h00 – 10h00'],
+  '2026-06-22': ['10h00 – 11h00','11h00 – 12h00','14h00 – 15h00','15h00 – 16h00'],
+  '2026-06-23': ['9h00 – 10h00','10h00 – 11h00'],
+  '2026-06-24': ['8h00 – 9h00','9h00 – 10h00','10h00 – 11h00','11h00 – 12h00'],
+  '2026-06-25': ['13h00 – 14h00','14h00 – 15h00'],
+  '2026-06-26': ['8h00 – 9h00','9h00 – 10h00','10h00 – 11h00'],
 };
 
 function renderUserCalendar(){
@@ -3334,8 +3638,10 @@ go = function(n){
   if(n==='planning') renderPlanning();
   if(n==='resa-detail-resp') renderResaDetail();
   if(n==='mes-reservations') renderMesReservations();
+  if(n==='resa-detail-user') renderResaDetailUser();
   if(n==='rapport-etudiant') renderRapportEtudiant();
-  if(n==='detail-reservation') renderReservationRecap();
+  if(n==='projets-etudiant') renderProjetsEtudiant();
+  if(n==='detail-reservation'){ renderReservationRecap(); renderProjets(); }
 };
 function startNewReservation(){
   resaCart=[];
@@ -3343,18 +3649,115 @@ function startNewReservation(){
   go('select-creneau');
 }
 
+/* ===== Projets de financement ===== */
+/* Renvoyés par le RIÉ : numéro, date de début, date de fin. */
+const PROJETS={
+  // Projets dont l'usager est chercheur principal ou co-chercheur
+  'FRQNT-2024-8812':{num:'FRQNT-2024-8812',titre:'Dynamique membranaire des cellules NK',debut:'2024-01-01',fin:'2026-12-31',role:'Co-chercheur'},
+  'CRSNG-2023-4471':{num:'CRSNG-2023-4471',titre:'Imagerie cellulaire avancée',debut:'2023-05-01',fin:'2026-06-30',role:'Chercheur principal'},
+  'IRSC-2021-1102' :{num:'IRSC-2021-1102', titre:'Marqueurs inflammatoires',debut:'2021-09-01',fin:'2026-06-12',role:'Co-chercheur'},
+  // Projets du professeur, assignables à ses étudiants
+  'IRSC-2025-3390' :{num:'IRSC-2025-3390', titre:'Analyse NK — IRSC',debut:'2025-01-01',fin:'2027-12-31',role:'Assigné par M. Tremblay'},
+  'FRQS-2024-7720' :{num:'FRQS-2024-7720', titre:'Cytométrie — FRQS',debut:'2024-03-01',fin:'2026-06-01',role:'Assigné par M. Tremblay'},
+  'CRSNG-2025-9014':{num:'CRSNG-2025-9014',titre:'Plateforme imagerie — fonds partagé',debut:'2025-06-01',fin:'2028-03-31',role:'Assigné par M. Tremblay'}
+};
+const PROJETS_PERSO=['FRQNT-2024-8812','CRSNG-2023-4471','IRSC-2021-1102'];
+const PROJETS_PROF =['IRSC-2025-3390','FRQS-2024-7720','CRSNG-2025-9014']; // projets du professeur
+// Un étudiant ne peut imputer qu'un projet que son professeur lui a préalablement assigné
+const MES_PROJETS_ASSIGNES=['IRSC-2025-3390','FRQS-2024-7720'];
+let billingType='projet', selectedProjet=null;
+
+function fmtDateFr(iso){
+  const p=iso.split('-').map(Number);
+  const m=['janv.','févr.','mars','avr.','mai','juin','juill.','août','sept.','oct.','nov.','déc.'];
+  return p[2]+' '+m[p[1]-1]+' '+p[0];
+}
+// Date de fin prévue de la réservation = fin du dernier créneau retenu
+function resaEndIso(){
+  if(!resaCart.length)return null;
+  return resaCart.slice().sort(function(a,b){return a.dateIso.localeCompare(b.dateIso);}).pop().dateIso;
+}
+function setBillingType(t){
+  billingType=t;
+  document.getElementById('bt-projet').classList.toggle('on',t==='projet');
+  document.getElementById('bt-externe').classList.toggle('on',t==='externe');
+  document.getElementById('billing-projet').style.display=t==='projet'?'block':'none';
+  document.getElementById('billing-externe').style.display=t==='externe'?'block':'none';
+  if(t==='externe'){selectedProjet=null;setRecap('recap-projet','Adresse de facturation externe');setRecap('recap-payeur','Organisme externe');}
+  else renderProjets();
+}
+function setRecap(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
+// Le payeur découle du projet choisi : un projet assigné par le professeur est facturé à son compte.
+function payeurDuProjet(num){
+  if(!num)return '—';
+  return MES_PROJETS_ASSIGNES.indexOf(num)>-1 ? 'M. Tremblay (superviseur)' : 'Moi-même';
+}
+function renderProjets(){
+  const host=document.getElementById('projet-list');
+  if(!host)return;
+  const ids=PROJETS_PERSO.concat(MES_PROJETS_ASSIGNES);
+  const end=resaEndIso();
+  const eligible=[], exclus=[];
+  ids.forEach(function(id){
+    const p=PROJETS[id];
+    // Règle : la fin prévue de la réservation doit être antérieure à la fin du projet
+    (end && p.fin < end ? exclus : eligible).push(p);
+  });
+  if(selectedProjet && eligible.map(function(p){return p.num;}).indexOf(selectedProjet)===-1)selectedProjet=null;
+  if(!selectedProjet && eligible.length)selectedProjet=eligible[0].num;
+
+  host.innerHTML=eligible.map(function(p){
+    const on=p.num===selectedProjet;
+    return '<label style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border:1px solid '+(on?'var(--blue)':'var(--bd)')+';background:'+(on?'var(--info-bg)':'var(--card)')+';border-radius:var(--r-md);margin-bottom:6px;cursor:pointer;font-size:12px">'+
+      '<input type="radio" name="projet" value="'+p.num+'"'+(on?' checked':'')+' onchange="selectProjet(\''+p.num+'\')" style="margin-top:2px">'+
+      '<span style="flex:1"><span style="font-weight:600">'+p.num+'</span><br>'+
+      '<span style="color:var(--t2)">'+p.titre+'</span><br>'+
+      '<span style="color:var(--t3);font-size:11px">'+p.role+' · se termine le '+fmtDateFr(p.fin)+'</span></span></label>';
+  }).join('') || '<div class="notice n-warn" style="margin:0"><i class="ti ti-alert-triangle"></i><span>Aucun projet admissible pour cette période. Choisissez une autre date de fin ou une facturation externe.</span></div>';
+
+  const exHost=document.getElementById('projet-excluded');
+  exHost.innerHTML=exclus.length
+    ? '<div style="margin-top:8px;padding:8px 10px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--r-md)">'+
+      '<div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:5px">Projets écartés — se terminent avant la fin de votre réservation ('+fmtDateFr(end)+')</div>'+
+      exclus.map(function(p){
+        return '<div style="font-size:11px;color:var(--t3);padding:2px 0;text-decoration:line-through">'+p.num+' — se termine le '+fmtDateFr(p.fin)+'</div>';
+      }).join('')+'</div>'
+    : '';
+
+  setRecap('recap-projet',selectedProjet||'—');
+  setRecap('recap-payeur',payeurDuProjet(selectedProjet));
+}
+function selectProjet(num){selectedProjet=num;renderProjets();}
 function refreshPayeur(){
-  const checked=document.querySelector('input[name="payeur"]:checked');
-  const label=checked&&checked.closest('label').querySelector('span').textContent;
-  const el=document.getElementById('recap-payeur');
-  if(el&&label)el.textContent=label;
+  renderProjets();
 }
 function validateResa(){
   const desc=document.getElementById('resa-desc');
   const errEl=document.getElementById('resa-err');
+  const errMsg=errEl?errEl.querySelector('span'):null;
+  function fail(msg){
+    if(errEl){
+      if(errMsg&&msg)errMsg.textContent=msg;
+      errEl.style.display='flex';errEl.style.marginTop='8px';
+    }
+  }
   if(!desc||!desc.value.trim()){
-    if(errEl){errEl.style.display='flex';errEl.style.marginTop='8px';}
+    fail("La description de l'utilisation prévue est requise.");
     return;
+  }
+  // Toute réservation doit être imputée : projet de financement ou adresse de facturation
+  if(billingType==='projet'&&!selectedProjet){
+    fail("Sélectionnez un projet de financement valide pour la période, ou optez pour une facturation externe.");
+    return;
+  }
+  if(billingType==='externe'){
+    const org=document.getElementById('bx-org').value.trim();
+    const addr=document.getElementById('bx-addr').value.trim();
+    const mail=document.getElementById('bx-mail').value.trim();
+    if(!org||!addr||!mail){
+      fail("Organisation, adresse et courriel de facturation sont requis.");
+      return;
+    }
   }
   if(errEl) errEl.style.display='none';
   go('reservation-confirmee');
